@@ -22,13 +22,27 @@
 // THE SOFTWARE.
 
 #import "ORGMAudioUnit.h"
-
 #import "ORGMConverter.h"
+
+@class ORGMOutputUnit;
+
+
+@protocol ORGMOutputUnitDelegate <NSObject>
+
+@optional
+
+- (void)outputUnit:(ORGMOutputUnit *)unit didChangeReadyToPlay:(BOOL)readyToPlay;
+
+@end
+
+
 
 /**
  `ORGMOutputUnit` is a subclass of ORGMAudioUnit for playing converted `PCM` data through the output device. This class gets data from the converter buffer.
  */
 @interface ORGMOutputUnit : ORGMAudioUnit
+
+@property (nonatomic,weak)id<ORGMOutputUnitDelegate> outputUnitDelegate;
 
 /**
  A flag that determines if instance is currently active.
@@ -47,7 +61,7 @@
 
  @return An initialized `ORGMOutputUnit` object.
  **/
-- (id)initWithConverter:(ORGMConverter *)converter;
+- (instancetype)initWithConverter:(ORGMConverter *)converter;
 
 /**
  Returns supported `PCM` audio format.
@@ -100,5 +114,7 @@
 - (void)setVolume:(float)volume;
 
 - (void)setSampleRate:(double)sampleRate;
+
+- (BOOL)isReadyToPlay;
 
 @end

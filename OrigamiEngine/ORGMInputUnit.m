@@ -25,7 +25,7 @@
 
 #import "ORGMPluginManager.h"
 
-@interface ORGMInputUnit () {
+@interface ORGMInputUnit () <ORGMSourceDelegate> {
     int bytesPerFrame;
     void *inputBuffer;
 
@@ -33,15 +33,16 @@
     long seekFrame;
 }
 
-@property (retain, nonatomic) NSMutableData *data;
-@property (retain, nonatomic) id<ORGMSource> source;
-@property (retain, nonatomic) id<ORGMDecoder> decoder;
+@property (strong, nonatomic) NSMutableData *data;
+@property (strong, nonatomic) id<ORGMSource> source;
+@property (strong, nonatomic) id<ORGMDecoder> decoder;
 @property (assign, nonatomic) BOOL endOfInput;
+@property (copy, nonatomic) NSURL *openedURL;
 @end
 
 @implementation ORGMInputUnit
 
-- (id)init {
+- (instancetype)init {
     self = [super init];
     if (self) {
         self.data = [NSMutableData data];
@@ -54,16 +55,16 @@
 - (void)dealloc {
     [self close];
     free(inputBuffer);
-    [_decoder release];
-    [_source release];
-    [_data release];
-    [super dealloc];
+    self.source.sourceDelegate = nil;
+    self.openedURL = nil;
 }
 
 #pragma mark - public
 
 - (BOOL)openWithUrl:(NSURL *)url {
+    self.openedURL = nil;
     self.source = [[ORGMPluginManager sharedManager] sourceForURL:url error:nil];
+    self.source.sourceDelegate = self;
     if (!_source || ![_source open:url]) return NO;
     self.decoder = [[ORGMPluginManager sharedManager] decoderForSource:_source error:nil];
     if (!_decoder || ![_decoder open:_source]) return NO;
@@ -72,7 +73,23 @@
 	int channels = [[_decoder.properties objectForKey:@"channels"] intValue];
     bytesPerFrame = (bitsPerSample/8) * channels;
 
+    self.openedURL = url;
+    
     return YES;
+}
+
+- (NSURL *)currentURL{
+    return self.openedURL;
+}
+
+- (float)preloadProgress{
+    long size = [self.source size];
+    long current = [self.source preloadSize];
+    
+    if(size!=0){
+        return (float)current/(float)size;
+    }
+    return 0.0;
 }
 
 - (void)close {
@@ -147,5 +164,17 @@
 }
 
 #pragma mark - private
+
+- (void)sourceDidReceiveData:(id<ORGMSource>)source{
+    if(source==self.source && [self.inputUnitDelegate respondsToSelector:@selector(inputUnit:didChangePreloadProgress:)]){
+        [self.inputUnitDelegate inputUnit:self didChangePreloadProgress:self.preloadProgress];
+    }
+}
+
+- (void)source:(id<ORGMSource>)source didFailWithError:(NSError *)error{
+    if(source==self.source && [self.inputUnitDelegate respondsToSelector:@selector(inputUnit:didFailWithError:)]){
+        [self.inputUnitDelegate inputUnit:self didFailWithError:error];
+    }
+}
 
 @end

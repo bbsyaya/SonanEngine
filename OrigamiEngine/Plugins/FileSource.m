@@ -26,15 +26,15 @@
 @interface FileSource () {
     FILE *_fd;
 }
-@property (retain, nonatomic) NSURL *url;
+@property (strong, nonatomic) NSURL *url;
 @end
 
 @implementation FileSource
 
+@synthesize sourceDelegate;
+
 - (void)dealloc {
 	[self close];
-	[_url release];
-	[super dealloc];
 }
 
 #pragma mark - ORGMSource
@@ -57,6 +57,9 @@
 - (BOOL)open:(NSURL *)url {
 	[self setUrl:url];
 	_fd = fopen([[url path] UTF8String], "r");
+    if([self.sourceDelegate respondsToSelector:@selector(sourceDidReceiveData:)]){
+        [self.sourceDelegate sourceDidReceiveData:self];
+    }
 	return (_fd != NULL);
 }
 
@@ -70,6 +73,10 @@
 
 - (long)tell {
     return ftell(_fd);
+}
+
+- (long)preloadSize{
+    return [self size];
 }
 
 - (int)read:(void *)buffer amount:(int)amount {

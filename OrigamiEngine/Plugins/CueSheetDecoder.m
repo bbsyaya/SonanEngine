@@ -28,24 +28,18 @@
 
 @interface CueSheetDecoder () {
 	long framePosition;
-    
 	long trackStart;
 	long trackEnd;		
 }
-@property (retain, nonatomic) id<ORGMSource> source;
-@property (retain, nonatomic) id<ORGMDecoder> decoder;
-@property (retain, nonatomic) CueSheet *cuesheet;
+@property (strong, nonatomic) id<ORGMSource> source;
+@property (strong, nonatomic) id<ORGMDecoder> decoder;
+@property (strong, nonatomic) CueSheet *cuesheet;
 @end
 
 @implementation CueSheetDecoder
 
 - (void)dealloc {
     [self close];
-    [_decoder release];
-    [_source release];
-    [_cuesheet release];
-
-    [super dealloc];
 }
 
 #pragma mark - ORGMDecoder
@@ -58,7 +52,7 @@
 	NSMutableDictionary *properties = [[_decoder properties] mutableCopy];
 	[properties setObject:[NSNumber numberWithLong:(trackEnd - trackStart)]
                    forKey:@"totalFrames"];
-	return [properties autorelease];
+	return properties;
 }
 
 - (NSDictionary *)metadata {
@@ -80,7 +74,7 @@
 
 - (int)readAudio:(void *)buf frames:(UInt32)frames {
 	if (framePosition + frames > trackEnd) {
-		frames = trackEnd - framePosition;
+		frames = (UInt32)(trackEnd - framePosition);
 	}
     
 	if (!frames) {
@@ -94,7 +88,7 @@
 
 - (BOOL)open:(id<ORGMSource>)s {
 	NSURL *url = [s url];
-	self.cuesheet = [[[CueSheet alloc] initWithURL:url] autorelease];
+	self.cuesheet = [[CueSheet alloc] initWithURL:url];
 	
     ORGMPluginManager *pluginManager = [ORGMPluginManager sharedManager];
 	for (int i = 0; i < _cuesheet.tracks.count; i++) {

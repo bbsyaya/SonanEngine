@@ -23,10 +23,27 @@
 
 #import "ORGMAudioUnit.h"
 
+
+@class ORGMInputUnit;
+
+
+@protocol ORGMInputUnitDelegate <NSObject>
+
+@optional
+
+- (void)inputUnit:(ORGMInputUnit *)unit didChangePreloadProgress:(float)progress;
+
+- (void)inputUnit:(ORGMInputUnit *)unit  didFailWithError:(NSError *)error;
+
+@end
+
+
 /**
  `ORGMInputUnit` is a subclass of ORGMAudioUnit for reading and decoding data from the source.
  */
 @interface ORGMInputUnit : ORGMAudioUnit
+
+@property (nonatomic,weak)id<ORGMInputUnitDelegate> inputUnitDelegate;
 
 /**
  A flag that determines if instance is currently decoding data.
@@ -99,5 +116,13 @@
  @return Actual amount of shifted bytes.
  */
 - (int)shiftBytes:(NSUInteger)amount buffer:(void *)buffer;
+
+
+//extra
+
+- (NSURL *)currentURL;
+
+- (float)preloadProgress;
+
 
 @end

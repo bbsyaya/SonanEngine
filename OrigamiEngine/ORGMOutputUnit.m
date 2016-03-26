@@ -28,23 +28,25 @@
 @interface ORGMOutputUnit () {
     AudioUnit outputUnit;
     AURenderCallbackStruct renderCallback;
-
     AudioStreamBasicDescription _format;
     unsigned long long _amountPlayed;
+    
 }
-@property (retain, nonatomic) ORGMConverter *converter;
+@property (strong, nonatomic) ORGMConverter *converter;
+
+@property (nonatomic,assign,getter=isReadyToPlay)BOOL readyToPlay;
 
 - (int)readData:(void *)ptr amount:(int)amount;
+
 @end
 
 @implementation ORGMOutputUnit
 
-- (id)initWithConverter:(ORGMConverter *)converter {
+- (instancetype)initWithConverter:(ORGMConverter *)converter {
     self = [super init];
     if (self) {
         outputUnit = NULL;
         [self setup];
-
         self.converter = converter;
         _amountPlayed = 0;
     }
@@ -53,7 +55,6 @@
 
 - (void)dealloc {
     [self stop];
-    [super dealloc];
 }
 
 #pragma mark - public
@@ -103,6 +104,17 @@
     AudioUnitSetParameter(outputUnit, kHALOutputParam_Volume, kAudioUnitScope_Global, 0, volume * 0.01f, 0);
 }
 
+- (void)setReadyToPlay:(BOOL)readyToPlay{
+    if(_readyToPlay!=readyToPlay){
+        _readyToPlay = readyToPlay;
+        if(self.outputUnitDelegate && _isProcessing){
+            if([self.outputUnitDelegate respondsToSelector:@selector(outputUnit:didChangeReadyToPlay:)]){
+                [self.outputUnitDelegate outputUnit:self didChangeReadyToPlay:readyToPlay];
+            }
+        }
+    }
+}
+
 - (void)setSampleRate:(double)sampleRate {
     UInt32 size = sizeof(AudioStreamBasicDescription);
     _format.mSampleRate = sampleRate;
@@ -130,7 +142,7 @@ static OSStatus Sound_Renderer(void *inRefCon,
                                UInt32 inBusNumber,
                                UInt32 inNumberFrames,
                                AudioBufferList  *ioData) {
-    ORGMOutputUnit *output = (ORGMOutputUnit *)inRefCon;
+    ORGMOutputUnit *output = (__bridge ORGMOutputUnit *)inRefCon;
     OSStatus err = noErr;
     void *readPointer = ioData->mBuffers[0].mData;
 
@@ -145,6 +157,8 @@ static OSStatus Sound_Renderer(void *inRefCon,
         amountRead += amountRead2;
     }
 
+    output.readyToPlay = (amountRead>0);
+    
     ioData->mBuffers[0].mDataByteSize = amountRead;
     ioData->mBuffers[0].mNumberChannels = output->_format.mChannelsPerFrame;
     ioData->mNumberBuffers = 1;
@@ -229,7 +243,7 @@ static OSStatus Sound_Renderer(void *inRefCon,
             size);
 
     renderCallback.inputProc = Sound_Renderer;
-    renderCallback.inputProcRefCon = self;
+    renderCallback.inputProcRefCon = (__bridge void * _Nullable)(self);
 
     AudioUnitSetProperty(outputUnit, kAudioUnitProperty_SetRenderCallback,
             kAudioUnitScope_Input, 0, &renderCallback,

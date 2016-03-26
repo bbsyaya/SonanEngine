@@ -36,6 +36,20 @@ typedef enum : NSInteger {
     ORGMEngineErrorCodesContainerFailed
 } ORGMEngineErrorCodes;
 
+
+@protocol ORGMSource;
+
+
+@protocol ORGMSourceDelegate <NSObject>
+
+@optional
+
+- (void)sourceDidReceiveData:(id<ORGMSource>)source;
+
+- (void)source:(id<ORGMSource>)source didFailWithError:(NSError *)error;
+
+@end
+
 /**
  All classes that act as plugins must adopt the `ORGMEngineObject` protocol. This protocol is a stub, future versions may require common plugin object protocol.
  */
@@ -46,6 +60,8 @@ typedef enum : NSInteger {
  All classes that act as input source must adopt the `ORGMSource` protocol. This protocol contains methods for communication with plugin manager.
  */
 @protocol ORGMSource <ORGMEngineObject>
+
+@property (nonatomic,weak)id<ORGMSourceDelegate> sourceDelegate;
 
 /**
  Returns supported url scheme.
@@ -67,6 +83,8 @@ typedef enum : NSInteger {
  @return A file size in `bytes`.
  */
 - (long)size;
+
+- (long)preloadSize;
 
 /**
  Opens source file for `read`.

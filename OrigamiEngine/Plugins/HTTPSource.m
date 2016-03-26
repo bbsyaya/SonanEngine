@@ -28,26 +28,22 @@
     long long _bytesExpected;
     long long _bytesWaitingFromCache;
     dispatch_semaphore_t _downloadingSemaphore;
-
     BOOL _connectionDidFail;
 }
-@property (retain, nonatomic) NSURLConnection *urlConnection;
-@property (retain, nonatomic) NSMutableURLRequest *request;
-@property (retain, nonatomic) NSFileHandle *fileHandle;
+@property (strong, nonatomic) NSURLConnection *urlConnection;
+@property (strong, nonatomic) NSMutableURLRequest *request;
+@property (strong, nonatomic) NSFileHandle *fileHandle;
 @end
 
 @implementation HTTPSource
 
 const NSTimeInterval readTimeout = 1.0;
 
+@synthesize sourceDelegate;
+
 - (void)dealloc {
     [self close];
     [_fileHandle closeFile];
-    [_fileHandle release];
-    [_urlConnection release];
-    [_request release];
-
-    [super dealloc];
 }
 
 #pragma mark - ORGMSource
@@ -72,7 +68,6 @@ const NSTimeInterval readTimeout = 1.0;
                                                                   delegate:self
                                                           startImmediately:NO];
     self.urlConnection = connection;
-    [connection release];
 
     if ([NSThread isMainThread]) {
         [_urlConnection start];
@@ -118,6 +113,10 @@ const NSTimeInterval readTimeout = 1.0;
 
 - (long)tell {
     return _bytesRead;
+}
+
+- (long)preloadSize{
+    return _byteCount;
 }
 
 - (int)read:(void *)buffer amount:(int)amount {
@@ -215,6 +214,9 @@ const NSTimeInterval readTimeout = 1.0;
                 [_fileHandle writeData:data];
             }
             _byteCount += data.length;
+            if([self.sourceDelegate respondsToSelector:@selector(sourceDidReceiveData:)]){
+                [self.sourceDelegate sourceDidReceiveData:self];
+            }
         });
     }
 }
@@ -222,6 +224,9 @@ const NSTimeInterval readTimeout = 1.0;
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
     dispatch_semaphore_signal(_downloadingSemaphore);
     _connectionDidFail = YES;
+    if([self.sourceDelegate respondsToSelector:@selector(source:didFailWithError:)]){
+        [self.sourceDelegate source:self didFailWithError:error];
+    }
 }
 
 @end

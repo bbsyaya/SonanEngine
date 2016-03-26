@@ -61,12 +61,12 @@ typedef enum : NSInteger {
 
  @discussion Value will be provided only for the `ORGMEngineStateError`, with other states this propertie will return `nil`.
  */
-@property (retain, nonatomic, readonly) NSError *currentError;
+@property (strong, nonatomic, readonly) NSError *currentError;
 
 /**
  The object that conforms ORGMEngineDelegate protocol and acts as the delegate.
  */
-@property (unsafe_unretained, nonatomic) id<ORGMEngineDelegate> delegate;
+@property (weak, nonatomic) id<ORGMEngineDelegate> delegate;
 
 /**
  Starts new playback process from corresponding source with provided output type of output unit.
@@ -150,6 +150,17 @@ typedef enum : NSInteger {
  @param flush A flag that allows you erase accumulated data before changing the track.
  */
 - (void)setNextUrl:(NSURL *)url withDataFlush:(BOOL)flush;
+
+
+
+//extra
+
+- (NSURL *)currentURL;
+
+- (float)preloadProgress;
+
+- (BOOL)isReadyToPlay;
+
 @end
 
 /**
@@ -176,4 +187,9 @@ typedef enum : NSInteger {
  @param state New state of the engine object.
  */
 - (void)engine:(ORGMEngine *)engine didChangeState:(ORGMEngineState)state;
+
+- (void)engine:(ORGMEngine *)engine didChangePreloadProgress:(float)progress;
+
+- (void)engine:(ORGMEngine *)engine didChangeReadyToPlay:(BOOL)readyToPlay;
+
 @end

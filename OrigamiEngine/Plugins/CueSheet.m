@@ -26,26 +26,23 @@
 #import "ORGMCommonProtocols.h"
 
 @interface CueSheet ()
+
 @property (copy, nonatomic) NSArray *tracks;
+
 @end
 
 @implementation CueSheet
 
 #pragma mark - public
 
-- (id)initWithURL:(NSURL *)url {
+- (instancetype)initWithURL:(NSURL *)url {
 	self = [super init];
 	if (self) {
 		[self parseFileWithUrl:url];
 	}
-	
 	return self;
 }
 
-- (void)dealloc {
-	[_tracks release];
-	[super dealloc];
-}
 
 #pragma mark - private
 - (void)parseFileWithUrl:(NSURL *)url {
@@ -159,18 +156,16 @@
             if (![scanner scanUpToString:@"\"" intoString:&artist])
                 continue;
         } else if ([command isEqualToString:@"TITLE"]) {
-            NSString **titleDest;
-            if (!path) {
-                titleDest = &album;
-            } else {
-                titleDest = &title;
-            }
-            
             if (![scanner scanString:@"\"" intoString:nil])
                 continue;
-            
-            if (![scanner scanUpToString:@"\"" intoString:titleDest])
-                continue;
+            if (!path) {
+                if (![scanner scanUpToString:@"\"" intoString:&album])
+                    continue;
+                
+            } else {
+                if (![scanner scanUpToString:@"\"" intoString:&title])
+                    continue;
+            }            
         } else if ([command isEqualToString:@"REM"]) {
             NSString *type;
             if (![scanner scanUpToCharactersFromSet:whitespace intoString:&type])

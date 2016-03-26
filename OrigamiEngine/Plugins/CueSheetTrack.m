@@ -24,7 +24,7 @@
 #import "CueSheetTrack.h"
 
 @interface CueSheetTrack ()
-@property (retain, nonatomic) NSURL *url;
+@property (strong, nonatomic) NSURL *url;
 @property (copy, nonatomic) NSString *track;
 @property (copy, nonatomic) NSString *artist;
 @property (copy, nonatomic) NSString *album;
@@ -36,7 +36,7 @@
 
 @implementation CueSheetTrack
 
-+ (id)trackWithURL:(NSURL *)url
++ (instancetype)trackWithURL:(NSURL *)url
              track:(NSString *)track
               time:(double)seconds
             artist:(NSString *)artist
@@ -45,17 +45,17 @@
              genre:(NSString *)genre
               year:(NSString *)year {
     
-	return [[[CueSheetTrack alloc] initWithURL:url
+	return [[CueSheetTrack alloc] initWithURL:url
                                          track:track
                                           time:seconds
                                         artist:artist
                                          album:album
                                          title:title
                                          genre:genre
-                                          year:year] autorelease];
+                                          year:year];
 }
 
-- (id)initWithURL:(NSURL *)url
+- (instancetype)initWithURL:(NSURL *)url
             track:(NSString *)track
              time:(double)seconds
            artist:(NSString *)artist
@@ -78,18 +78,6 @@
 	}
 	
 	return self;
-}
-
-- (void)dealloc {
-	[_track release];
-	[_url release];
-	[_artist release];
-	[_album release];
-	[_title release];
-	[_genre release];
-	[_year release];
-	
-	[super dealloc];
 }
 
 @end

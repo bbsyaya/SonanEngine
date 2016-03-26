@@ -28,17 +28,18 @@
 #import "ORGMConverter.h"
 #import "ORGMCommonProtocols.h"
 
-@interface ORGMEngine ()
-@property (retain, nonatomic) ORGMInputUnit *input;
-@property (retain, nonatomic) ORGMOutputUnit *output;
-@property (retain, nonatomic) ORGMConverter *converter;
+@interface ORGMEngine () <ORGMInputUnitDelegate,ORGMOutputUnitDelegate>
+@property (strong, nonatomic) ORGMInputUnit *input;
+@property (strong, nonatomic) ORGMOutputUnit *output;
+@property (strong, nonatomic) ORGMConverter *converter;
 @property (assign, nonatomic) ORGMEngineState currentState;
-@property (retain, nonatomic) NSError *currentError;
+@property (strong, nonatomic) NSError *currentError;
+@property (assign, nonatomic) float lastPreloadProgress;
 @end
 
 @implementation ORGMEngine
 
-- (id)init {
+- (instancetype)init {
     self = [super init];
     if (self) {
         self.volume = 100.0f;
@@ -53,10 +54,12 @@
 
 - (void)dealloc {
     [self removeObserver:self forKeyPath:@"currentState"];
-    [_input release];
-    [_output release];
-    [_converter release];
-    [super dealloc];
+    [_input removeObserver:self forKeyPath:@"endOfInput"];
+    self.output.outputUnitDelegate = nil;
+    self.output = nil;
+    self.input.inputUnitDelegate = nil;
+    self.input = nil;
+    self.converter = nil;
 }
 
 #pragma mark - public
@@ -75,7 +78,7 @@
 
         ORGMInputUnit *input = [[ORGMInputUnit alloc] init];
         self.input = input;
-        [input release];
+        self.input.inputUnitDelegate = self;
 
         if (![_input openWithUrl:url]) {
             self.currentState = ORGMEngineStateError;
@@ -91,13 +94,12 @@
 
         ORGMConverter *converter = [[ORGMConverter alloc] initWithInputUnit:_input];
         self.converter = converter;
-        [converter release];
 
         ORGMOutputUnit *output = [[outputUnitClass alloc] initWithConverter:_converter];
         output.outputFormat = _outputFormat;
         self.output = output;
+        self.output.outputUnitDelegate = self;
         [_output setVolume:_volume];
-        [output release];
 
         if (![_converter setupWithOutputUnit:_output]) {
             self.currentState = ORGMEngineStateError;
@@ -114,8 +116,19 @@
 }
 
 - (void)playUrl:(NSURL *)url {
+   [self playUrl:url withOutputUnitClass:[ORGMOutputUnit class]];
+}
 
-  [self playUrl:url withOutputUnitClass:[ORGMOutputUnit class]];
+- (NSURL *)currentURL{
+    return self.input.currentURL;
+}
+
+- (float)preloadProgress{
+    return self.input.preloadProgress;
+}
+
+- (BOOL)isReadyToPlay{
+    return self.output.isReadyToPlay;
 }
 
 - (void)pause {
@@ -137,7 +150,9 @@
 - (void)stop {
     dispatch_async([ORGMQueues processing_queue], ^{
         [_input removeObserver:self forKeyPath:@"endOfInput"];
+        self.output.outputUnitDelegate = nil;
         self.output = nil;
+        self.input.inputUnitDelegate = nil;
         self.input = nil;
         self.converter = nil;
         [self setCurrentState:ORGMEngineStateStopped];
@@ -218,6 +233,25 @@
 - (void)setVolume:(float)volume {
     _volume = volume;
     [_output setVolume:volume];
+}
+
+- (void)inputUnit:(ORGMInputUnit *)unit didChangePreloadProgress:(float)progress{
+    if(ABS(_lastPreloadProgress-progress)>0.05 || (fabs(progress - 1.0) < FLT_EPSILON) || (fabs(progress) < FLT_EPSILON)){
+        _lastPreloadProgress = progress;
+        if(unit==self.input && [self.delegate respondsToSelector:@selector(engine:didChangePreloadProgress:)]){
+            [self.delegate engine:self didChangePreloadProgress:progress];
+        }
+    }
+}
+
+- (void)inputUnit:(ORGMInputUnit *)unit didFailWithError:(NSError *)error{
+    
+}
+
+- (void)outputUnit:(ORGMOutputUnit *)unit didChangeReadyToPlay:(BOOL)readyToPlay{
+    if(unit==self.output && [self.delegate respondsToSelector:@selector(engine:didChangeReadyToPlay:)]){
+        [self.delegate engine:self didChangeReadyToPlay:readyToPlay];
+    }
 }
 
 @end

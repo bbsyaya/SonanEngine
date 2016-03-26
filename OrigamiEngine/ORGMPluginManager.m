@@ -33,9 +33,9 @@
 #import "M3uContainer.h"
 
 @interface ORGMPluginManager ()
-@property(retain, nonatomic) NSDictionary *sources;
-@property(retain, nonatomic) NSMutableDictionary *decoders;
-@property(retain, nonatomic) NSDictionary *containers;
+@property(strong, nonatomic) NSDictionary *sources;
+@property(strong, nonatomic) NSMutableDictionary *decoders;
+@property(strong, nonatomic) NSDictionary *containers;
 @end
 
 @implementation ORGMPluginManager
@@ -50,7 +50,7 @@
     return _sharedManager;
 }
 
-- (id)init {
+- (instancetype)init {
     self = [super init];
     if (self) {
         
@@ -89,13 +89,6 @@
     return self;
 }
 
-- (void)dealloc {
-    [_sources release];
-    [_decoders release];
-    [_containers release];
-    [super dealloc];
-}
-
 - (id<ORGMSource>)sourceForURL:(NSURL *)url error:(NSError **)error {
     id<ORGMSource> result;
     if (_resolver && (result = [_resolver sourceForURL:url error:error])) {
@@ -115,7 +108,7 @@
         }
         return nil;
     }
-	return [[[source alloc] init] autorelease];
+	return [[source alloc] init];
 }
 
 - (id<ORGMDecoder>)decoderForSource:(id<ORGMSource>)source error:(NSError **)error {
@@ -142,7 +135,7 @@
         return nil;
 	}
     
-	return [[[decoder alloc] init] autorelease];
+	return [[decoder alloc] init];
 }
 
 - (NSArray *)urlsForContainerURL:(NSURL *)url error:(NSError **)error {

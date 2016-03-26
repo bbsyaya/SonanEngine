@@ -35,21 +35,19 @@
     void *writeBuf;
 }
 
-@property (retain, nonatomic) ORGMInputUnit *inputUnit;
-@property (unsafe_unretained, nonatomic) ORGMOutputUnit *outputUnit;
-@property (retain, nonatomic) NSMutableData *convertedData;
+@property (strong, nonatomic) ORGMInputUnit *inputUnit;
+@property (weak, nonatomic) ORGMOutputUnit *outputUnit;
+@property (strong, nonatomic) NSMutableData *convertedData;
 @end
 
 @implementation ORGMConverter
 
-- (id)initWithInputUnit:(ORGMInputUnit *)inputUnit {
+- (instancetype)initWithInputUnit:(ORGMInputUnit *)inputUnit {
     self = [super init];
     if (self) {
         self.convertedData = [NSMutableData data];
-
         self.inputUnit = inputUnit;
         _inputFormat = inputUnit.format;
-
         writeBuf = malloc(CHUNK_SIZE);
     }
     return self;
@@ -58,9 +56,7 @@
 - (void)dealloc {
     free(callbackBuffer);
     free(writeBuf);
-    [_convertedData release];
     _inputUnit = nil;
-    [super dealloc];
 }
 
 #pragma mark - public
@@ -158,7 +154,7 @@
     ioData.mBuffers[0].mNumberChannels = _outputFormat.mChannelsPerFrame;
     ioData.mNumberBuffers = 1;
 
-    err = AudioConverterFillComplexBuffer(_converter, ACInputProc, self, &ioNumberFrames, &ioData, NULL);
+    err = AudioConverterFillComplexBuffer(_converter, ACInputProc, (__bridge void * _Nullable)(self), &ioNumberFrames, &ioData, NULL);
     int amountRead = ioData.mBuffers[0].mDataByteSize;
     if (err == kAudioConverterErr_InvalidInputSize)	{
         amountRead += [self convert:dest + amountRead amount:amount - amountRead];
@@ -171,7 +167,7 @@ static OSStatus ACInputProc(AudioConverterRef inAudioConverter,
                             UInt32* ioNumberDataPackets, AudioBufferList* ioData,
                             AudioStreamPacketDescription** outDataPacketDescription,
                             void* inUserData) {
-    ORGMConverter *converter = (ORGMConverter *)inUserData;
+    ORGMConverter *converter = (__bridge ORGMConverter *)inUserData;
     OSStatus err = noErr;
     int amountToWrite;
 

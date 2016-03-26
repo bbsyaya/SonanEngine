@@ -36,7 +36,7 @@
 
  @return An initialized `ORGMConverter` object.
  */
-- (id)initWithInputUnit:(ORGMInputUnit *)inputUnit;
+- (instancetype)initWithInputUnit:(ORGMInputUnit *)inputUnit;
 
 /**
  Specifies output `PCM` format from output unit.

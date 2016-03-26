@@ -26,12 +26,11 @@
 
 @interface OpusFileDecoder () {
     OggOpusFile *decoder;
-
     long totalFrames;
 }
 
-@property (retain, nonatomic) NSMutableDictionary *metadata;
-@property (retain, nonatomic) id<ORGMSource> source;
+@property (strong, nonatomic) NSMutableDictionary *metadata;
+@property (strong, nonatomic) id<ORGMSource> source;
 
 @end
 
@@ -40,9 +39,6 @@
 
 - (void)dealloc {
     [self close];
-    [_metadata release];
-    [source release];
-    [super dealloc];
 }
 
 #pragma mark - ORGMDecoder
@@ -75,8 +71,7 @@
 }
 
 - (BOOL)open:(id<ORGMSource>)s {
-	[self setSource:s];
-	
+    [self setSource:s];
     self.metadata = [NSMutableDictionary dictionary];
 
     OpusFileCallbacks callbacks = {
@@ -87,7 +82,7 @@
     };
 
     int rc;
-    decoder = op_open_callbacks(source, &callbacks, NULL, 0, &rc);
+    decoder = op_open_callbacks((__bridge void *)(source), &callbacks, NULL, 0, &rc);
 
     if (rc != 0) return NO;
     
@@ -142,21 +137,18 @@
 #pragma mark - callback
 
 static int ReadCallback(void *stream, unsigned char *ptr, int nbytes) {
-
-    id<ORGMSource> source = stream;
+    id<ORGMSource> source = (__bridge id<ORGMSource>)(stream);
     int result = [source read:ptr amount:nbytes];
 	return result;
 }
 
 static int SeekCallback(void *stream, opus_int64 offset, int whence) {
-
-	id<ORGMSource> source = stream;
+	id<ORGMSource> source = (__bridge id<ORGMSource>)(stream);
     return [source seek:(long)offset whence:whence] ? 0 : -1;
 }
 
 static opus_int64 TellCallback(void *stream) {
-
-	id<ORGMSource> source = stream;
+	id<ORGMSource> source = (__bridge id<ORGMSource>)(stream);
     return [source tell];
 }
 
