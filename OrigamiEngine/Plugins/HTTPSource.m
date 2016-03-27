@@ -146,6 +146,7 @@ const NSTimeInterval readTimeout = 1.0;
 }
 
 - (void)close {
+    dispatch_semaphore_signal(_downloadingSemaphore);
     [_urlConnection cancel];
 }
 
