@@ -57,10 +57,24 @@
 - (BOOL)open:(NSURL *)url {
 	[self setUrl:url];
 	_fd = fopen([[url path] UTF8String], "r");
-    if([self.sourceDelegate respondsToSelector:@selector(sourceDidReceiveData:)]){
-        [self.sourceDelegate sourceDidReceiveData:self];
-    }
-	return (_fd != NULL);
+    
+    BOOL success = (_fd != NULL);
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        if(success){
+            if([self.sourceDelegate respondsToSelector:@selector(sourceDidReceiveData:)]){
+                [self.sourceDelegate sourceDidReceiveData:self];
+            }
+        }
+        else{
+            NSError *error = [[NSError alloc] initWithDomain:@"FileSourceErrorDomain" code:-1 userInfo:nil];
+            if([self.sourceDelegate respondsToSelector:@selector(source:didFailWithError:)]){
+                [self.sourceDelegate source:self didFailWithError:error];
+            }
+        }
+    });
+    
+	return success;
 }
 
 - (BOOL)seekable {

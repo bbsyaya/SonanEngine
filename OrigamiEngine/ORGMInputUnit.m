@@ -37,7 +37,7 @@
 @property (strong, nonatomic) id<ORGMSource> source;
 @property (strong, nonatomic) id<ORGMDecoder> decoder;
 @property (assign, nonatomic) BOOL endOfInput;
-@property (copy, nonatomic) NSURL *openedURL;
+@property (strong, nonatomic) NSURL *url;
 @end
 
 @implementation ORGMInputUnit
@@ -45,7 +45,7 @@
 - (instancetype)init {
     self = [super init];
     if (self) {
-        self.data = [NSMutableData data];
+        self.data = [[NSMutableData alloc] init];
         inputBuffer = malloc(CHUNK_SIZE);
         _endOfInput = NO;
     }
@@ -56,13 +56,13 @@
     [self close];
     free(inputBuffer);
     self.source.sourceDelegate = nil;
-    self.openedURL = nil;
+    self.url = nil;
 }
 
 #pragma mark - public
 
 - (BOOL)openWithUrl:(NSURL *)url {
-    self.openedURL = nil;
+    self.url = url;
     self.source = [[ORGMPluginManager sharedManager] sourceForURL:url error:nil];
     self.source.sourceDelegate = self;
     if (!_source || ![_source open:url]) return NO;
@@ -72,20 +72,17 @@
     int bitsPerSample = [[_decoder.properties objectForKey:@"bitsPerSample"] intValue];
 	int channels = [[_decoder.properties objectForKey:@"channels"] intValue];
     bytesPerFrame = (bitsPerSample/8) * channels;
-
-    self.openedURL = url;
     
     return YES;
 }
 
 - (NSURL *)currentURL{
-    return self.openedURL;
+    return self.url;
 }
 
 - (float)preloadProgress{
     long size = [self.source size];
     long current = [self.source preloadSize];
-    
     if(size!=0){
         return (float)current/(float)size;
     }

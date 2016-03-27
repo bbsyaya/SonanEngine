@@ -30,7 +30,7 @@
  Specifies states of the engine.
  */
 typedef enum : NSInteger {
-    ORGMEngineStateStopped,
+    ORGMEngineStateStopped = 0,
     ORGMEngineStatePlaying,
     ORGMEngineStatePaused,
     ORGMEngineStateError
@@ -152,7 +152,6 @@ typedef enum : NSInteger {
 - (void)setNextUrl:(NSURL *)url withDataFlush:(BOOL)flush;
 
 
-
 //extra
 
 - (NSURL *)currentURL;
@@ -190,6 +189,10 @@ typedef enum : NSInteger {
 
 - (void)engine:(ORGMEngine *)engine didChangePreloadProgress:(float)progress;
 
+- (void)engine:(ORGMEngine *)engine didFailCurrentItemWithError:(NSError *)error;
+
 - (void)engine:(ORGMEngine *)engine didChangeReadyToPlay:(BOOL)readyToPlay;
+
+- (void)engine:(ORGMEngine *)engine didChangeCurrentURL:(NSURL *)currentURL prevItemURL:(NSURL *)prevURL;
 
 @end
