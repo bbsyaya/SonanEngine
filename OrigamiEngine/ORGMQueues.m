@@ -35,6 +35,16 @@
     return _lock_queue;
 }
 
++ (dispatch_queue_t)callback_queue{
+    static dispatch_queue_t _lock_queue;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        _lock_queue = dispatch_queue_create("com.origami.callback",
+                                            DISPATCH_QUEUE_SERIAL);
+    });
+    return _lock_queue;
+}
+
 + (dispatch_queue_t)processing_queue {
     static dispatch_queue_t _processing_queue;
     static dispatch_once_t onceToken;

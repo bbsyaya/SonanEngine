@@ -56,13 +56,14 @@
     self.input.inputUnitDelegate = nil;
     self.input = nil;
     self.converter = nil;
+    self.delegate = nil;
 }
 
 - (void)setCurrentState:(ORGMEngineState)currentState{
     if(_currentState!=currentState){
         _currentState = currentState;
         if ([_delegate respondsToSelector:@selector(engine:didChangeState:)]) {
-            dispatch_async(dispatch_get_main_queue(), ^{
+            dispatch_async([ORGMQueues callback_queue], ^{
                 [_delegate engine:self didChangeState:_currentState];
             });
         }
@@ -118,7 +119,7 @@
         }
 
         if([_delegate respondsToSelector:@selector(engine:didChangeCurrentURL:prevItemURL:)]) {
-            dispatch_async(dispatch_get_main_queue(), ^{
+            dispatch_async([ORGMQueues callback_queue], ^{
                 [_delegate engine:self didChangeCurrentURL:url prevItemURL:nil];
             });
         }
@@ -214,7 +215,7 @@
                 [_output seek:0.0]; //to reset amount played
                 [self setCurrentState:ORGMEngineStatePlaying]; //trigger delegate method
                 if([_delegate respondsToSelector:@selector(engine:didChangeCurrentURL:prevItemURL:)]) {
-                    dispatch_async(dispatch_get_main_queue(), ^{
+                    dispatch_async([ORGMQueues callback_queue], ^{
                         [_delegate engine:self didChangeCurrentURL:url prevItemURL:prevURL];
                     });
                 }
@@ -238,7 +239,7 @@
             [self setCurrentState:ORGMEngineStateStopped];
             return;
         }
-        dispatch_async(dispatch_get_main_queue(), ^{
+        dispatch_async([ORGMQueues callback_queue], ^{
             [self setNextUrl:nextUrl withDataFlush:NO];
         });
     }
@@ -260,7 +261,7 @@
     if( unit==self.input && (ABS(_lastPreloadProgress-progress)>0.05 || (fabs(progress - 1.0) < FLT_EPSILON) || (fabs(progress) < FLT_EPSILON))){
         _lastPreloadProgress = progress;
         if(unit==self.input && [self.delegate respondsToSelector:@selector(engine:didChangePreloadProgress:)]){
-            dispatch_async(dispatch_get_main_queue(), ^{
+            dispatch_async([ORGMQueues callback_queue], ^{
                 [self.delegate engine:self didChangePreloadProgress:progress];
             });
         }
@@ -269,7 +270,7 @@
 
 - (void)inputUnit:(ORGMInputUnit *)unit didFailWithError:(NSError *)error{
     if(unit==self.input && [self.delegate respondsToSelector:@selector(engine:didFailCurrentItemWithError:)]){
-        dispatch_async(dispatch_get_main_queue(), ^{
+        dispatch_async([ORGMQueues callback_queue], ^{
             [self.delegate engine:self didFailCurrentItemWithError:error];
         });
     }
@@ -277,7 +278,7 @@
 
 - (void)outputUnit:(ORGMOutputUnit *)unit didChangeReadyToPlay:(BOOL)readyToPlay{
     if(unit==self.output && [self.delegate respondsToSelector:@selector(engine:didChangeReadyToPlay:)]){
-        dispatch_async(dispatch_get_main_queue(), ^{
+        dispatch_async([ORGMQueues callback_queue], ^{
             [self.delegate engine:self didChangeReadyToPlay:readyToPlay];
         });
     }

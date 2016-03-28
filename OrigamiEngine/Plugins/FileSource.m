@@ -22,6 +22,8 @@
 // THE SOFTWARE.
 
 #import "FileSource.h"
+#import "ORGMQueues.h"
+
 
 @interface FileSource () {
     FILE *_fd;
@@ -60,7 +62,7 @@
     
     BOOL success = (_fd != NULL);
     
-    dispatch_async(dispatch_get_main_queue(), ^{
+    dispatch_async([ORGMQueues callback_queue], ^{
         if(success){
             if([self.sourceDelegate respondsToSelector:@selector(sourceDidReceiveData:)]){
                 [self.sourceDelegate sourceDidReceiveData:self];
