@@ -50,7 +50,7 @@
 }
 
 - (void)dealloc {
-    [_input removeObserver:self forKeyPath:@"endOfInput"];
+    @try {[self.input removeObserver:self forKeyPath:@"endOfInput"];}@catch (NSException *exception) {}
     self.output.outputUnitDelegate = nil;
     self.output = nil;
     self.input.inputUnitDelegate = nil;
@@ -96,10 +96,7 @@
                                                             NSLocalizedString(@"Couldn't open source", nil) }];
             return;
         }
-        [_input addObserver:self forKeyPath:@"endOfInput"
-                    options:NSKeyValueObservingOptionNew
-                    context:nil];
-
+        @try {[self.input addObserver:self forKeyPath:@"endOfInput" options:NSKeyValueObservingOptionNew context:nil];}@catch (NSException *exception) {}
         ORGMConverter *converter = [[ORGMConverter alloc] initWithInputUnit:_input];
         self.converter = converter;
 
@@ -164,7 +161,7 @@
 
 - (void)stop {
     dispatch_async([ORGMQueues processing_queue], ^{
-        [self.input removeObserver:self forKeyPath:@"endOfInput"];
+        @try {[self.input removeObserver:self forKeyPath:@"endOfInput"];}@catch (NSException *exception) {}
         self.output.outputUnitDelegate = nil;
         self.output = nil;
         self.input.inputUnitDelegate = nil;
