@@ -33,7 +33,7 @@
 #import "M3uContainer.h"
 
 @interface ORGMPluginManager ()
-@property(strong, nonatomic) NSDictionary *sources;
+@property(strong, nonatomic) NSMutableDictionary *sources;
 @property(strong, nonatomic) NSMutableDictionary *decoders;
 @property(strong, nonatomic) NSDictionary *containers;
 @end
@@ -55,11 +55,10 @@
     if (self) {
         
         /* Sources */
-        self.sources = [NSDictionary dictionaryWithObjectsAndKeys:
-                        [HTTPSource class], [HTTPSource scheme],
-                        [HTTPSource class], @"https",
-                        [FileSource class], [FileSource scheme],
-                        nil];
+        self.sources = [[NSMutableDictionary alloc] init];
+        [self registerSource:[HTTPSource class] forScheme:[HTTPSource scheme]];
+        [self registerSource:[HTTPSource class] forScheme:@"https"];
+        [self registerSource:[FileSource class] forScheme:[FileSource scheme]];
                  
         /* Decoders */
         NSMutableDictionary *decodersDict = [NSMutableDictionary dictionary];
@@ -89,6 +88,12 @@
     return self;
 }
 
+- (void)registerSource:(Class)sourceClass forScheme:(NSString *)scheme{
+    @synchronized(self.sources) {
+        [self.sources setObject:sourceClass forKey:scheme];
+    }
+}
+
 - (id<ORGMSource>)sourceForURL:(NSURL *)url error:(NSError **)error {
     id<ORGMSource> result;
     if (_resolver && (result = [_resolver sourceForURL:url error:error])) {
@@ -98,6 +103,7 @@
 	NSString *scheme = [url scheme];	
 	Class source = [_sources objectForKey:scheme];
 	if (!source) {
+        NSParameterAssert(NO);
         if (error) {
             NSString *message = [NSString stringWithFormat:@"%@ %@",
                                  NSLocalizedString(@"Unable to find source for scheme", nil),
@@ -121,9 +127,10 @@
         return result;
     }
 
-	NSString *extension = [[[source url] path] pathExtension];
+	NSString *extension = [source pathExtension];
 	Class decoder = [_decoders objectForKey:[extension lowercaseString]];
 	if (!decoder) {
+        NSParameterAssert(NO);
         if (error) {
             NSString *message = [NSString stringWithFormat:@"%@ %@",
                                  NSLocalizedString(@"Unable to find decoder for extension", nil),

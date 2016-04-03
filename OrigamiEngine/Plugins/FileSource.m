@@ -48,6 +48,10 @@
 	return _url;
 }
 
+- (NSString *)pathExtension{
+    return self.url.pathExtension;
+}
+
 - (long)size {
     long curpos = ftell(_fd);
     fseek (_fd, 0, SEEK_END);
@@ -59,9 +63,7 @@
 - (BOOL)open:(NSURL *)url {
 	[self setUrl:url];
 	_fd = fopen([[url path] UTF8String], "r");
-    
     BOOL success = (_fd != NULL);
-    
     dispatch_async([ORGMQueues callback_queue], ^{
         if(success){
             if([self.sourceDelegate respondsToSelector:@selector(sourceDidReceiveData:)]){
@@ -75,12 +77,15 @@
             }
         }
     });
-    
 	return success;
 }
 
 - (BOOL)seekable {
 	return YES;
+}
+
+- (BOOL)isRemoteSource {
+    return NO;
 }
 
 - (BOOL)seek:(long)position whence:(int)whence {

@@ -56,39 +56,48 @@ const NSTimeInterval readTimeout = 1.0;
     return [_request URL];
 }
 
+- (NSString *)pathExtension{
+    return self.url.pathExtension;
+}
+
 - (long)size {
     return (long)_bytesExpected;
 }
 
 - (BOOL)open:(NSURL *)url {
-    self.request = [NSMutableURLRequest requestWithURL:url];
-    [self.request addValue:@"identity" forHTTPHeaderField:@"Accept-Encoding"];
+    if(url){
+        self.request = [NSMutableURLRequest requestWithURL:url];
+        if(self.request){
+            [self.request addValue:@"identity" forHTTPHeaderField:@"Accept-Encoding"];
+            NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:_request
+                                                                          delegate:self
+                                                                  startImmediately:NO];
+            if(connection){
+                self.urlConnection = connection;
+                _bytesExpected = 0;
+                _bytesRead    = 0;
+                _byteCount     = 0;
+                _bytesWaitingFromCache = 0;
+                _connectionDidFail = NO;
 
-    NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:_request
-                                                                  delegate:self
-                                                          startImmediately:NO];
-    self.urlConnection = connection;
-
-    if ([NSThread isMainThread]) {
-        [_urlConnection start];
-    } else { //fix nsurlconnection delegate
-        dispatch_sync(dispatch_get_main_queue(), ^{
-            [_urlConnection start];
-        });
+                [self prepareCache:[NSString stringWithFormat:@"%lx.%@",
+                                    (unsigned long)[[url absoluteString] hash],
+                                    url.pathExtension]];
+                dispatch_sync(dispatch_get_main_queue(), ^{
+                    [connection start];
+                });
+                _downloadingSemaphore = dispatch_semaphore_create(0);
+                dispatch_semaphore_wait(_downloadingSemaphore, DISPATCH_TIME_FOREVER);
+                return YES;
+            }
+            return NO;
+        }
+        return NO;
     }
+    return NO;
+}
 
-    _bytesExpected = 0;
-    _bytesRead    = 0;
-    _byteCount     = 0;
-    _connectionDidFail = NO;
-
-    [self prepareCache:[NSString stringWithFormat:@"%lx.%@",
-                        (unsigned long)[[url absoluteString] hash],
-                        url.pathExtension]];
-
-    _downloadingSemaphore = dispatch_semaphore_create(0);
-    dispatch_semaphore_wait(_downloadingSemaphore, DISPATCH_TIME_FOREVER);
-
+- (BOOL)isRemoteSource {
     return YES;
 }
 

@@ -195,7 +195,7 @@ const int ID3V1_SIZE = 128;
 
 - (NSMutableDictionary *)metadataForFile:(AudioFileID)audioFile {
 
-    if ([_source isKindOfClass:NSClassFromString(@"HTTPSource")] &&
+    if ([_source isRemoteSource] &&
         [[[_source url] pathExtension] isEqualToString:@"mp3"]) {
 
         uint16_t data;
@@ -304,7 +304,7 @@ static OSStatus audioFile_ReadProc(void *inClientData,
     id<ORGMSource> source = (__bridge id<ORGMSource>)(inClientData);
 
     // Skip potential id3v1 tags over HTTP connection
-    if ([NSStringFromClass([source class]) isEqualToString:@"HTTPSource"] &&
+    if ([source isRemoteSource] &&
         [source size] - inPosition == ID3V1_SIZE) {
 
         *actualCount = ID3V1_SIZE;

@@ -77,6 +77,8 @@ typedef enum : NSInteger {
  */
 - (NSURL *)url;
 
+- (NSString *)pathExtension;
+
 /**
  Returns source file size.
  
@@ -133,6 +135,9 @@ typedef enum : NSInteger {
  Closes a source file. 
  */
 - (void)close;
+
+- (BOOL)isRemoteSource;
+
 @end
 
 /**
