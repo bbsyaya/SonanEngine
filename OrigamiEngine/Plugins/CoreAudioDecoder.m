@@ -196,7 +196,7 @@ const int ID3V1_SIZE = 128;
 - (NSMutableDictionary *)metadataForFile:(AudioFileID)audioFile {
 
     if ([_source isRemoteSource] &&
-        [[[_source url] pathExtension] isEqualToString:@"mp3"]) {
+        [[_source pathExtension] isEqualToString:@"mp3"]) {
 
         uint16_t data;
         [_source seek:0 whence:SEEK_SET];
