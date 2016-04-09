@@ -27,8 +27,6 @@
 
 @interface ORGMInputUnit () <ORGMSourceDelegate> {
     int bytesPerFrame;
-    void *inputBuffer;
-
     BOOL _shouldSeek;
     long seekFrame;
 }
@@ -38,6 +36,9 @@
 @property (strong, nonatomic) id<ORGMDecoder> decoder;
 @property (assign, nonatomic) BOOL endOfInput;
 @property (strong, nonatomic) NSURL *url;
+@property (strong, nonatomic) dispatch_queue_t lock_queue;
+@property (assign, nonatomic) void *inputBuffer;
+
 @end
 
 @implementation ORGMInputUnit
@@ -45,8 +46,9 @@
 - (instancetype)init {
     self = [super init];
     if (self) {
+        self.lock_queue = dispatch_queue_create("com.origami.lock",DISPATCH_QUEUE_SERIAL);
         self.data = [[NSMutableData alloc] init];
-        inputBuffer = malloc(CHUNK_SIZE);
+        self.inputBuffer = malloc(CHUNK_SIZE);
         _endOfInput = NO;
     }
     return self;
@@ -54,7 +56,7 @@
 
 - (void)dealloc {
     [self close];
-    free(inputBuffer);
+    free(self.inputBuffer);
     self.source.sourceDelegate = nil;
     self.url = nil;
 }
@@ -91,6 +93,7 @@
 }
 
 - (void)close {
+    [_source close];
     [_decoder close];
 }
 
@@ -113,11 +116,12 @@
         if(bytesPerFrame>0){
             framesToRead = CHUNK_SIZE/bytesPerFrame;
         }
-        framesRead = [_decoder readAudio:inputBuffer frames:framesToRead];
+        framesRead = [_decoder readAudio:self.inputBuffer frames:framesToRead];
         amountInBuffer = (framesRead * bytesPerFrame);
 
-        dispatch_sync([ORGMQueues lock_queue], ^{
-            [_data appendBytes:inputBuffer length:amountInBuffer];
+        __weak typeof (self) weakSelf = self;
+        dispatch_sync(self.lock_queue, ^{
+            [weakSelf.data appendBytes:weakSelf.inputBuffer length:amountInBuffer];
         });
     } while (framesRead > 0);
 
@@ -135,7 +139,10 @@
 
 - (void)seek:(double)time withDataFlush:(BOOL)flush {
     if (flush) {
-        dispatch_sync([ORGMQueues lock_queue], ^{ self.data = [NSMutableData data]; });
+         __weak typeof (self) weakSelf = self;
+        dispatch_sync(self.lock_queue, ^{
+            weakSelf.data = [[NSMutableData alloc] init];
+        });
     }
     seekFrame = time * [[_decoder.properties objectForKey:@"sampleRate"] floatValue];
     _shouldSeek = YES;
@@ -156,9 +163,10 @@
 - (int)shiftBytes:(NSUInteger)amount buffer:(void *)buffer {
     int bytesToRead = MIN(amount, _data.length);
 
-    dispatch_sync([ORGMQueues lock_queue], ^{
-        memcpy(buffer, _data.bytes, bytesToRead);
-        [_data replaceBytesInRange:NSMakeRange(0, bytesToRead) withBytes:NULL length:0];
+     __weak typeof (self) weakSelf = self;
+    dispatch_sync(self.lock_queue, ^{
+        memcpy(buffer, weakSelf.data.bytes, bytesToRead);
+        [weakSelf.data replaceBytesInRange:NSMakeRange(0, bytesToRead) withBytes:NULL length:0];
     });
 
     return bytesToRead;

@@ -38,15 +38,18 @@
 @property (strong, nonatomic) ORGMInputUnit *inputUnit;
 @property (weak, nonatomic) ORGMOutputUnit *outputUnit;
 @property (strong, nonatomic) NSMutableData *convertedData;
+@property (strong, nonatomic) dispatch_source_t buffering_source;
+
 @end
 
 @implementation ORGMConverter
 
-- (instancetype)initWithInputUnit:(ORGMInputUnit *)inputUnit {
+- (instancetype)initWithInputUnit:(ORGMInputUnit *)inputUnit bufferingSource:(dispatch_source_t)bufferingSource{
     self = [super init];
     if (self) {
         self.convertedData = [NSMutableData data];
         self.inputUnit = inputUnit;
+        self.buffering_source = bufferingSource;
         _inputFormat = inputUnit.format;
         writeBuf = malloc(CHUNK_SIZE);
     }
@@ -97,14 +100,15 @@
             break;
         }
         amountConverted = [self convert:writeBuf amount:CHUNK_SIZE];
-        dispatch_sync([ORGMQueues lock_queue], ^{
-            [_convertedData appendBytes:writeBuf length:amountConverted];
+        __weak typeof (self) weakSelf = self;
+        dispatch_sync(self.inputUnit.lock_queue, ^{
+            [weakSelf.convertedData appendBytes:writeBuf length:amountConverted];
         });
     } while (amountConverted > 0);
 
     if (!_outputUnit.isProcessing) {
         if (_convertedData.length < BUFFER_SIZE) {
-            dispatch_source_merge_data([ORGMQueues buffering_source], 1);
+            dispatch_source_merge_data(self.buffering_source, 1);
             return;
         }
         [_outputUnit process];
@@ -123,9 +127,10 @@
 - (int)shiftBytes:(NSUInteger)amount buffer:(void *)buffer {
     int bytesToRead = MIN(_convertedData.length, amount);
 
-    dispatch_sync([ORGMQueues lock_queue], ^{
-        memcpy(buffer, _convertedData.bytes, bytesToRead);
-        [_convertedData replaceBytesInRange:NSMakeRange(0, bytesToRead) withBytes:NULL length:0];
+    __weak typeof (self) weakSelf = self;
+    dispatch_sync(self.inputUnit.lock_queue, ^{
+        memcpy(buffer, weakSelf.convertedData.bytes, bytesToRead);
+        [weakSelf.convertedData replaceBytesInRange:NSMakeRange(0, bytesToRead) withBytes:NULL length:0];
     });
 
     return bytesToRead;
@@ -136,8 +141,9 @@
 }
 
 - (void)flushBuffer {
-    dispatch_sync([ORGMQueues lock_queue], ^{
-        self.convertedData = [NSMutableData data];
+     __weak typeof (self) weakSelf = self;
+    dispatch_sync(self.inputUnit.lock_queue, ^{
+        weakSelf.convertedData = [NSMutableData data];
     });
 }
 

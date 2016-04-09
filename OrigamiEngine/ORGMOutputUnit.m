@@ -254,19 +254,16 @@ static OSStatus Sound_Renderer(void *inRefCon,
 }
 
 - (int)readData:(void *)ptr amount:(int)amount {
-    if (!_converter) {
-        @throw [NSException exceptionWithName:NSInternalInconsistencyException
-                                       reason:NSLocalizedString(@"Converter is undefined", nil)
-                                     userInfo:nil];
+    NSAssert(self.converter, @"Converter is undefined");
+    if (self.converter) {
+        int bytesRead = [_converter shiftBytes:amount buffer:ptr];
+        _amountPlayed += bytesRead;
+        if ([_converter isReadyForBuffering]) {
+            dispatch_source_merge_data(_converter.buffering_source, 1);
+        }
+        return bytesRead;
     }
-    int bytesRead = [_converter shiftBytes:amount buffer:ptr];
-    _amountPlayed += bytesRead;
-
-    if ([_converter isReadyForBuffering]) {
-        dispatch_source_merge_data([ORGMQueues buffering_source], 1);
-    }
-
-    return bytesRead;
+    return 0;
 }
 
 - (void)setFormat:(AudioStreamBasicDescription *)f {

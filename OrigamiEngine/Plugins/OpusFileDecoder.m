@@ -97,9 +97,8 @@
 }
 
 - (void)close {
+    [source close];
     op_free(decoder);
-	[source close];
-
 	decoder = NULL;
 }
 

@@ -22,8 +22,6 @@
 // THE SOFTWARE.
 
 #import "FileSource.h"
-#import "ORGMQueues.h"
-
 
 @interface FileSource () {
     FILE *_fd;
@@ -64,7 +62,7 @@
 	[self setUrl:url];
 	_fd = fopen([[url path] UTF8String], "r");
     BOOL success = (_fd != NULL);
-    dispatch_async([ORGMQueues callback_queue], ^{
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         if(success){
             if([self.sourceDelegate respondsToSelector:@selector(sourceDidReceiveData:)]){
                 [self.sourceDelegate sourceDidReceiveData:self];
@@ -76,6 +74,8 @@
                 [self.sourceDelegate source:self didFailWithError:error];
             }
         }
+        
+        
     });
 	return success;
 }

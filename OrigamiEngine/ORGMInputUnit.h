@@ -43,6 +43,8 @@
  */
 @interface ORGMInputUnit : ORGMAudioUnit
 
+@property (strong, nonatomic, readonly) dispatch_queue_t lock_queue;
+
 @property (nonatomic,weak)id<ORGMInputUnitDelegate> inputUnitDelegate;
 
 /**

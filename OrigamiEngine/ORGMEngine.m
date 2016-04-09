@@ -29,12 +29,17 @@
 #import "ORGMCommonProtocols.h"
 
 @interface ORGMEngine () <ORGMInputUnitDelegate,ORGMOutputUnitDelegate>
+
 @property (strong, nonatomic) ORGMInputUnit *input;
 @property (strong, nonatomic) ORGMOutputUnit *output;
 @property (strong, nonatomic) ORGMConverter *converter;
 @property (assign, nonatomic) ORGMEngineState currentState;
 @property (strong, nonatomic) NSError *currentError;
 @property (assign, nonatomic) float lastPreloadProgress;
+@property (strong, nonatomic) dispatch_queue_t callback_queue;
+@property (strong, nonatomic) dispatch_queue_t processing_queue;
+@property (strong, nonatomic) dispatch_source_t buffering_source;
+
 @end
 
 @implementation ORGMEngine
@@ -42,6 +47,10 @@
 - (instancetype)init {
     self = [super init];
     if (self) {
+        self.callback_queue = dispatch_queue_create("com.origami.callback",DISPATCH_QUEUE_SERIAL);
+        self.processing_queue = dispatch_queue_create("com.origami.processing",DISPATCH_QUEUE_SERIAL);
+        self.buffering_source = dispatch_source_create(DISPATCH_SOURCE_TYPE_DATA_ADD,0, 0, self.processing_queue);
+        dispatch_resume(self.buffering_source);
         self.volume = 100.0f;
         [self setup];
         [self setCurrentState:ORGMEngineStateStopped];
@@ -57,14 +66,18 @@
     self.input = nil;
     self.converter = nil;
     self.delegate = nil;
+    self.callback_queue = nil;
+    self.processing_queue = nil;
+    self.buffering_source = nil;
 }
 
 - (void)setCurrentState:(ORGMEngineState)currentState{
     if(_currentState!=currentState){
         _currentState = currentState;
-        if ([_delegate respondsToSelector:@selector(engine:didChangeState:)]) {
-            dispatch_async([ORGMQueues callback_queue], ^{
-                [_delegate engine:self didChangeState:_currentState];
+        if ([self.delegate respondsToSelector:@selector(engine:didChangeState:)]) {
+            __weak typeof (self) weakSelf = self;
+            dispatch_async(self.callback_queue, ^{
+                [weakSelf.delegate engine:weakSelf didChangeState:currentState];
             });
         }
     }
@@ -73,57 +86,52 @@
 #pragma mark - public
 
 - (void)playUrl:(NSURL *)url withOutputUnitClass:(Class)outputUnitClass {
-    if (!outputUnitClass || ![outputUnitClass isSubclassOfClass:[ORGMOutputUnit class]]) {
-
-        @throw [NSException exceptionWithName:NSInternalInconsistencyException
-                                       reason:NSLocalizedString(@"Output unit should be subclass of ORGMOutputUnit", nil)
-                                     userInfo:nil];
+    NSAssert([outputUnitClass isSubclassOfClass:[ORGMOutputUnit class]], @"Output unit should be subclass of ORGMOutputUnit");
+    if (self.currentState == ORGMEngineStatePlaying){
+        [self stop];
     }
-
-    if (self.currentState == ORGMEngineStatePlaying) [self stop];
-    dispatch_async([ORGMQueues processing_queue], ^{
-        self.currentError = nil;
+    __weak typeof (self) weakSelf = self;
+    dispatch_async(self.processing_queue, ^{
+        weakSelf.currentError = nil;
 
         ORGMInputUnit *input = [[ORGMInputUnit alloc] init];
-        self.input = input;
-        self.input.inputUnitDelegate = self;
+        weakSelf.input = input;
+        weakSelf.input.inputUnitDelegate = weakSelf;
 
-        if (![_input openWithUrl:url]) {
-            self.currentState = ORGMEngineStateError;
-            self.currentError = [NSError errorWithDomain:kErrorDomain
+        if (![weakSelf.input openWithUrl:url]) {
+            weakSelf.currentState = ORGMEngineStateError;
+            weakSelf.currentError = [NSError errorWithDomain:kErrorDomain
                                                     code:ORGMEngineErrorCodesSourceFailed
                                                 userInfo:@{ NSLocalizedDescriptionKey:
                                                             NSLocalizedString(@"Couldn't open source", nil) }];
             return;
         }
-        @try {[self.input addObserver:self forKeyPath:@"endOfInput" options:NSKeyValueObservingOptionNew context:nil];}@catch (NSException *exception) {}
-        ORGMConverter *converter = [[ORGMConverter alloc] initWithInputUnit:_input];
-        self.converter = converter;
+        @try {[weakSelf.input addObserver:weakSelf forKeyPath:@"endOfInput" options:NSKeyValueObservingOptionNew context:nil];}@catch (NSException *exception) {}
+        ORGMConverter *converter = [[ORGMConverter alloc] initWithInputUnit:weakSelf.input bufferingSource:weakSelf.buffering_source];
+        weakSelf.converter = converter;
 
-        ORGMOutputUnit *output = [[outputUnitClass alloc] initWithConverter:_converter];
-        output.outputFormat = _outputFormat;
-        self.output = output;
-        self.output.outputUnitDelegate = self;
-        [_output setVolume:_volume];
+        ORGMOutputUnit *output = [[outputUnitClass alloc] initWithConverter:weakSelf.converter];
+        output.outputFormat = weakSelf.outputFormat;
+        weakSelf.output = output;
+        weakSelf.output.outputUnitDelegate = weakSelf;
+        [weakSelf.output setVolume:weakSelf.volume];
 
-        if (![_converter setupWithOutputUnit:_output]) {
-            self.currentState = ORGMEngineStateError;
-            self.currentError = [NSError errorWithDomain:kErrorDomain
+        if (![weakSelf.converter setupWithOutputUnit:weakSelf.output]) {
+            weakSelf.currentState = ORGMEngineStateError;
+            weakSelf.currentError = [NSError errorWithDomain:kErrorDomain
                                                     code:ORGMEngineErrorCodesConverterFailed
                                                 userInfo:@{ NSLocalizedDescriptionKey:
                                                             NSLocalizedString(@"Couldn't setup converter", nil) }];
             return;
         }
 
-        if([_delegate respondsToSelector:@selector(engine:didChangeCurrentURL:prevItemURL:)]) {
-            dispatch_async([ORGMQueues callback_queue], ^{
-                [_delegate engine:self didChangeCurrentURL:url prevItemURL:nil];
+        if([weakSelf.delegate respondsToSelector:@selector(engine:didChangeCurrentURL:prevItemURL:)]) {
+            dispatch_async(weakSelf.callback_queue, ^{
+                [weakSelf.delegate engine:weakSelf didChangeCurrentURL:url prevItemURL:nil];
             });
         }
-        
-        [self setCurrentState:ORGMEngineStatePlaying];
-        
-        dispatch_source_merge_data([ORGMQueues buffering_source], 1);
+        [weakSelf setCurrentState:ORGMEngineStatePlaying];
+        dispatch_source_merge_data(weakSelf.buffering_source, 1);
     });
 }
 
@@ -144,49 +152,52 @@
 }
 
 - (void)pause {
-    if (_currentState != ORGMEngineStatePlaying)
+    if (self.currentState != ORGMEngineStatePlaying){
         return;
-
-    [_output pause];
+    }
+    [self.output pause];
     [self setCurrentState:ORGMEngineStatePaused];
 }
 
 - (void)resume {
-    if (_currentState != ORGMEngineStatePaused)
+    if (self.currentState != ORGMEngineStatePaused){
         return;
-
-    [_output resume];
+    }
+    [self.output resume];
     [self setCurrentState:ORGMEngineStatePlaying];
 }
 
 - (void)stop {
-    dispatch_async([ORGMQueues processing_queue], ^{
-        @try {[self.input removeObserver:self forKeyPath:@"endOfInput"];}@catch (NSException *exception) {}
-        self.output.outputUnitDelegate = nil;
-        self.output = nil;
-        self.input.inputUnitDelegate = nil;
-        self.input = nil;
-        self.converter = nil;
-        [self setCurrentState:ORGMEngineStateStopped];
+     __weak typeof (self) weakSelf = self;
+    dispatch_async(self.processing_queue, ^{
+        @try {[weakSelf.input removeObserver:weakSelf forKeyPath:@"endOfInput"];}@catch (NSException *exception) {}
+        weakSelf.output.outputUnitDelegate = nil;
+        weakSelf.output = nil;
+        weakSelf.input.inputUnitDelegate = nil;
+        weakSelf.input = nil;
+        weakSelf.converter = nil;
+        [weakSelf setCurrentState:ORGMEngineStateStopped];
     });
 }
 
 - (double)trackTime {
-    return [_output framesToSeconds:_input.framesCount];
+    return [self.output framesToSeconds:self.input.framesCount];
 }
 
 - (double)amountPlayed {
-    return [_output amountPlayed];
+    return [self.output amountPlayed];
 }
 
 - (NSDictionary *)metadata {
-    return [_input metadata];
+    return [self.input metadata];
 }
 
 - (void)seekToTime:(double)time withDataFlush:(BOOL)flush {
-    [_output seek:time];
-    [_input seek:time withDataFlush:flush];
-    if (flush) [_converter flushBuffer];
+    [self.output seek:time];
+    [self.input seek:time withDataFlush:flush];
+    if (flush) {
+        [self.converter flushBuffer];
+    }
 }
 
 - (void)seekToTime:(double)time {
@@ -198,22 +209,23 @@
     if (!url) {
         [self stop];
     } else {
-        dispatch_async([ORGMQueues processing_queue], ^{
-            if ([_input openWithUrl:url]==NO) {
-                self.currentState = ORGMEngineStateError;
-                self.currentError = [NSError errorWithDomain:kErrorDomain
+        __weak typeof (self) weakSelf = self;
+        dispatch_async(self.processing_queue, ^{
+            if ([weakSelf.input openWithUrl:url]==NO) {
+                weakSelf.currentState = ORGMEngineStateError;
+                weakSelf.currentError = [NSError errorWithDomain:kErrorDomain
                                                         code:ORGMEngineErrorCodesSourceFailed
                                                     userInfo:@{ NSLocalizedDescriptionKey:
                                                                     NSLocalizedString(@"Couldn't open source", nil) }];
-                [self stop];
+                [weakSelf stop];
             }
             else{
-                [_converter reinitWithNewInput:_input withDataFlush:flush];
-                [_output seek:0.0]; //to reset amount played
-                [self setCurrentState:ORGMEngineStatePlaying]; //trigger delegate method
-                if([_delegate respondsToSelector:@selector(engine:didChangeCurrentURL:prevItemURL:)]) {
-                    dispatch_async([ORGMQueues callback_queue], ^{
-                        [_delegate engine:self didChangeCurrentURL:url prevItemURL:prevURL];
+                [weakSelf.converter reinitWithNewInput:weakSelf.input withDataFlush:flush];
+                [weakSelf.output seek:0.0]; //to reset amount played
+                [weakSelf setCurrentState:ORGMEngineStatePlaying]; //trigger delegate method
+                if([weakSelf.delegate respondsToSelector:@selector(engine:didChangeCurrentURL:prevItemURL:)]) {
+                    dispatch_async(weakSelf.callback_queue, ^{
+                        [weakSelf.delegate engine:weakSelf didChangeCurrentURL:url prevItemURL:prevURL];
                     });
                 }
             }
@@ -227,39 +239,45 @@
                       ofObject:(id)object
                         change:(NSDictionary *)change
                        context:(void *)context {
-    if (!_delegate)
-        return;
-
+     if (self.delegate==nil){
+         return;
+     }
      if ([keyPath isEqualToString:@"endOfInput"]) {
-        NSURL *nextUrl = [_delegate engineExpectsNextUrl:self];
-        if (!nextUrl) {
+         NSURL *nextUrl = nil;
+         if([self.delegate respondsToSelector:@selector(engineExpectsNextUrl:)]){
+             nextUrl = [self.delegate engineExpectsNextUrl:self];
+        }
+        if (nextUrl==nil) {
             [self setCurrentState:ORGMEngineStateStopped];
             return;
         }
-        dispatch_async([ORGMQueues callback_queue], ^{
-            [self setNextUrl:nextUrl withDataFlush:NO];
+        __weak typeof (self) weakSelf = self;
+        dispatch_async(self.callback_queue, ^{
+            [weakSelf setNextUrl:nextUrl withDataFlush:NO];
         });
     }
 }
 
 - (void)setup {
-    dispatch_source_set_event_handler([ORGMQueues buffering_source], ^{
-        [_input process];
-        [_converter process];
+    __weak typeof (self) weakSelf = self;
+    dispatch_source_set_event_handler(self.buffering_source, ^{
+        [weakSelf.input process];
+        [weakSelf.converter process];
     });
 }
 
 - (void)setVolume:(float)volume {
     _volume = volume;
-    [_output setVolume:volume];
+    [self.output setVolume:volume];
 }
 
 - (void)inputUnit:(ORGMInputUnit *)unit didChangePreloadProgress:(float)progress{
     if( unit==self.input && (ABS(_lastPreloadProgress-progress)>0.05 || (fabs(progress - 1.0) < FLT_EPSILON) || (fabs(progress) < FLT_EPSILON))){
         _lastPreloadProgress = progress;
         if(unit==self.input && [self.delegate respondsToSelector:@selector(engine:didChangePreloadProgress:)]){
-            dispatch_async([ORGMQueues callback_queue], ^{
-                [self.delegate engine:self didChangePreloadProgress:progress];
+            __weak typeof (self) weakSelf = self;
+            dispatch_async(self.callback_queue, ^{
+                [weakSelf.delegate engine:weakSelf didChangePreloadProgress:progress];
             });
         }
     }
@@ -267,16 +285,18 @@
 
 - (void)inputUnit:(ORGMInputUnit *)unit didFailWithError:(NSError *)error{
     if(unit==self.input && [self.delegate respondsToSelector:@selector(engine:didFailCurrentItemWithError:)]){
-        dispatch_async([ORGMQueues callback_queue], ^{
-            [self.delegate engine:self didFailCurrentItemWithError:error];
+        __weak typeof (self) weakSelf = self;
+        dispatch_async(self.callback_queue, ^{
+            [weakSelf.delegate engine:weakSelf didFailCurrentItemWithError:error];
         });
     }
 }
 
 - (void)outputUnit:(ORGMOutputUnit *)unit didChangeReadyToPlay:(BOOL)readyToPlay{
     if(unit==self.output && [self.delegate respondsToSelector:@selector(engine:didChangeReadyToPlay:)]){
-        dispatch_async([ORGMQueues callback_queue], ^{
-            [self.delegate engine:self didChangeReadyToPlay:readyToPlay];
+        __weak typeof (self) weakSelf = self;
+        dispatch_async(self.callback_queue, ^{
+            [weakSelf.delegate engine:weakSelf didChangeReadyToPlay:readyToPlay];
         });
     }
 }

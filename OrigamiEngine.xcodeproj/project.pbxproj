@@ -21,7 +21,6 @@
 		9502C2B916C592000054F4E3 /* ORGMOutputUnit.m in Sources */ = {isa = PBXBuildFile; fileRef = 959B583815CEE17200D44955 /* ORGMOutputUnit.m */; };
 		9502C2BB16C592000054F4E3 /* ORGMAudioUnit.m in Sources */ = {isa = PBXBuildFile; fileRef = 959B583C15CEE17200D44955 /* ORGMAudioUnit.m */; };
 		9502C2BD16C592000054F4E3 /* ORGMInputUnit.m in Sources */ = {isa = PBXBuildFile; fileRef = 959B583D15CEE17200D44955 /* ORGMInputUnit.m */; };
-		9502C2BF16C592000054F4E3 /* ORGMQueues.m in Sources */ = {isa = PBXBuildFile; fileRef = 959B583A15CEE17200D44955 /* ORGMQueues.m */; };
 		9502C2C216C592000054F4E3 /* ORGMPluginManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 95317ADB15D43C7A0029D115 /* ORGMPluginManager.m */; };
 		9502C2C316C592290054F4E3 /* CoreAudioDecoder.h in Headers */ = {isa = PBXBuildFile; fileRef = 95EE6A6C15D26758001AD694 /* CoreAudioDecoder.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9502C2C516C592290054F4E3 /* CueSheet.h in Headers */ = {isa = PBXBuildFile; fileRef = 95317ADF15D444FE0029D115 /* CueSheet.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -37,7 +36,6 @@
 		9502C2D916C592290054F4E3 /* ORGMOutputUnit.h in Headers */ = {isa = PBXBuildFile; fileRef = 959B583615CEE17200D44955 /* ORGMOutputUnit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9502C2DB16C592290054F4E3 /* ORGMAudioUnit.h in Headers */ = {isa = PBXBuildFile; fileRef = 959B583B15CEE17200D44955 /* ORGMAudioUnit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9502C2DD16C592290054F4E3 /* ORGMInputUnit.h in Headers */ = {isa = PBXBuildFile; fileRef = 959B583E15CEE17200D44955 /* ORGMInputUnit.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		9502C2DF16C592290054F4E3 /* ORGMQueues.h in Headers */ = {isa = PBXBuildFile; fileRef = 959B583F15CEE17200D44955 /* ORGMQueues.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9502C2E116C592290054F4E3 /* ORGMCommonProtocols.h in Headers */ = {isa = PBXBuildFile; fileRef = 95EE6A2E15D2629E001AD694 /* ORGMCommonProtocols.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9502C2E216C592290054F4E3 /* ORGMPluginManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 95317ADA15D43C7A0029D115 /* ORGMPluginManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9502C32316C5955F0054F4E3 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9502C32216C5955F0054F4E3 /* AudioToolbox.framework */; };
@@ -78,7 +76,6 @@
 		959B584015CEE17200D44955 /* ORGMConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = 959B583415CEE17200D44955 /* ORGMConverter.m */; };
 		959B584215CEE17200D44955 /* ORGMEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 959B583515CEE17200D44955 /* ORGMEngine.m */; };
 		959B584415CEE17200D44955 /* ORGMOutputUnit.m in Sources */ = {isa = PBXBuildFile; fileRef = 959B583815CEE17200D44955 /* ORGMOutputUnit.m */; };
-		959B584615CEE17200D44955 /* ORGMQueues.m in Sources */ = {isa = PBXBuildFile; fileRef = 959B583A15CEE17200D44955 /* ORGMQueues.m */; };
 		959B584815CEE17200D44955 /* ORGMAudioUnit.m in Sources */ = {isa = PBXBuildFile; fileRef = 959B583C15CEE17200D44955 /* ORGMAudioUnit.m */; };
 		959B584A15CEE17200D44955 /* ORGMInputUnit.m in Sources */ = {isa = PBXBuildFile; fileRef = 959B583D15CEE17200D44955 /* ORGMInputUnit.m */; };
 		959B586115CEE1D900D44955 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 959B586015CEE1D900D44955 /* AVFoundation.framework */; };
@@ -182,12 +179,10 @@
 		959B583715CEE17200D44955 /* ORGMConverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORGMConverter.h; sourceTree = "<group>"; };
 		959B583815CEE17200D44955 /* ORGMOutputUnit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORGMOutputUnit.m; sourceTree = "<group>"; };
 		959B583915CEE17200D44955 /* ORGMEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORGMEngine.h; sourceTree = "<group>"; };
-		959B583A15CEE17200D44955 /* ORGMQueues.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORGMQueues.m; sourceTree = "<group>"; };
 		959B583B15CEE17200D44955 /* ORGMAudioUnit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORGMAudioUnit.h; sourceTree = "<group>"; };
 		959B583C15CEE17200D44955 /* ORGMAudioUnit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORGMAudioUnit.m; sourceTree = "<group>"; };
 		959B583D15CEE17200D44955 /* ORGMInputUnit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORGMInputUnit.m; sourceTree = "<group>"; };
 		959B583E15CEE17200D44955 /* ORGMInputUnit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORGMInputUnit.h; sourceTree = "<group>"; };
-		959B583F15CEE17200D44955 /* ORGMQueues.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORGMQueues.h; sourceTree = "<group>"; };
 		959B586015CEE1D900D44955 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		959B586215CEE1DF00D44955 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		95A3DE3316368B7B008F802D /* FLAC.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FLAC.framework; path = "Audio-Frameworks/bin/flac/FLAC.framework"; sourceTree = "<group>"; };
@@ -333,8 +328,6 @@
 				959B583C15CEE17200D44955 /* ORGMAudioUnit.m */,
 				959B583E15CEE17200D44955 /* ORGMInputUnit.h */,
 				959B583D15CEE17200D44955 /* ORGMInputUnit.m */,
-				959B583F15CEE17200D44955 /* ORGMQueues.h */,
-				959B583A15CEE17200D44955 /* ORGMQueues.m */,
 				95EE6A2E15D2629E001AD694 /* ORGMCommonProtocols.h */,
 				95317ADA15D43C7A0029D115 /* ORGMPluginManager.h */,
 				95317ADB15D43C7A0029D115 /* ORGMPluginManager.m */,
@@ -441,7 +434,6 @@
 				9502C2D916C592290054F4E3 /* ORGMOutputUnit.h in Headers */,
 				9502C2DB16C592290054F4E3 /* ORGMAudioUnit.h in Headers */,
 				9502C2DD16C592290054F4E3 /* ORGMInputUnit.h in Headers */,
-				9502C2DF16C592290054F4E3 /* ORGMQueues.h in Headers */,
 				9502C2E116C592290054F4E3 /* ORGMCommonProtocols.h in Headers */,
 				9502C2E216C592290054F4E3 /* ORGMPluginManager.h in Headers */,
 			);
@@ -511,7 +503,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastTestingUpgradeCheck = 0720;
-				LastUpgradeCheck = 0460;
+				LastUpgradeCheck = 0720;
 			};
 			buildConfigurationList = 959B580315CEE13C00D44955 /* Build configuration list for PBXProject "OrigamiEngine" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -592,7 +584,6 @@
 				9502C2B916C592000054F4E3 /* ORGMOutputUnit.m in Sources */,
 				9502C2BB16C592000054F4E3 /* ORGMAudioUnit.m in Sources */,
 				9502C2BD16C592000054F4E3 /* ORGMInputUnit.m in Sources */,
-				9502C2BF16C592000054F4E3 /* ORGMQueues.m in Sources */,
 				9502C2C216C592000054F4E3 /* ORGMPluginManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -605,7 +596,6 @@
 				959B584015CEE17200D44955 /* ORGMConverter.m in Sources */,
 				959B584215CEE17200D44955 /* ORGMEngine.m in Sources */,
 				959B584415CEE17200D44955 /* ORGMOutputUnit.m in Sources */,
-				959B584615CEE17200D44955 /* ORGMQueues.m in Sources */,
 				959B584815CEE17200D44955 /* ORGMAudioUnit.m in Sources */,
 				959B584A15CEE17200D44955 /* ORGMInputUnit.m in Sources */,
 				95EE6A8015D26811001AD694 /* FlacDecoder.m in Sources */,
@@ -665,7 +655,6 @@
 		9502C29F16C591C00054F4E3 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
@@ -698,7 +687,6 @@
 		9502C2A016C591C00054F4E3 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
@@ -732,15 +720,20 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -748,11 +741,15 @@
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -761,17 +758,24 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
@@ -842,6 +846,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "OrigamiEngine/OrigamiEngine-Prefix.pch";
 				INFOPLIST_FILE = "OrigamiEngineTests/OrigamiEngineTests-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "origami.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = octest;
 			};
@@ -859,6 +864,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "OrigamiEngine/OrigamiEngine-Prefix.pch";
 				INFOPLIST_FILE = "OrigamiEngineTests/OrigamiEngineTests-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "origami.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = octest;
 			};

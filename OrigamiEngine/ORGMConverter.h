@@ -27,6 +27,7 @@
  `ORGMConverter` is a subclass of ORGMAudioUnit for converting decoded `PCM` data to `PCM` format compatable with output unit. This class is a wrapper for `AudioConverterRef`, it determines `PCM` format from specified output and input units.
  */
 @class ORGMOutputUnit, ORGMInputUnit;
+
 @interface ORGMConverter : ORGMAudioUnit
 
 /**
@@ -36,7 +37,9 @@
 
  @return An initialized `ORGMConverter` object.
  */
-- (instancetype)initWithInputUnit:(ORGMInputUnit *)inputUnit;
+- (instancetype)initWithInputUnit:(ORGMInputUnit *)inputUnit bufferingSource:(dispatch_source_t)bufferingSource;
+
+@property (strong, nonatomic, readonly) dispatch_source_t buffering_source;
 
 /**
  Specifies output `PCM` format from output unit.
