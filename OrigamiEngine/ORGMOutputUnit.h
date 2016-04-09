@@ -63,6 +63,8 @@
  **/
 - (instancetype)initWithConverter:(ORGMConverter *)converter;
 
+@property (readonly, strong, nonatomic) ORGMConverter *converter;
+
 /**
  Returns supported `PCM` audio format.
 

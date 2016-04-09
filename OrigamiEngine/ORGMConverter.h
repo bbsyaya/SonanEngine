@@ -41,6 +41,8 @@
 
 @property (strong, nonatomic, readonly) dispatch_source_t buffering_source;
 
+@property (strong, nonatomic, readonly) ORGMInputUnit *inputUnit;
+
 /**
  Specifies output `PCM` format from output unit.
 

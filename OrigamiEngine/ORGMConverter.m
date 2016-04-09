@@ -30,15 +30,14 @@
     AudioStreamBasicDescription _inputFormat;
     AudioStreamBasicDescription _outputFormat;
     AudioConverterRef _converter;
-
-    void *callbackBuffer;
-    void *writeBuf;
 }
 
 @property (strong, nonatomic) ORGMInputUnit *inputUnit;
 @property (weak, nonatomic) ORGMOutputUnit *outputUnit;
 @property (strong, nonatomic) NSMutableData *convertedData;
 @property (strong, nonatomic) dispatch_source_t buffering_source;
+@property (assign, nonatomic) void *callbackBuffer;
+@property (assign, nonatomic) void *writeBuf;
 
 @end
 
@@ -51,15 +50,15 @@
         self.inputUnit = inputUnit;
         self.buffering_source = bufferingSource;
         _inputFormat = inputUnit.format;
-        writeBuf = malloc(CHUNK_SIZE);
+        self.writeBuf = malloc(CHUNK_SIZE);
     }
     return self;
 }
 
 - (void)dealloc {
-    free(callbackBuffer);
-    free(writeBuf);
-    _inputUnit = nil;
+    free(self.callbackBuffer);
+    free(self.writeBuf);
+    self.inputUnit = nil;
 }
 
 #pragma mark - public
@@ -69,7 +68,7 @@
     [_outputUnit setSampleRate:_inputFormat.mSampleRate];
 
     _outputFormat = outputUnit.format;
-    callbackBuffer = malloc((CHUNK_SIZE/_outputFormat.mBytesPerFrame) * _inputFormat.mBytesPerPacket);
+    self.callbackBuffer = malloc((CHUNK_SIZE/_outputFormat.mBytesPerFrame) * _inputFormat.mBytesPerPacket);
 
     OSStatus stat = AudioConverterNew(&_inputFormat, &_outputFormat, &_converter);
     if (stat != noErr) {
@@ -99,10 +98,10 @@
         if (_convertedData.length >= BUFFER_SIZE) {
             break;
         }
-        amountConverted = [self convert:writeBuf amount:CHUNK_SIZE];
+        amountConverted = [self convert:self.writeBuf amount:CHUNK_SIZE];
         __weak typeof (self) weakSelf = self;
         dispatch_sync(self.inputUnit.lock_queue, ^{
-            [weakSelf.convertedData appendBytes:writeBuf length:amountConverted];
+            [weakSelf.convertedData appendBytes:weakSelf.writeBuf length:amountConverted];
         });
     } while (amountConverted > 0);
 
@@ -178,7 +177,7 @@ static OSStatus ACInputProc(AudioConverterRef inAudioConverter,
     int amountToWrite;
 
     amountToWrite = [converter.inputUnit shiftBytes:(*ioNumberDataPackets)*(converter->_inputFormat.mBytesPerPacket)
-                                             buffer:converter->callbackBuffer];
+                                             buffer:converter->_callbackBuffer];
 
     if (amountToWrite == 0) {
         ioData->mBuffers[0].mDataByteSize = 0;
@@ -187,7 +186,7 @@ static OSStatus ACInputProc(AudioConverterRef inAudioConverter,
         return 100;
     }
 
-    ioData->mBuffers[0].mData = converter->callbackBuffer;
+    ioData->mBuffers[0].mData = converter->_callbackBuffer;
     ioData->mBuffers[0].mDataByteSize = amountToWrite;
     ioData->mBuffers[0].mNumberChannels = (converter->_inputFormat.mChannelsPerFrame);
     ioData->mNumberBuffers = 1;

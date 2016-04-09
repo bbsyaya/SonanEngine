@@ -112,6 +112,7 @@
 
         ORGMOutputUnit *output = [[outputUnitClass alloc] initWithConverter:weakSelf.converter];
         output.outputFormat = weakSelf.outputFormat;
+        @try {[weakSelf.output.converter.inputUnit removeObserver:weakSelf forKeyPath:@"endOfInput"];}@catch (NSException *exception) {}
         weakSelf.output = output;
         weakSelf.output.outputUnitDelegate = weakSelf;
         [weakSelf.output setVolume:weakSelf.volume];
