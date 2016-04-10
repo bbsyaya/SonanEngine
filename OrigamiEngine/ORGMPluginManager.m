@@ -130,7 +130,6 @@
 	NSString *extension = [source pathExtension];
 	Class decoder = [_decoders objectForKey:[extension lowercaseString]];
 	if (!decoder) {
-        NSParameterAssert(NO);
         if (error) {
             NSString *message = [NSString stringWithFormat:@"%@ %@",
                                  NSLocalizedString(@"Unable to find decoder for extension", nil),
@@ -143,6 +142,10 @@
 	}
     
 	return [[decoder alloc] init];
+}
+
+- (NSArray *)supportedFileExtensions{
+    return [[self.decoders allKeys] arrayByAddingObjectsFromArray:[self.containers allKeys]];
 }
 
 - (NSArray *)urlsForContainerURL:(NSURL *)url error:(NSError **)error {

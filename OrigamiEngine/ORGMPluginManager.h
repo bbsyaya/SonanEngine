@@ -75,6 +75,9 @@
  @return An array with track urls from the container or `nil` if corresponding plugin is not found.
  */
 - (NSArray *)urlsForContainerURL:(NSURL *)url error:(NSError **)error;
+
+- (NSArray *)supportedFileExtensions;
+
 @end
 
 /**
