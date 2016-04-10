@@ -157,7 +157,16 @@
 }
 
 - (NSDictionary *)metadata {
-    return [_decoder metadata];
+    NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
+    NSDictionary *commonMeta = [_decoder metadata];
+    if(commonMeta){
+        [dict addEntriesFromDictionary:commonMeta];
+    }
+    if(fabs(self.format.mSampleRate)>FLT_EPSILON){
+        double trackDuration = self.framesCount/self.format.mSampleRate;
+        [dict setObject:@(trackDuration) forKey:@"duration"];
+    }
+    return dict;
 }
 
 - (int)shiftBytes:(NSUInteger)amount buffer:(void *)buffer {
