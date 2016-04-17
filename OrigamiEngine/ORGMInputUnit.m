@@ -74,7 +74,6 @@
     int bitsPerSample = [[_decoder.properties objectForKey:@"bitsPerSample"] intValue];
 	int channels = [[_decoder.properties objectForKey:@"channels"] intValue];
     bytesPerFrame = (bitsPerSample/8) * channels;
-    NSParameterAssert(bytesPerFrame!=0);
     
     return YES;
 }
