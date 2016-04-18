@@ -157,8 +157,8 @@
 
 - (NSDictionary *)metadata {
     NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
-    NSDictionary *commonMeta = [_decoder metadata];
-    if(commonMeta){
+    NSDictionary *commonMeta = [[_decoder metadata] copy];
+    if(commonMeta.count>0){
         [dict addEntriesFromDictionary:commonMeta];
     }
     if(fabs(self.format.mSampleRate)>FLT_EPSILON){

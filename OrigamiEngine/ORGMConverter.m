@@ -58,7 +58,10 @@
 - (void)dealloc {
     free(self.callbackBuffer);
     free(self.writeBuf);
-    self.inputUnit = nil;
+    @try {
+        [self.inputUnit close];
+        self.inputUnit = nil;
+    } @catch (NSException *exception) {}
 }
 
 #pragma mark - public
