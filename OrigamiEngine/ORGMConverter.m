@@ -56,8 +56,12 @@
 }
 
 - (void)dealloc {
-    free(self.callbackBuffer);
-    free(self.writeBuf);
+    if(self.callbackBuffer!=NULL){
+        free(self.callbackBuffer);
+    }
+    if(self.writeBuf!=NULL){
+        free(self.writeBuf);
+    }
     @try {
         [self.inputUnit close];
         self.inputUnit = nil;

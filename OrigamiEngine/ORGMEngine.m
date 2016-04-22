@@ -59,13 +59,13 @@
 }
 
 - (void)dealloc {
+    self.delegate = nil;
+    self.input.inputUnitDelegate = nil;
     @try {[self.input removeObserver:self forKeyPath:@"endOfInput"];}@catch (NSException *exception) {}
+    self.input = nil;
     self.output.outputUnitDelegate = nil;
     self.output = nil;
-    self.input.inputUnitDelegate = nil;
-    self.input = nil;
     self.converter = nil;
-    self.delegate = nil;
     self.callback_queue = nil;
     self.processing_queue = nil;
     self.buffering_source = nil;
@@ -171,11 +171,11 @@
 - (void)stop {
      __weak typeof (self) weakSelf = self;
     dispatch_async(self.processing_queue, ^{
+        weakSelf.input.inputUnitDelegate = nil;
         @try {[weakSelf.input removeObserver:weakSelf forKeyPath:@"endOfInput"];}@catch (NSException *exception) {}
+        weakSelf.input = nil;
         weakSelf.output.outputUnitDelegate = nil;
         weakSelf.output = nil;
-        weakSelf.input.inputUnitDelegate = nil;
-        weakSelf.input = nil;
         weakSelf.converter = nil;
         [weakSelf setCurrentState:ORGMEngineStateStopped];
     });
