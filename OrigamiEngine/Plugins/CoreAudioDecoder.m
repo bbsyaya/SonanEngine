@@ -204,94 +204,84 @@ const int ID3V1_SIZE = 128;
         if (data != 17481) return nil; // ID == 17481
     }
 
-    NSMutableDictionary *result = nil;
-    UInt32 dataSize = 0;
-    OSStatus err;
-
-    err = AudioFileGetPropertyInfo(audioFile,
-                                   kAudioFilePropertyInfoDictionary,
-                                   &dataSize,
-                                   0);
-
-    if (err != noErr) return result;
-
-    CFDictionaryRef dictionary;
-    err = AudioFileGetProperty(audioFile, kAudioFilePropertyInfoDictionary, &dataSize, &dictionary);
-    if (err != noErr) return result;
-
-    result = [NSMutableDictionary dictionaryWithDictionary:(__bridge NSDictionary *)dictionary];
-    CFRelease(dictionary);
-
-    err = AudioFileGetPropertyInfo(audioFile,
-                                   kAudioFilePropertyAlbumArtwork,
-                                   &dataSize,
-                                   0);
-    NSData *image;
-    if (err == noErr) {
-        char *rawImageData = (char *)malloc(dataSize);
-        AudioFileGetProperty(audioFile,
-                             kAudioFilePropertyAlbumArtwork,
-                             &dataSize,
-                             &rawImageData);
-        if (dataSize>0) {
-            image = [NSData dataWithBytes:rawImageData length:dataSize];
-            [self.metadata setObject:image forKey:@"picture"];
-        }
-        free(rawImageData);
-    } else if ((image = [self imageDataFromID3Tag:audioFile])) {
-        [self.metadata setObject:image forKey:@"picture"];
-    }
-    return result;
-}
-
-- (NSData *)imageDataFromID3Tag:(AudioFileID)audioFile {
-
-    OSStatus err;
-
-    UInt32 propertySize = 0;
-    AudioFileGetPropertyInfo(audioFile,
-            kAudioFilePropertyID3Tag,
-            &propertySize,
-            0);
-
-    char *rawID3Tag = (char *)malloc(propertySize);
-    err = AudioFileGetProperty(audioFile,
-            kAudioFilePropertyID3Tag,
-            &propertySize,
-            rawID3Tag);
-
-    if (err != noErr) {
-        free(rawID3Tag);
+    AudioFileID fileID  = audioFile;
+    OSStatus err = noErr;
+    
+    UInt32 id3DataSize = 0;
+    char* rawID3Tag = NULL;
+    
+    //  Reads in the raw ID3 tag info
+    err = AudioFileGetPropertyInfo(fileID, kAudioFilePropertyID3Tag, &id3DataSize, NULL);
+    if(err != noErr) {
         return nil;
     }
-
+    
+    //  Allocate the raw tag data
+    rawID3Tag = (char *) malloc(id3DataSize);
+    
+    if(rawID3Tag == NULL) {
+        return nil;
+    }
+    
+    err = AudioFileGetProperty(fileID, kAudioFilePropertyID3Tag, &id3DataSize, rawID3Tag);
+    if(err != noErr) {
+        return nil;
+    }
+    
     UInt32 id3TagSize = 0;
-    UInt32 id3TagSizeLength = sizeof(id3TagSize);
-    AudioFormatGetProperty(kAudioFormatProperty_ID3TagSize,
-            propertySize,
-            rawID3Tag,
-            &id3TagSizeLength,
-            &id3TagSize);
-
-    CFDictionaryRef id3Dict;
-    AudioFormatGetProperty(kAudioFormatProperty_ID3TagToDictionary,
-            propertySize,
-            rawID3Tag,
-            &id3TagSize,
-            &id3Dict);
-
-    NSDictionary *tagDict = [NSDictionary dictionaryWithDictionary:(__bridge NSDictionary *)id3Dict];
+    UInt32 id3TagSizeLength = 0;
+    err = AudioFormatGetProperty(kAudioFormatProperty_ID3TagSize, id3DataSize, rawID3Tag, &id3TagSizeLength, &id3TagSize);
+    
+    if(err != noErr) {
+        switch(err) {
+            case kAudioFormatUnspecifiedError:
+                NSLog(@"err: audio format unspecified error");
+                return nil;
+            case kAudioFormatUnsupportedPropertyError:
+                NSLog(@"err: audio format unsupported property error");
+                return nil;
+            case kAudioFormatBadPropertySizeError:
+                NSLog(@"err: audio format bad property size error");
+                return nil;
+            case kAudioFormatBadSpecifierSizeError:
+                NSLog(@"err: audio format bad specifier size error");
+                return nil;
+            case kAudioFormatUnsupportedDataFormatError:
+                NSLog(@"err: audio format unsupported data format error");
+                return nil;
+            case kAudioFormatUnknownFormatError:
+                NSLog(@"err: audio format unknown format error");
+                return nil;
+            default:
+                NSLog(@"err: some other audio format error");
+                return nil;
+        }
+    }
+    
+    CFDictionaryRef piDict = nil;
+    UInt32 piDataSize = sizeof(piDict);
+    
+    //  Populates a CFDictionary with the ID3 tag properties
+    err = AudioFileGetProperty(fileID, kAudioFilePropertyInfoDictionary, &piDataSize, &piDict);
+    if(err != noErr) {
+        NSLog(@"AudioFileGetProperty failed for property info dictionary");
+        return nil;
+    }
+    
+    //  Toll free bridge the CFDictionary so that we can interact with it via objc
+    NSDictionary* nsDict = (__bridge NSDictionary*)piDict;
+    
+    //  ALWAYS CLEAN UP!
+    CFRelease(piDict);
+    
+    NSMutableDictionary *result = [[NSMutableDictionary alloc] init];
+    if([nsDict count]>0){
+        [result addEntriesFromDictionary:nsDict];
+    }
+    nsDict = nil;
     free(rawID3Tag);
-    CFRelease(id3Dict);
-
-    NSDictionary *apicDict = tagDict[@"APIC"];
-    if (!apicDict) return nil;
-
-    NSString *picKey      = [[apicDict allKeys] lastObject];
-    NSDictionary *picDict = apicDict[picKey];
-    if (!picDict) return nil;
-
-    return picDict[@"data"];
+    
+    return result;
 }
 
 #pragma mark - callback functions
