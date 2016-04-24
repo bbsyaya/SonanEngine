@@ -31,6 +31,7 @@
     long seekFrame;
 }
 
+@property (nonatomic,strong) NSMapTable *observerInfo;
 @property (strong, nonatomic) NSMutableData *data;
 @property (strong, nonatomic) id<ORGMSource> source;
 @property (strong, nonatomic) id<ORGMDecoder> decoder;
@@ -55,6 +56,7 @@
 }
 
 - (void)dealloc {
+    [self removeItemStatusObserver];
     [self close];
     free(self.inputBuffer);
     self.source.sourceDelegate = nil;
@@ -178,6 +180,35 @@
     });
 
     return bytesToRead;
+}
+
+- (void)addItemStatusObserver:(NSObject *)observer forKeyPaths:(NSSet *)keyPaths options:(NSKeyValueObservingOptions)options{
+    @synchronized(self) {
+        if(self.observerInfo){
+            [self removeItemStatusObserver];
+        }
+        self.observerInfo = [NSMapTable mapTableWithKeyOptions:NSPointerFunctionsStrongMemory valueOptions:NSPointerFunctionsWeakMemory];
+        [keyPaths enumerateObjectsUsingBlock:^(NSString *key, BOOL *stop) {
+            @try {[self addObserver:observer forKeyPath:key options:options context:NULL];}@catch (NSException *exception) {}
+            [self.observerInfo setObject:observer forKey:key];
+        }];
+    }
+}
+
+- (void)removeItemStatusObserver{
+    @synchronized(self) {
+        if(self.observerInfo){
+            NSArray *keys = [[self.observerInfo keyEnumerator] allObjects];
+            for (NSString *key in keys) {
+                id value = [self.observerInfo objectForKey:key];
+                NSParameterAssert(value);
+                if(value){
+                    @try {[self removeObserver:value forKeyPath:key]; }@catch (NSException *exception) {}
+                }
+            }
+            self.observerInfo = nil;
+        }
+    }
 }
 
 #pragma mark - private

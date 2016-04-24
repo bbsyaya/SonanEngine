@@ -61,7 +61,7 @@
 - (void)dealloc {
     self.delegate = nil;
     self.input.inputUnitDelegate = nil;
-    @try {[self.input removeObserver:self forKeyPath:@"endOfInput"];}@catch (NSException *exception) {}
+    [self.input removeItemStatusObserver];
     self.input = nil;
     self.output.outputUnitDelegate = nil;
     self.output = nil;
@@ -106,13 +106,13 @@
                                                             NSLocalizedString(@"Couldn't open source", nil) }];
             return;
         }
-        @try {[weakSelf.input addObserver:weakSelf forKeyPath:@"endOfInput" options:NSKeyValueObservingOptionNew context:nil];}@catch (NSException *exception) {}
+        [weakSelf.input addItemStatusObserver:weakSelf forKeyPaths:[NSSet setWithArray:@[@"endOfInput"]] options:NSKeyValueObservingOptionNew];
         ORGMConverter *converter = [[ORGMConverter alloc] initWithInputUnit:weakSelf.input bufferingSource:weakSelf.buffering_source];
         weakSelf.converter = converter;
 
         ORGMOutputUnit *output = [[outputUnitClass alloc] initWithConverter:weakSelf.converter];
         output.outputFormat = weakSelf.outputFormat;
-        @try {[weakSelf.output.converter.inputUnit removeObserver:weakSelf forKeyPath:@"endOfInput"];}@catch (NSException *exception) {}
+        [weakSelf.output.converter.inputUnit removeItemStatusObserver];
         weakSelf.output = output;
         weakSelf.output.outputUnitDelegate = weakSelf;
         [weakSelf.output setVolume:weakSelf.volume];
@@ -172,7 +172,7 @@
      __weak typeof (self) weakSelf = self;
     dispatch_async(self.processing_queue, ^{
         weakSelf.input.inputUnitDelegate = nil;
-        @try {[weakSelf.input removeObserver:weakSelf forKeyPath:@"endOfInput"];}@catch (NSException *exception) {}
+        [weakSelf.input removeItemStatusObserver];
         weakSelf.input = nil;
         weakSelf.output.outputUnitDelegate = nil;
         weakSelf.output = nil;

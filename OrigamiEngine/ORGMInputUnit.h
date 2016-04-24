@@ -126,5 +126,7 @@
 
 - (float)preloadProgress;
 
+- (void)addItemStatusObserver:(NSObject *)observer forKeyPaths:(NSSet *)keyPaths options:(NSKeyValueObservingOptions)options;
+- (void)removeItemStatusObserver;
 
 @end
