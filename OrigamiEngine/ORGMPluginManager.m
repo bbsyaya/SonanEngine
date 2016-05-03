@@ -119,6 +119,7 @@
 
 - (id<ORGMDecoder>)decoderForSource:(id<ORGMSource>)source error:(NSError **)error {
     if (!source || ![source url]) {
+        NSParameterAssert(NO);
         return nil;
     }
 
@@ -130,6 +131,7 @@
 	NSString *extension = [source pathExtension];
 	Class decoder = [_decoders objectForKey:[extension lowercaseString]];
 	if (!decoder) {
+        NSParameterAssert(NO);
         if (error) {
             NSString *message = [NSString stringWithFormat:@"%@ %@",
                                  NSLocalizedString(@"Unable to find decoder for extension", nil),
