@@ -47,8 +47,8 @@
 - (instancetype)init {
     self = [super init];
     if (self) {
-        self.callback_queue = dispatch_queue_create("com.origami.callback",DISPATCH_QUEUE_SERIAL);
-        self.processing_queue = dispatch_queue_create("com.origami.processing",DISPATCH_QUEUE_SERIAL);
+        self.callback_queue = dispatch_queue_create("com.Sonan.callback",DISPATCH_QUEUE_SERIAL);
+        self.processing_queue = dispatch_queue_create("com.Sonan.processing",DISPATCH_QUEUE_SERIAL);
         self.buffering_source = dispatch_source_create(DISPATCH_SOURCE_TYPE_DATA_ADD,0, 0, self.processing_queue);
         dispatch_resume(self.buffering_source);
         self.volume = 100.0f;

@@ -47,7 +47,7 @@
 - (instancetype)init {
     self = [super init];
     if (self) {
-        self.lock_queue = dispatch_queue_create("com.origami.lock",DISPATCH_QUEUE_SERIAL);
+        self.lock_queue = dispatch_queue_create("com.Sonan.lock",DISPATCH_QUEUE_SERIAL);
         self.data = [[NSMutableData alloc] init];
         self.inputBuffer = malloc(CHUNK_SIZE);
         _endOfInput = NO;

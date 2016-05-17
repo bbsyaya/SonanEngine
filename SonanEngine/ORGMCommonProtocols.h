@@ -24,7 +24,7 @@
 /**
  Common domain for the all engine errors
  */
-#define kErrorDomain @"com.origami.engine.error"
+#define kErrorDomain @"com.Sonan.engine.error"
 
 /**
  Libarary error codes

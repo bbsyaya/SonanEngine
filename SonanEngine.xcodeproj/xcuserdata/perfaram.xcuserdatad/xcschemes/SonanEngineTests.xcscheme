@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0720"
+   LastUpgradeVersion = "0730"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,10 +14,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "9502C28D16C591C00054F4E3"
-               BuildableName = "OrigamiEngine.framework"
-               BlueprintName = "OrigamiEngineMac"
-               ReferencedContainer = "container:OrigamiEngine.xcodeproj">
+               BlueprintIdentifier = "959B581915CEE13C00D44955"
+               BuildableName = "SonanEngineTests.octest"
+               BlueprintName = "SonanEngineTests"
+               ReferencedContainer = "container:SonanEngine.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -45,10 +45,10 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "9502C28D16C591C00054F4E3"
-            BuildableName = "OrigamiEngine.framework"
-            BlueprintName = "OrigamiEngineMac"
-            ReferencedContainer = "container:OrigamiEngine.xcodeproj">
+            BlueprintIdentifier = "959B581915CEE13C00D44955"
+            BuildableName = "SonanEngineTests.octest"
+            BlueprintName = "SonanEngineTests"
+            ReferencedContainer = "container:SonanEngine.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -63,10 +63,10 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "9502C28D16C591C00054F4E3"
-            BuildableName = "OrigamiEngine.framework"
-            BlueprintName = "OrigamiEngineMac"
-            ReferencedContainer = "container:OrigamiEngine.xcodeproj">
+            BlueprintIdentifier = "959B581915CEE13C00D44955"
+            BuildableName = "SonanEngineTests.octest"
+            BlueprintName = "SonanEngineTests"
+            ReferencedContainer = "container:SonanEngine.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </ProfileAction>

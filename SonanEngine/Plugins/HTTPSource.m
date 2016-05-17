@@ -165,7 +165,7 @@ const NSTimeInterval readTimeout = 1.0;
     static dispatch_queue_t _cachingQueue;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        _cachingQueue = dispatch_queue_create("com.origami.httpcache",
+        _cachingQueue = dispatch_queue_create("com.Sonan.httpcache",
                                               DISPATCH_QUEUE_SERIAL);
     });
     return _cachingQueue;

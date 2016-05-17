@@ -71,7 +71,7 @@
 		959B580D15CEE13C00D44955 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 959B580C15CEE13C00D44955 /* Foundation.framework */; };
 		959B581C15CEE13C00D44955 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 959B581B15CEE13C00D44955 /* SenTestingKit.framework */; };
 		959B581F15CEE13C00D44955 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 959B580C15CEE13C00D44955 /* Foundation.framework */; };
-		959B582215CEE13C00D44955 /* libOrigamiEngine.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 959B580915CEE13C00D44955 /* libOrigamiEngine.a */; };
+		959B582215CEE13C00D44955 /* libSonanEngine.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 959B580915CEE13C00D44955 /* libSonanEngine.a */; };
 		959B582815CEE13C00D44955 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 959B582615CEE13C00D44955 /* InfoPlist.strings */; };
 		959B584015CEE17200D44955 /* ORGMConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = 959B583415CEE17200D44955 /* ORGMConverter.m */; };
 		959B584215CEE17200D44955 /* ORGMEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 959B583515CEE17200D44955 /* ORGMEngine.m */; };
@@ -102,7 +102,7 @@
 			containerPortal = 959B580015CEE13C00D44955 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 959B580815CEE13C00D44955;
-			remoteInfo = OrigamiEngine;
+			remoteInfo = SonanEngine;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -119,7 +119,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		9502C28E16C591C00054F4E3 /* OrigamiEngine.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = OrigamiEngine.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9502C28E16C591C00054F4E3 /* SonanEngine.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SonanEngine.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9502C32016C594970054F4E3 /* FLAC.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FLAC.framework; path = "../Audio-Frameworks/bin/flac/FLAC_OSX/FLAC.framework"; sourceTree = "<group>"; };
 		9502C32216C5955F0054F4E3 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk/System/Library/Frameworks/AudioToolbox.framework; sourceTree = DEVELOPER_DIR; };
 		9502C32416C595650054F4E3 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk/System/Library/Frameworks/AVFoundation.framework; sourceTree = DEVELOPER_DIR; };
@@ -166,12 +166,12 @@
 		9536D2A515DB9DD10098A77C /* multiple-vc.cue */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "multiple-vc.cue"; sourceTree = "<group>"; };
 		9536D2A715DBABB10098A77C /* FileSourceTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileSourceTests.h; sourceTree = "<group>"; };
 		9536D2A815DBABB10098A77C /* FileSourceTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileSourceTests.m; sourceTree = "<group>"; };
-		959B580915CEE13C00D44955 /* libOrigamiEngine.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libOrigamiEngine.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		959B580915CEE13C00D44955 /* libSonanEngine.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libSonanEngine.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		959B580C15CEE13C00D44955 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		959B581015CEE13C00D44955 /* OrigamiEngine-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "OrigamiEngine-Prefix.pch"; sourceTree = "<group>"; };
-		959B581A15CEE13C00D44955 /* OrigamiEngineTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OrigamiEngineTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		959B581015CEE13C00D44955 /* SonanEngine-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SonanEngine-Prefix.pch"; sourceTree = "<group>"; };
+		959B581A15CEE13C00D44955 /* SonanEngineTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SonanEngineTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		959B581B15CEE13C00D44955 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
-		959B582515CEE13C00D44955 /* OrigamiEngineTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "OrigamiEngineTests-Info.plist"; sourceTree = "<group>"; };
+		959B582515CEE13C00D44955 /* SonanEngineTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SonanEngineTests-Info.plist"; sourceTree = "<group>"; };
 		959B582715CEE13C00D44955 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		959B583415CEE17200D44955 /* ORGMConverter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORGMConverter.m; sourceTree = "<group>"; };
 		959B583515CEE17200D44955 /* ORGMEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORGMEngine.m; sourceTree = "<group>"; };
@@ -242,7 +242,7 @@
 				950B03B815DAB6A800C2365B /* AVFoundation.framework in Frameworks */,
 				959B581C15CEE13C00D44955 /* SenTestingKit.framework in Frameworks */,
 				959B581F15CEE13C00D44955 /* Foundation.framework in Frameworks */,
-				959B582215CEE13C00D44955 /* libOrigamiEngine.a in Frameworks */,
+				959B582215CEE13C00D44955 /* libSonanEngine.a in Frameworks */,
 				95A3DE3516368B7B008F802D /* FLAC.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -250,7 +250,7 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		9502C29516C591C00054F4E3 /* OrigamiEngineOSX */ = {
+		9502C29516C591C00054F4E3 /* SonanEngineOSX */ = {
 			isa = PBXGroup;
 			children = (
 				9502C32616C595B20054F4E3 /* AudioUnit.framework */,
@@ -258,8 +258,8 @@
 				9502C32216C5955F0054F4E3 /* AudioToolbox.framework */,
 				9502C32016C594970054F4E3 /* FLAC.framework */,
 			);
-			name = OrigamiEngineOSX;
-			path = OrigamiEngineMac;
+			name = SonanEngineOSX;
+			path = SonanEngineMac;
 			sourceTree = "<group>";
 		};
 		95317B5C15D51B060029D115 /* fixtures */ = {
@@ -278,9 +278,9 @@
 		959B57FE15CEE13C00D44955 = {
 			isa = PBXGroup;
 			children = (
-				959B580E15CEE13C00D44955 /* OrigamiEngine */,
-				959B582315CEE13C00D44955 /* OrigamiEngineTests */,
-				9502C29516C591C00054F4E3 /* OrigamiEngineOSX */,
+				959B580E15CEE13C00D44955 /* SonanEngine */,
+				959B582315CEE13C00D44955 /* SonanEngineTests */,
+				9502C29516C591C00054F4E3 /* SonanEngineOSX */,
 				959B580B15CEE13C00D44955 /* Frameworks */,
 				959B580A15CEE13C00D44955 /* Products */,
 			);
@@ -289,9 +289,9 @@
 		959B580A15CEE13C00D44955 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				959B580915CEE13C00D44955 /* libOrigamiEngine.a */,
-				959B581A15CEE13C00D44955 /* OrigamiEngineTests.octest */,
-				9502C28E16C591C00054F4E3 /* OrigamiEngine.framework */,
+				959B580915CEE13C00D44955 /* libSonanEngine.a */,
+				959B581A15CEE13C00D44955 /* SonanEngineTests.octest */,
+				9502C28E16C591C00054F4E3 /* SonanEngine.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -314,7 +314,7 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		959B580E15CEE13C00D44955 /* OrigamiEngine */ = {
+		959B580E15CEE13C00D44955 /* SonanEngine */ = {
 			isa = PBXGroup;
 			children = (
 				95EE6A6B15D26746001AD694 /* Plugin */,
@@ -333,18 +333,18 @@
 				95317ADB15D43C7A0029D115 /* ORGMPluginManager.m */,
 				959B580F15CEE13C00D44955 /* Supporting Files */,
 			);
-			path = OrigamiEngine;
+			path = SonanEngine;
 			sourceTree = "<group>";
 		};
 		959B580F15CEE13C00D44955 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				959B581015CEE13C00D44955 /* OrigamiEngine-Prefix.pch */,
+				959B581015CEE13C00D44955 /* SonanEngine-Prefix.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		959B582315CEE13C00D44955 /* OrigamiEngineTests */ = {
+		959B582315CEE13C00D44955 /* SonanEngineTests */ = {
 			isa = PBXGroup;
 			children = (
 				959B582415CEE13C00D44955 /* Supporting Files */,
@@ -373,14 +373,14 @@
 				95B2920F15DBD3390031017D /* HTTPSourceTests.h */,
 				95B2921015DBD3390031017D /* HTTPSourceTests.m */,
 			);
-			path = OrigamiEngineTests;
+			path = SonanEngineTests;
 			sourceTree = "<group>";
 		};
 		959B582415CEE13C00D44955 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
 				95317B5C15D51B060029D115 /* fixtures */,
-				959B582515CEE13C00D44955 /* OrigamiEngineTests-Info.plist */,
+				959B582515CEE13C00D44955 /* SonanEngineTests-Info.plist */,
 				959B582615CEE13C00D44955 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
@@ -442,9 +442,9 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		9502C28D16C591C00054F4E3 /* OrigamiEngineMac */ = {
+		9502C28D16C591C00054F4E3 /* SonanEngineMac */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 9502C2A116C591C00054F4E3 /* Build configuration list for PBXNativeTarget "OrigamiEngineMac" */;
+			buildConfigurationList = 9502C2A116C591C00054F4E3 /* Build configuration list for PBXNativeTarget "SonanEngineMac" */;
 			buildPhases = (
 				9502C28916C591C00054F4E3 /* Sources */,
 				9502C28A16C591C00054F4E3 /* Frameworks */,
@@ -455,14 +455,14 @@
 			);
 			dependencies = (
 			);
-			name = OrigamiEngineMac;
-			productName = OrigamiEngineMac;
-			productReference = 9502C28E16C591C00054F4E3 /* OrigamiEngine.framework */;
+			name = SonanEngineMac;
+			productName = SonanEngineMac;
+			productReference = 9502C28E16C591C00054F4E3 /* SonanEngine.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		959B580815CEE13C00D44955 /* OrigamiEngine */ = {
+		959B580815CEE13C00D44955 /* SonanEngine */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 959B582E15CEE13C00D44955 /* Build configuration list for PBXNativeTarget "OrigamiEngine" */;
+			buildConfigurationList = 959B582E15CEE13C00D44955 /* Build configuration list for PBXNativeTarget "SonanEngine" */;
 			buildPhases = (
 				959B580515CEE13C00D44955 /* Sources */,
 				959B580615CEE13C00D44955 /* Frameworks */,
@@ -472,14 +472,14 @@
 			);
 			dependencies = (
 			);
-			name = OrigamiEngine;
-			productName = OrigamiEngine;
-			productReference = 959B580915CEE13C00D44955 /* libOrigamiEngine.a */;
+			name = SonanEngine;
+			productName = SonanEngine;
+			productReference = 959B580915CEE13C00D44955 /* libSonanEngine.a */;
 			productType = "com.apple.product-type.library.static";
 		};
-		959B581915CEE13C00D44955 /* OrigamiEngineTests */ = {
+		959B581915CEE13C00D44955 /* SonanEngineTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 959B583115CEE13C00D44955 /* Build configuration list for PBXNativeTarget "OrigamiEngineTests" */;
+			buildConfigurationList = 959B583115CEE13C00D44955 /* Build configuration list for PBXNativeTarget "SonanEngineTests" */;
 			buildPhases = (
 				959B581515CEE13C00D44955 /* Sources */,
 				959B581615CEE13C00D44955 /* Frameworks */,
@@ -491,9 +491,9 @@
 			dependencies = (
 				959B582115CEE13C00D44955 /* PBXTargetDependency */,
 			);
-			name = OrigamiEngineTests;
-			productName = OrigamiEngineTests;
-			productReference = 959B581A15CEE13C00D44955 /* OrigamiEngineTests.octest */;
+			name = SonanEngineTests;
+			productName = SonanEngineTests;
+			productReference = 959B581A15CEE13C00D44955 /* SonanEngineTests.octest */;
 			productType = "com.apple.product-type.bundle.ocunit-test";
 		};
 /* End PBXNativeTarget section */
@@ -505,7 +505,7 @@
 				LastTestingUpgradeCheck = 0730;
 				LastUpgradeCheck = 0720;
 			};
-			buildConfigurationList = 959B580315CEE13C00D44955 /* Build configuration list for PBXProject "OrigamiEngine" */;
+			buildConfigurationList = 959B580315CEE13C00D44955 /* Build configuration list for PBXProject "SonanEngine" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -517,9 +517,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				959B580815CEE13C00D44955 /* OrigamiEngine */,
-				9502C28D16C591C00054F4E3 /* OrigamiEngineMac */,
-				959B581915CEE13C00D44955 /* OrigamiEngineTests */,
+				959B580815CEE13C00D44955 /* SonanEngine */,
+				9502C28D16C591C00054F4E3 /* SonanEngineMac */,
+				959B581915CEE13C00D44955 /* SonanEngineTests */,
 			);
 		};
 /* End PBXProject section */
@@ -635,7 +635,7 @@
 /* Begin PBXTargetDependency section */
 		959B582115CEE13C00D44955 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 959B580815CEE13C00D44955 /* OrigamiEngine */;
+			target = 959B580815CEE13C00D44955 /* SonanEngine */;
 			targetProxy = 959B582015CEE13C00D44955 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -674,11 +674,11 @@
 				FRAMEWORK_VERSION = A;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "OrigamiEngine/OrigamiEngine-Prefix.pch";
+				GCC_PREFIX_HEADER = "SonanEngine/SonanEngine-Prefix.pch";
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = OrigamiEngine;
+				PRODUCT_NAME = SonanEngine;
 				SDKROOT = macosx;
 				WRAPPER_EXTENSION = framework;
 			};
@@ -707,10 +707,10 @@
 				FRAMEWORK_VERSION = A;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "OrigamiEngine/OrigamiEngine-Prefix.pch";
+				GCC_PREFIX_HEADER = "SonanEngine/SonanEngine-Prefix.pch";
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = OrigamiEngine;
+				PRODUCT_NAME = SonanEngine;
 				SDKROOT = macosx;
 				WRAPPER_EXTENSION = framework;
 			};
@@ -788,7 +788,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_ARC = YES;
-				DSTROOT = /tmp/OrigamiEngine.dst;
+				DSTROOT = /tmp/SonanEngine.dst;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/Audio-Frameworks/bin/flac",
@@ -797,7 +797,7 @@
 					"$(SRCROOT)/Audio-Frameworks/bin/opus",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "OrigamiEngine/OrigamiEngine-Prefix.pch";
+				GCC_PREFIX_HEADER = "SonanEngine/SonanEngine-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
@@ -813,7 +813,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_ARC = YES;
-				DSTROOT = /tmp/OrigamiEngine.dst;
+				DSTROOT = /tmp/SonanEngine.dst;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/Audio-Frameworks/bin/flac",
@@ -822,7 +822,7 @@
 					"$(SRCROOT)/Audio-Frameworks/bin/opus",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "OrigamiEngine/OrigamiEngine-Prefix.pch";
+				GCC_PREFIX_HEADER = "SonanEngine/SonanEngine-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
@@ -845,9 +845,9 @@
 					"\"$(SRCROOT)/Audio-Frameworks/bin/flac\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "OrigamiEngine/OrigamiEngine-Prefix.pch";
-				INFOPLIST_FILE = "OrigamiEngineTests/OrigamiEngineTests-Info.plist";
-				PRODUCT_BUNDLE_IDENTIFIER = "origami.${PRODUCT_NAME:rfc1034identifier}";
+				GCC_PREFIX_HEADER = "SonanEngine/SonanEngine-Prefix.pch";
+				INFOPLIST_FILE = "SonanEngineTests/SonanEngineTests-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "Sonan.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = octest;
 			};
@@ -863,9 +863,9 @@
 					"\"$(SRCROOT)/Audio-Frameworks/bin/flac\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "OrigamiEngine/OrigamiEngine-Prefix.pch";
-				INFOPLIST_FILE = "OrigamiEngineTests/OrigamiEngineTests-Info.plist";
-				PRODUCT_BUNDLE_IDENTIFIER = "origami.${PRODUCT_NAME:rfc1034identifier}";
+				GCC_PREFIX_HEADER = "SonanEngine/SonanEngine-Prefix.pch";
+				INFOPLIST_FILE = "SonanEngineTests/SonanEngineTests-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "Sonan.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = octest;
 			};
@@ -874,7 +874,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		9502C2A116C591C00054F4E3 /* Build configuration list for PBXNativeTarget "OrigamiEngineMac" */ = {
+		9502C2A116C591C00054F4E3 /* Build configuration list for PBXNativeTarget "SonanEngineMac" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				9502C29F16C591C00054F4E3 /* Debug */,
@@ -883,7 +883,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		959B580315CEE13C00D44955 /* Build configuration list for PBXProject "OrigamiEngine" */ = {
+		959B580315CEE13C00D44955 /* Build configuration list for PBXProject "SonanEngine" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				959B582C15CEE13C00D44955 /* Debug */,
@@ -892,7 +892,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		959B582E15CEE13C00D44955 /* Build configuration list for PBXNativeTarget "OrigamiEngine" */ = {
+		959B582E15CEE13C00D44955 /* Build configuration list for PBXNativeTarget "SonanEngine" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				959B582F15CEE13C00D44955 /* Debug */,
@@ -901,7 +901,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		959B583115CEE13C00D44955 /* Build configuration list for PBXNativeTarget "OrigamiEngineTests" */ = {
+		959B583115CEE13C00D44955 /* Build configuration list for PBXNativeTarget "SonanEngineTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				959B583215CEE13C00D44955 /* Debug */,
