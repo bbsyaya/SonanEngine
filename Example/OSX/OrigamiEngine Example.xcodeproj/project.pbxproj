@@ -17,7 +17,7 @@
 		9502C37216C5A05C0054F4E3 /* PlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9502C37016C5A05C0054F4E3 /* PlayerViewController.m */; };
 		9502C37316C5A05C0054F4E3 /* PlayerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9502C37116C5A05C0054F4E3 /* PlayerViewController.xib */; };
 		952F657B16F06A7C00127423 /* FLAC.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9502C35916C598A30054F4E3 /* FLAC.framework */; };
-		95C86BDB17F6895A00F6C878 /* OrigamiEngine.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95C86BD817F6894800F6C878 /* OrigamiEngine.framework */; };
+		95C86BDB17F6895A00F6C878 /* SonanEngine.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95C86BD817F6894800F6C878 /* SonanEngine.framework */; };
 		95D00F8617F6E455003BE0D4 /* Opus.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 95D00F8517F6E455003BE0D4 /* Opus.framework */; };
 		95D00F8C17F6E483003BE0D4 /* Ogg.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 95D00F8B17F6E483003BE0D4 /* Ogg.framework */; };
 		95D00F8E17F6E49F003BE0D4 /* OpusFile.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 95D00F8D17F6E49F003BE0D4 /* OpusFile.framework */; };
@@ -26,38 +26,38 @@
 /* Begin PBXContainerItemProxy section */
 		95C86BD117F6894800F6C878 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 95C86BCA17F6894800F6C878 /* OrigamiEngine.xcodeproj */;
+			containerPortal = 95C86BCA17F6894800F6C878 /* SonanEngine.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 959B580915CEE13C00D44955;
-			remoteInfo = OrigamiEngine;
+			remoteInfo = SonanEngine;
 		};
 		95C86BD317F6894800F6C878 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 95C86BCA17F6894800F6C878 /* OrigamiEngine.xcodeproj */;
+			containerPortal = 95C86BCA17F6894800F6C878 /* SonanEngine.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 959B581A15CEE13C00D44955;
-			remoteInfo = OrigamiEngineTests;
+			remoteInfo = SonanEngineTests;
 		};
 		95C86BD517F6894800F6C878 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 95C86BCA17F6894800F6C878 /* OrigamiEngine.xcodeproj */;
+			containerPortal = 95C86BCA17F6894800F6C878 /* SonanEngine.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 955229D615DC23CC002CFB1F;
-			remoteInfo = OrigamiEngineFlacEmbeeded;
+			remoteInfo = SonanEngineFlacEmbeeded;
 		};
 		95C86BD717F6894800F6C878 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 95C86BCA17F6894800F6C878 /* OrigamiEngine.xcodeproj */;
+			containerPortal = 95C86BCA17F6894800F6C878 /* SonanEngine.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 9502C28E16C591C00054F4E3;
-			remoteInfo = OrigamiEngineMac;
+			remoteInfo = SonanEngineMac;
 		};
 		95C86BD917F6894E00F6C878 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 95C86BCA17F6894800F6C878 /* OrigamiEngine.xcodeproj */;
+			containerPortal = 95C86BCA17F6894800F6C878 /* SonanEngine.xcodeproj */;
 			proxyType = 1;
 			remoteGlobalIDString = 9502C28D16C591C00054F4E3;
-			remoteInfo = OrigamiEngineMac;
+			remoteInfo = SonanEngineMac;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -78,11 +78,11 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		9502C33116C596C60054F4E3 /* OrigamiEngine Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "OrigamiEngine Example.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		9502C33116C596C60054F4E3 /* SonanEngine Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SonanEngine Example.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9502C33416C596C60054F4E3 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
-		9502C33C16C596C70054F4E3 /* OrigamiEngine Example-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "OrigamiEngine Example-Info.plist"; sourceTree = "<group>"; };
+		9502C33C16C596C70054F4E3 /* SonanEngine Example-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SonanEngine Example-Info.plist"; sourceTree = "<group>"; };
 		9502C34016C596C70054F4E3 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		9502C34216C596C70054F4E3 /* OrigamiEngine Example-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "OrigamiEngine Example-Prefix.pch"; sourceTree = "<group>"; };
+		9502C34216C596C70054F4E3 /* SonanEngine Example-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SonanEngine Example-Prefix.pch"; sourceTree = "<group>"; };
 		9502C34616C596C70054F4E3 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		9502C34716C596C70054F4E3 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		9502C34A16C596C70054F4E3 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
@@ -93,8 +93,8 @@
 		9502C36F16C5A05C0054F4E3 /* PlayerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerViewController.h; sourceTree = "<group>"; };
 		9502C37016C5A05C0054F4E3 /* PlayerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayerViewController.m; sourceTree = "<group>"; };
 		9502C37116C5A05C0054F4E3 /* PlayerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PlayerViewController.xib; sourceTree = "<group>"; };
-		9502C37816C5CECD0054F4E3 /* OrigamiEngine.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OrigamiEngine.framework; path = ../../build/Release/OrigamiEngine.framework; sourceTree = "<group>"; };
-		95C86BCA17F6894800F6C878 /* OrigamiEngine.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = OrigamiEngine.xcodeproj; path = /Users/ap4y/github/OrigamiEngine/Example/../OrigamiEngine.xcodeproj; sourceTree = "<absolute>"; };
+		9502C37816C5CECD0054F4E3 /* SonanEngine.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SonanEngine.framework; path = ../../build/Release/SonanEngine.framework; sourceTree = "<group>"; };
+		95C86BCA17F6894800F6C878 /* SonanEngine.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SonanEngine.xcodeproj; path = /Users/ap4y/github/SonanEngine/Example/../SonanEngine.xcodeproj; sourceTree = "<absolute>"; };
 		95D00F8517F6E455003BE0D4 /* Opus.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Opus.framework; path = "../../Audio-Frameworks/bin/opus/MacOS/Opus.framework"; sourceTree = "<group>"; };
 		95D00F8B17F6E483003BE0D4 /* Ogg.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Ogg.framework; path = "../../Audio-Frameworks/bin/ogg/MacOS/Ogg.framework"; sourceTree = "<group>"; };
 		95D00F8D17F6E49F003BE0D4 /* OpusFile.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpusFile.framework; path = "../../Audio-Frameworks/bin/opusfile/MacOS/OpusFile.framework"; sourceTree = "<group>"; };
@@ -106,7 +106,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				95C86BDB17F6895A00F6C878 /* OrigamiEngine.framework in Frameworks */,
+				95C86BDB17F6895A00F6C878 /* SonanEngine.framework in Frameworks */,
 				9502C36016C599130054F4E3 /* AVFoundation.framework in Frameworks */,
 				9502C35E16C5990B0054F4E3 /* AudioToolbox.framework in Frameworks */,
 				9502C35C16C599050054F4E3 /* AudioUnit.framework in Frameworks */,
@@ -120,8 +120,8 @@
 		9502C32816C596C60054F4E3 = {
 			isa = PBXGroup;
 			children = (
-				95C86BCA17F6894800F6C878 /* OrigamiEngine.xcodeproj */,
-				9502C33A16C596C70054F4E3 /* OrigamiEngine Example */,
+				95C86BCA17F6894800F6C878 /* SonanEngine.xcodeproj */,
+				9502C33A16C596C70054F4E3 /* SonanEngine Example */,
 				9502C33316C596C60054F4E3 /* Frameworks */,
 				9502C33216C596C60054F4E3 /* Products */,
 			);
@@ -130,7 +130,7 @@
 		9502C33216C596C60054F4E3 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				9502C33116C596C60054F4E3 /* OrigamiEngine Example.app */,
+				9502C33116C596C60054F4E3 /* SonanEngine Example.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -142,7 +142,7 @@
 				95D00F8B17F6E483003BE0D4 /* Ogg.framework */,
 				95D00F8517F6E455003BE0D4 /* Opus.framework */,
 				95D00F9017F6E4D1003BE0D4 /* ORGMEngineExample.xcworkspace */,
-				9502C37816C5CECD0054F4E3 /* OrigamiEngine.framework */,
+				9502C37816C5CECD0054F4E3 /* SonanEngine.framework */,
 				9502C35F16C599130054F4E3 /* AVFoundation.framework */,
 				9502C35D16C5990B0054F4E3 /* AudioToolbox.framework */,
 				9502C35B16C599050054F4E3 /* AudioUnit.framework */,
@@ -152,7 +152,7 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		9502C33A16C596C70054F4E3 /* OrigamiEngine Example */ = {
+		9502C33A16C596C70054F4E3 /* SonanEngine Example */ = {
 			isa = PBXGroup;
 			children = (
 				9502C34616C596C70054F4E3 /* AppDelegate.h */,
@@ -163,15 +163,15 @@
 				9502C37116C5A05C0054F4E3 /* PlayerViewController.xib */,
 				9502C33B16C596C70054F4E3 /* Supporting Files */,
 			);
-			path = "OrigamiEngine Example";
+			path = "SonanEngine Example";
 			sourceTree = "<group>";
 		};
 		9502C33B16C596C70054F4E3 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				9502C33C16C596C70054F4E3 /* OrigamiEngine Example-Info.plist */,
+				9502C33C16C596C70054F4E3 /* SonanEngine Example-Info.plist */,
 				9502C34016C596C70054F4E3 /* main.m */,
-				9502C34216C596C70054F4E3 /* OrigamiEngine Example-Prefix.pch */,
+				9502C34216C596C70054F4E3 /* SonanEngine Example-Prefix.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -179,10 +179,10 @@
 		95C86BCB17F6894800F6C878 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				95C86BD217F6894800F6C878 /* libOrigamiEngine.a */,
-				95C86BD817F6894800F6C878 /* OrigamiEngine.framework */,
-				95C86BD417F6894800F6C878 /* OrigamiEngineTests.octest */,
-				95C86BD617F6894800F6C878 /* libOrigamiEngine.a */,
+				95C86BD217F6894800F6C878 /* libSonanEngine.a */,
+				95C86BD817F6894800F6C878 /* SonanEngine.framework */,
+				95C86BD417F6894800F6C878 /* SonanEngineTests.octest */,
+				95C86BD617F6894800F6C878 /* libSonanEngine.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -190,9 +190,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		9502C33016C596C60054F4E3 /* OrigamiEngine Example */ = {
+		9502C33016C596C60054F4E3 /* SonanEngine Example */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 9502C34E16C596C70054F4E3 /* Build configuration list for PBXNativeTarget "OrigamiEngine Example" */;
+			buildConfigurationList = 9502C34E16C596C70054F4E3 /* Build configuration list for PBXNativeTarget "SonanEngine Example" */;
 			buildPhases = (
 				9502C32D16C596C60054F4E3 /* Sources */,
 				9502C32E16C596C60054F4E3 /* Frameworks */,
@@ -204,9 +204,9 @@
 			dependencies = (
 				95C86BDA17F6894E00F6C878 /* PBXTargetDependency */,
 			);
-			name = "OrigamiEngine Example";
-			productName = "OrigamiEngine Example";
-			productReference = 9502C33116C596C60054F4E3 /* OrigamiEngine Example.app */;
+			name = "SonanEngine Example";
+			productName = "SonanEngine Example";
+			productReference = 9502C33116C596C60054F4E3 /* SonanEngine Example.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -218,7 +218,7 @@
 				CLASSPREFIX = ORGM;
 				LastUpgradeCheck = 0460;
 			};
-			buildConfigurationList = 9502C32C16C596C60054F4E3 /* Build configuration list for PBXProject "OrigamiEngine Example" */;
+			buildConfigurationList = 9502C32C16C596C60054F4E3 /* Build configuration list for PBXProject "SonanEngine Example" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -231,42 +231,42 @@
 			projectReferences = (
 				{
 					ProductGroup = 95C86BCB17F6894800F6C878 /* Products */;
-					ProjectRef = 95C86BCA17F6894800F6C878 /* OrigamiEngine.xcodeproj */;
+					ProjectRef = 95C86BCA17F6894800F6C878 /* SonanEngine.xcodeproj */;
 				},
 			);
 			projectRoot = "";
 			targets = (
-				9502C33016C596C60054F4E3 /* OrigamiEngine Example */,
+				9502C33016C596C60054F4E3 /* SonanEngine Example */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		95C86BD217F6894800F6C878 /* libOrigamiEngine.a */ = {
+		95C86BD217F6894800F6C878 /* libSonanEngine.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			path = libOrigamiEngine.a;
+			path = libSonanEngine.a;
 			remoteRef = 95C86BD117F6894800F6C878 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		95C86BD417F6894800F6C878 /* OrigamiEngineTests.octest */ = {
+		95C86BD417F6894800F6C878 /* SonanEngineTests.octest */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
-			path = OrigamiEngineTests.octest;
+			path = SonanEngineTests.octest;
 			remoteRef = 95C86BD317F6894800F6C878 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		95C86BD617F6894800F6C878 /* libOrigamiEngine.a */ = {
+		95C86BD617F6894800F6C878 /* libSonanEngine.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			path = libOrigamiEngine.a;
+			path = libSonanEngine.a;
 			remoteRef = 95C86BD517F6894800F6C878 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		95C86BD817F6894800F6C878 /* OrigamiEngine.framework */ = {
+		95C86BD817F6894800F6C878 /* SonanEngine.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
-			path = OrigamiEngine.framework;
+			path = SonanEngine.framework;
 			remoteRef = 95C86BD717F6894800F6C878 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
@@ -300,7 +300,7 @@
 /* Begin PBXTargetDependency section */
 		95C86BDA17F6894E00F6C878 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			name = OrigamiEngineMac;
+			name = SonanEngineMac;
 			targetProxy = 95C86BD917F6894E00F6C878 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -381,8 +381,8 @@
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "OrigamiEngine Example/OrigamiEngine Example-Prefix.pch";
-				INFOPLIST_FILE = "OrigamiEngine Example/OrigamiEngine Example-Info.plist";
+				GCC_PREFIX_HEADER = "SonanEngine Example/SonanEngine Example-Prefix.pch";
+				INFOPLIST_FILE = "SonanEngine Example/SonanEngine Example-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -393,8 +393,8 @@
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "OrigamiEngine Example/OrigamiEngine Example-Prefix.pch";
-				INFOPLIST_FILE = "OrigamiEngine Example/OrigamiEngine Example-Info.plist";
+				GCC_PREFIX_HEADER = "SonanEngine Example/SonanEngine Example-Prefix.pch";
+				INFOPLIST_FILE = "SonanEngine Example/SonanEngine Example-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -403,7 +403,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		9502C32C16C596C60054F4E3 /* Build configuration list for PBXProject "OrigamiEngine Example" */ = {
+		9502C32C16C596C60054F4E3 /* Build configuration list for PBXProject "SonanEngine Example" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				9502C34C16C596C70054F4E3 /* Debug */,
@@ -412,7 +412,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		9502C34E16C596C70054F4E3 /* Build configuration list for PBXNativeTarget "OrigamiEngine Example" */ = {
+		9502C34E16C596C70054F4E3 /* Build configuration list for PBXNativeTarget "SonanEngine Example" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				9502C34F16C596C70054F4E3 /* Debug */,

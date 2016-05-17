@@ -2,12 +2,12 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:../OrigamiEngine.xcodeproj">
+      location = "group:../SonanEngine.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:iOS/ORGMEngine Example.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:OSX/OrigamiEngine Example.xcodeproj">
+      location = "group:OSX/SonanEngine Example.xcodeproj">
    </FileRef>
 </Workspace>
