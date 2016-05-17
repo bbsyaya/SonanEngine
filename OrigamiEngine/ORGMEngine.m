@@ -86,7 +86,12 @@
 #pragma mark - public
 
 - (void)playUrl:(NSURL *)url withOutputUnitClass:(Class)outputUnitClass {
-    NSAssert([outputUnitClass isSubclassOfClass:[ORGMOutputUnit class]], @"Output unit should be subclass of ORGMOutputUnit");
+    if (![outputUnitClass isSubclassOfClass:[ORGMOutputUnit class]]) {
+        @throw [NSException exceptionWithName:NSInternalInconsistencyException
+                                       reason:@"Output unit should be subclass of ORGMOutputUnit"
+                                     userInfo:nil];
+    }
+    
     if (self.currentState == ORGMEngineStatePlaying){
         [self stop];
     }
