@@ -44,9 +44,9 @@ typedef enum : NSInteger {
 
 @optional
 
-- (void)sourceDidReceiveData:(id<ORGMSource>)source;
+- (void)sourceDidReceiveData:(nonnull id<ORGMSource>)source;
 
-- (void)source:(id<ORGMSource>)source didFailWithError:(NSError *)error;
+- (void)source:(nonnull id<ORGMSource>)source didFailWithError:(nonnull NSError *)error;
 
 @end
 
@@ -61,23 +61,23 @@ typedef enum : NSInteger {
  */
 @protocol ORGMSource <ORGMEngineObject>
 
-@property (nonatomic,weak)id<ORGMSourceDelegate> sourceDelegate;
+@property (nonatomic, weak, nullable) id<ORGMSourceDelegate> sourceDelegate;
 
 /**
  Returns supported url scheme.
  
  @return A string with supported url scheme.
  */
-+ (NSString *)scheme;
++ (nonnull NSString *)scheme;
 
 /**
  Returns current source file url.
  
  @return Current file url.
  */
-- (NSURL *)url;
+- (nonnull NSURL *)url;
 
-- (NSString *)pathExtension;
+- (nonnull NSString *)pathExtension;
 
 /**
  Returns source file size.
@@ -95,7 +95,7 @@ typedef enum : NSInteger {
  
  @return `YES` if success, otherwise `NO`.
  */
-- (BOOL)open:(NSURL *)url;
+- (BOOL)open:(nonnull NSURL *)url;
 
 /**
  Determines if source is seekable.
@@ -129,7 +129,7 @@ typedef enum : NSInteger {
  
  @return Actual amount of `bytes` read from a source.
  */
-- (int)read:(void *)buffer amount:(int)amount;
+- (int)read:(nonnull void *)buffer amount:(int)amount;
 
 /**
  Closes a source file. 
@@ -150,7 +150,7 @@ typedef enum : NSInteger {
  
  @return An array with supported file extensions.
  */
-+ (NSArray *)fileTypes;
++ (nonnull NSArray *)fileTypes;
 
 /**
  Parses and returns track urls from specified container.
@@ -159,7 +159,7 @@ typedef enum : NSInteger {
  
  @return An array of track urls from container.
  */
-+ (NSArray *)urlsForContainerURL:(NSURL *)url;
++ (nullable NSArray *)urlsForContainerURL:(nonnull NSURL *)url;
 @end
 
 /**
@@ -173,7 +173,7 @@ typedef enum : NSInteger {
  
  @return An array with supported file extensions.
  */
-+ (NSArray *)fileTypes;
++ (nonnull NSArray *)fileTypes;
 
 /**
  Returns current audio properties.
@@ -189,7 +189,7 @@ typedef enum : NSInteger {
  
  @return A properties dictionary.
  */
-- (NSDictionary *)properties;
+- (nonnull NSDictionary *)properties;
 
 /**
  Returns current track metadata.
@@ -198,7 +198,7 @@ typedef enum : NSInteger {
  
  @return A Metadata dictionary or `nil` if track don't have metadata.
  */
-- (NSDictionary *)metadata;
+- (nullable NSDictionary *)metadata;
 
 /**
  Reads and decodes specified amount of frames from a source into provided buffer.
@@ -208,7 +208,7 @@ typedef enum : NSInteger {
  
  @return Actual amount of `frames` read from a source.
  */
-- (int)readAudio:(void *)buffer frames:(UInt32)frames;
+- (int)readAudio:(nonnull void *)buffer frames:(UInt32)frames;
 
 /**
  Initialises decoder from specified source.
@@ -217,7 +217,7 @@ typedef enum : NSInteger {
  
  @return `YES` if success, otherwise `NO`.
  */
-- (BOOL)open:(id<ORGMSource>)source;
+- (BOOL)open:(nonnull id<ORGMSource>)source;
 
 /**
  Seeks to a specified frame and continues decoding from that frame.

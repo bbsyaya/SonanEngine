@@ -42,7 +42,7 @@
  */
 @interface ORGMOutputUnit : ORGMAudioUnit
 
-@property (nonatomic,weak)id<ORGMOutputUnitDelegate> outputUnitDelegate;
+@property (nonatomic, weak, nullable) id<ORGMOutputUnitDelegate> outputUnitDelegate;
 
 /**
  A flag that determines if instance is currently active.
@@ -61,9 +61,9 @@
 
  @return An initialized `ORGMOutputUnit` object.
  **/
-- (instancetype)initWithConverter:(ORGMConverter *)converter;
+- (nonnull instancetype)initWithConverter:(nonnull ORGMConverter *)converter;
 
-@property (readonly, strong, nonatomic) ORGMConverter *converter;
+@property (readonly, strong, nonatomic, nonnull) ORGMConverter *converter;
 
 /**
  Returns supported `PCM` audio format.

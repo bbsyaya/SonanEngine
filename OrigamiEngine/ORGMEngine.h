@@ -61,26 +61,26 @@ typedef enum : NSInteger {
 
  @discussion Value will be provided only for the `ORGMEngineStateError`, with other states this propertie will return `nil`.
  */
-@property (strong, nonatomic, readonly) NSError *currentError;
+@property (strong, nonatomic, readonly, nullable) NSError *currentError;
 
 /**
  The object that conforms ORGMEngineDelegate protocol and acts as the delegate.
  */
-@property (weak, nonatomic) id<ORGMEngineDelegate> delegate;
+@property (weak, nonatomic, nullable) id<ORGMEngineDelegate> delegate;
 
 /**
  Starts new playback process from corresponding source with provided output type of output unit.
 
  @param outputUnitClass Class that will be used during output unit initialisation. Must be subclass of ORGMOutputUnit.
  */
-- (void)playUrl:(NSURL *)url withOutputUnitClass:(Class)outputUnitClass;
+- (void)playUrl:(nonnull NSURL *)url withOutputUnitClass:(nonnull Class)outputUnitClass;
 
 /**
  Starts new playback process from corresponding source.
 
  @param url The url object to be used as a source path during playback.
  */
-- (void)playUrl:(NSURL *)url;
+- (void)playUrl:(nonnull NSURL *)url;
 
 /**
  Pauses the playback.
@@ -124,7 +124,7 @@ typedef enum : NSInteger {
 
  @return Metadata dictionary or `nil` if track don't have metadata.
  */
-- (NSDictionary *)metadata;
+- (nullable NSDictionary *)metadata;
 
 /**
  Provides ability to seek within playing track.
@@ -149,12 +149,12 @@ typedef enum : NSInteger {
  @param url The url object to be used as a source path during playback.
  @param flush A flag that allows you erase accumulated data before changing the track.
  */
-- (void)setNextUrl:(NSURL *)url withDataFlush:(BOOL)flush;
+- (void)setNextUrl:(nonnull NSURL *)url withDataFlush:(BOOL)flush;
 
 
 //extra
 
-- (NSURL *)currentURL;
+- (nullable NSURL *)currentURL;
 
 - (float)preloadProgress;
 
@@ -175,7 +175,7 @@ typedef enum : NSInteger {
 
  @return The url object to be used as a source path during playback.
  */
-- (NSURL *)engineExpectsNextUrl:(ORGMEngine *)engine;
+- (nullable NSURL *)engineExpectsNextUrl:(nullable ORGMEngine *)engine;
 
 @optional
 
@@ -185,14 +185,14 @@ typedef enum : NSInteger {
  @param engine The engine object posting this information.
  @param state New state of the engine object.
  */
-- (void)engine:(ORGMEngine *)engine didChangeState:(ORGMEngineState)state;
+- (void)engine:(nullable ORGMEngine *)engine didChangeState:(ORGMEngineState)state;
 
-- (void)engine:(ORGMEngine *)engine didChangePreloadProgress:(float)progress;
+- (void)engine:(nullable ORGMEngine *)engine didChangePreloadProgress:(float)progress;
 
-- (void)engine:(ORGMEngine *)engine didFailCurrentItemWithError:(NSError *)error;
+- (void)engine:(nullable ORGMEngine *)engine didFailCurrentItemWithError:(nonnull NSError *)error;
 
-- (void)engine:(ORGMEngine *)engine didChangeReadyToPlay:(BOOL)readyToPlay;
+- (void)engine:(nullable ORGMEngine *)engine didChangeReadyToPlay:(BOOL)readyToPlay;
 
-- (void)engine:(ORGMEngine *)engine didChangeCurrentURL:(NSURL *)currentURL prevItemURL:(NSURL *)prevURL;
+- (void)engine:(nullable ORGMEngine *)engine didChangeCurrentURL:(nullable NSURL *)currentURL prevItemURL:(nullable NSURL *)prevURL;
 
 @end

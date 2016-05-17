@@ -94,7 +94,7 @@
     }
 }
 
-- (id<ORGMSource>)sourceForURL:(NSURL *)url error:(NSError **)error {
+- (id<ORGMSource>)sourceForURL:(NSURL *)url error:(NullableReferenceNSError)error {
     id<ORGMSource> result;
     if (_resolver && (result = [_resolver sourceForURL:url error:error])) {
         return result;
@@ -117,7 +117,7 @@
 	return [[source alloc] init];
 }
 
-- (id<ORGMDecoder>)decoderForSource:(id<ORGMSource>)source error:(NSError **)error {
+- (id<ORGMDecoder>)decoderForSource:(id<ORGMSource>)source error:(NullableReferenceNSError)error {
     if (!source || ![source url]) {
         NSParameterAssert(NO);
         return nil;
@@ -150,7 +150,7 @@
     return [[self.decoders allKeys] arrayByAddingObjectsFromArray:[self.containers allKeys]];
 }
 
-- (NSArray *)urlsForContainerURL:(NSURL *)url error:(NSError **)error {
+- (NSArray *)urlsForContainerURL:(NSURL *)url error:(NullableReferenceNSError)error {
     NSArray *result;
     if (_resolver && (result = [_resolver urlsForContainerURL:url error:error])) {
         return result;

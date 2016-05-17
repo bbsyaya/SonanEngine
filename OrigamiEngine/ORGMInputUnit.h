@@ -85,7 +85,7 @@
 
  @return Metadata dictionary or `nil` if track don't have metadata.
  */
-- (NSDictionary *)metadata;
+- (nullable NSDictionary *)metadata;
 
 /**
  Returns frames number for the current source.
@@ -117,16 +117,16 @@
 
  @return Actual amount of shifted bytes.
  */
-- (int)shiftBytes:(NSUInteger)amount buffer:(void *)buffer;
+- (int)shiftBytes:(NSUInteger)amount buffer:(nonnull void *)buffer;
 
 
 //extra
 
-- (NSURL *)currentURL;
+- (nullable NSURL *)currentURL;
 
 - (float)preloadProgress;
 
-- (void)addItemStatusObserver:(NSObject *)observer forKeyPaths:(NSSet *)keyPaths options:(NSKeyValueObservingOptions)options;
+- (void)addItemStatusObserver:(nonnull NSObject *)observer forKeyPaths:(nonnull NSSet *)keyPaths options:(NSKeyValueObservingOptions)options;
 
 - (void)removeItemStatusObserver;
 
