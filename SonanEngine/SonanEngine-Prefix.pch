@@ -1,5 +1,5 @@
 //
-// Prefix header for all source files of the 'OrigamiEngine' target in the 'OrigamiEngine' project
+// Prefix header for all source files of the 'SonanEngine' target in the 'SonanEngine' project
 //
 
 #ifdef __OBJC__
