@@ -41,8 +41,6 @@
 }
 
 - (void)tearDown {
-    [_multiFileCueUrl release];
-    [_singleFileCueUrl release];
     [super tearDown];
 }
 

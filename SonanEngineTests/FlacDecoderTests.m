@@ -47,8 +47,6 @@
 }
 
 - (void)tearDown {
-    [_decoder close];
-    [_decoder release];
     [super tearDown];
 }
 

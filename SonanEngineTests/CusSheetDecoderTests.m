@@ -45,12 +45,10 @@
     [source open:cueUrl];
     
     STAssertTrue([_decoder open:source], nil);
-    [source release];
 }
 
 - (void)tearDown {
     [_decoder close];
-    [_decoder release];
     [super tearDown];
 }
 

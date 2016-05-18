@@ -43,13 +43,9 @@
         
     _outputUnit = [[ORGMOutputUnit alloc] initWithConverter:converter];
     [converter setupWithOutputUnit:_outputUnit];
-    
-    [input release];
-    [converter release];
 }
 
 - (void)tearDown {
-    [_outputUnit release];
     [super tearDown];
 }
 
