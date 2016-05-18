@@ -42,23 +42,23 @@ AudioStreamBasicDescription propertiesToASBD(NSDictionary *properties) {
 	asbd.mFormatID = kAudioFormatLinearPCM;
 	asbd.mFormatFlags = 0;
     
-	asbd.mSampleRate = [[properties objectForKey:@"sampleRate"] doubleValue];
+	asbd.mSampleRate = [properties[@"sampleRate"] doubleValue];
     
-	asbd.mBitsPerChannel = [[properties objectForKey:@"bitsPerSample"] intValue];
+	asbd.mBitsPerChannel = [properties[@"bitsPerSample"] intValue];
     
-	asbd.mChannelsPerFrame = [[properties objectForKey:@"channels"] intValue];;
+	asbd.mChannelsPerFrame = [properties[@"channels"] intValue];;
 	asbd.mBytesPerFrame = (asbd.mBitsPerChannel/8)*asbd.mChannelsPerFrame;
 	
 	asbd.mFramesPerPacket = 1;
 	asbd.mBytesPerPacket = asbd.mBytesPerFrame * asbd.mFramesPerPacket;
 	asbd.mReserved = 0;
 	
-	if ([[properties objectForKey:@"endian"] isEqualToString:@"big"]) {
+	if ([properties[@"endian"] isEqualToString:@"big"]) {
 		asbd.mFormatFlags |= kLinearPCMFormatFlagIsBigEndian;
 		asbd.mFormatFlags |= kLinearPCMFormatFlagIsAlignedHigh;
 	}
 	
-	if ([[properties objectForKey:@"unsigned"] boolValue] == NO) {
+	if ([properties[@"unsigned"] boolValue] == NO) {
 		asbd.mFormatFlags |= kLinearPCMFormatFlagIsSignedInteger;
 	}
 	

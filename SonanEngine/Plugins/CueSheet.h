@@ -29,6 +29,6 @@
 
 @property (copy, nonatomic, readonly) NSArray *tracks;
 
-- (instancetype)initWithURL:(NSURL *)url;
+- (instancetype)initWithURL:(NSURL *)url NS_DESIGNATED_INITIALIZER;
 
 @end

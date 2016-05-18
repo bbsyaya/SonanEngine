@@ -45,28 +45,25 @@
 #pragma mark - ORGMDecoder
 
 + (NSArray *)fileTypes  {
-	return [NSArray arrayWithObject:@"cue"];
+	return @[@"cue"];
 }
 
 - (NSDictionary *)properties {
 	NSMutableDictionary *properties = [[_decoder properties] mutableCopy];
-	[properties setObject:[NSNumber numberWithLong:(trackEnd - trackStart)]
-                   forKey:@"totalFrames"];
+	properties[@"totalFrames"] = @(trackEnd - trackStart);
 	return properties;
 }
 
 - (NSDictionary *)metadata {
     NSDictionary *resultDict = nil;
     for (CueSheetTrack *track in _cuesheet.tracks) {
-        if ([[_source.url fragment] isEqualToString:[track track]]) {
-            resultDict = [NSDictionary dictionaryWithObjectsAndKeys:
-                          track.artist, @"artist",
-                          track.album, @"album",
-                          track.title, @"title",
-                          [NSNumber numberWithInt:[track.track intValue]], @"track",
-                          track.genre, @"genre",
-                          track.year, @"year",
-                          nil];
+        if ([(_source.url).fragment isEqualToString:track.track]) {
+            resultDict = @{@"artist": track.artist,
+                          @"album": track.album,
+                          @"title": track.title,
+                          @"track": @((track.track).intValue),
+                          @"genre": track.genre,
+                          @"year": track.year};
         }
     }
     return resultDict;
@@ -92,8 +89,8 @@
 	
     ORGMPluginManager *pluginManager = [ORGMPluginManager sharedManager];
 	for (int i = 0; i < _cuesheet.tracks.count; i++) {
-        CueSheetTrack *track = [_cuesheet.tracks objectAtIndex:i];
-		if ([track.track isEqualToString:[url fragment]]) {
+        CueSheetTrack *track = (_cuesheet.tracks)[i];
+		if ([track.track isEqualToString:url.fragment]) {
 			self.source = [pluginManager sourceForURL:track.url error:nil];
 
 			if (![_source open:track.url]) {
@@ -106,18 +103,18 @@
 			}
 
 			CueSheetTrack *nextTrack = nil;
-			if (i + 1 < [_cuesheet.tracks count]) {
-				nextTrack = [_cuesheet.tracks objectAtIndex:i + 1];
+			if (i + 1 < (_cuesheet.tracks).count) {
+				nextTrack = (_cuesheet.tracks)[i + 1];
 			}
 
 			NSDictionary *properties = [_decoder properties];
-			float sampleRate = [[properties objectForKey:@"sampleRate"] floatValue];
-			trackStart = [track time] * sampleRate;
+			float sampleRate = [properties[@"sampleRate"] floatValue];
+			trackStart = track.time * sampleRate;
 
 			if (nextTrack && [nextTrack.url isEqual:track.url]) {
-				trackEnd = [nextTrack time] * sampleRate;
+				trackEnd = nextTrack.time * sampleRate;
 			} else {
-				trackEnd = [[properties objectForKey:@"totalFrames"] doubleValue];
+				trackEnd = [properties[@"totalFrames"] doubleValue];
 			}
 			[self seek: 0];
 

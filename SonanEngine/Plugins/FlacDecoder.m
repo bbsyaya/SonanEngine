@@ -59,18 +59,16 @@
 
 #pragma mark - ORGMDecoder
 + (NSArray *)fileTypes {
-	return [NSArray arrayWithObjects:@"flac", nil];
+	return @[@"flac"];
 }
 
 - (NSDictionary *)properties {
-	return [NSDictionary dictionaryWithObjectsAndKeys:
-            [NSNumber numberWithInt:channels], @"channels",
-            [NSNumber numberWithInt:bitsPerSample], @"bitsPerSample",
-            [NSNumber numberWithFloat:frequency], @"sampleRate",
-            [NSNumber numberWithDouble:totalFrames], @"totalFrames",
-            [NSNumber numberWithBool:[source seekable]], @"seekable",
-            @"big",@"endian",
-            nil];
+	return @{@"channels": @(channels),
+            @"bitsPerSample": @(bitsPerSample),
+            @"sampleRate": @(frequency),
+            @"totalFrames": [NSNumber numberWithDouble:totalFrames],
+            @"seekable": @([source seekable]),
+            @"endian": @"big"};
 }
 
 - (NSMutableDictionary *)metadata {
@@ -114,7 +112,7 @@
 }
 
 - (BOOL)open:(id<ORGMSource>)s {
-	[self setSource:s];
+	self.source = s;
 	
     self.metadata = [NSMutableDictionary dictionary];
 	decoder = FLAC__stream_decoder_new();
@@ -187,7 +185,7 @@ FLAC__StreamDecoderReadStatus ReadCallback(const FLAC__StreamDecoder *decoder,
                                            size_t *bytes,
                                            void *client_data) {
 	FlacDecoder *flacDecoder = (__bridge FlacDecoder *)client_data;
-	*bytes = [[flacDecoder source] read:blockBuffer amount:*bytes];
+	*bytes = [flacDecoder.source read:blockBuffer amount:*bytes];
     
     if(*bytes == 0) {
 		[flacDecoder setEndOfStream:YES];
@@ -203,7 +201,7 @@ FLAC__StreamDecoderSeekStatus SeekCallback(const FLAC__StreamDecoder *decoder,
                                            void *client_data) {
 	FlacDecoder *flacDecoder = (__bridge FlacDecoder *)client_data;
 	
-	if(![[flacDecoder source] seek:(long)absolute_byte_offset whence:SEEK_SET])
+	if(![flacDecoder.source seek:(long)absolute_byte_offset whence:SEEK_SET])
 		return FLAC__STREAM_DECODER_SEEK_STATUS_ERROR;
 	else
 		return FLAC__STREAM_DECODER_SEEK_STATUS_OK;
@@ -215,7 +213,7 @@ FLAC__StreamDecoderTellStatus TellCallback(const FLAC__StreamDecoder *decoder,
 	FlacDecoder *flacDecoder = (__bridge FlacDecoder *)client_data;
 
 	off_t pos;
-	if((pos = [[flacDecoder source] tell]) < 0) {
+	if((pos = [flacDecoder.source tell]) < 0) {
 		return FLAC__STREAM_DECODER_TELL_STATUS_ERROR;
 	} else {
 		*absolute_byte_offset = (FLAC__uint64)pos;
@@ -225,7 +223,7 @@ FLAC__StreamDecoderTellStatus TellCallback(const FLAC__StreamDecoder *decoder,
 
 FLAC__bool EOFCallback(const FLAC__StreamDecoder *decoder, void *client_data) {
 	FlacDecoder *flacDecoder = (__bridge FlacDecoder *)client_data;
-	return (FLAC__bool)[flacDecoder endOfStream];
+	return (FLAC__bool)flacDecoder.endOfStream;
 }
 
 FLAC__StreamDecoderLengthStatus LengthCallback(const FLAC__StreamDecoder *decoder,
@@ -233,13 +231,13 @@ FLAC__StreamDecoderLengthStatus LengthCallback(const FLAC__StreamDecoder *decode
                                                void *client_data) {
 	FlacDecoder *flacDecoder = (__bridge FlacDecoder *)client_data;
 	
-	if ([[flacDecoder source] seekable]) {
-		long currentPos = [[flacDecoder source] tell];
+	if ([flacDecoder.source seekable]) {
+		long currentPos = [flacDecoder.source tell];
 		
-		[[flacDecoder source] seek:0 whence:SEEK_END];
-		*stream_length = [[flacDecoder source] tell];
+		[flacDecoder.source seek:0 whence:SEEK_END];
+		*stream_length = [flacDecoder.source tell];
 		
-		[[flacDecoder source] seek:currentPos whence:SEEK_SET];
+		[flacDecoder.source seek:currentPos whence:SEEK_SET];
 		
 		return FLAC__STREAM_DECODER_LENGTH_STATUS_OK;
 	} else {
@@ -323,19 +321,19 @@ void MetadataCallback(const FLAC__StreamDecoder *decoder,
         FLAC__StreamMetadata_VorbisComment comment = metadata->data.vorbis_comment;
         FLAC__uint32 count = metadata->data.vorbis_comment.num_comments;
         for (int i = 0; i < count; i++) {
-            NSString *commentValue = [NSString stringWithUTF8String:(const char*)comment.comments[i].entry];
+            NSString *commentValue = @((const char*)comment.comments[i].entry);
             NSRange range = [commentValue rangeOfString:@"="];
             NSString *key = [commentValue substringWithRange:NSMakeRange(0, range.location)];
             NSString *value = [commentValue substringWithRange:NSMakeRange(range.location + 1,
                                                                            commentValue.length - range.location - 1)];
-            [flacDecoder.metadata setObject:value forKey:[key lowercaseString]];
+            (flacDecoder.metadata)[key.lowercaseString] = value;
         }
     } else if (metadata->type == FLAC__METADATA_TYPE_PICTURE) {
         FlacDecoder *flacDecoder = (__bridge FlacDecoder *)client_data;
         FLAC__StreamMetadata_Picture picture = metadata->data.picture;
         NSData *picture_data = [NSData dataWithBytes:picture.data
                                               length:picture.data_length];
-        [flacDecoder.metadata setObject:picture_data forKey:@"picture"];
+        (flacDecoder.metadata)[@"picture"] = picture_data;
     } else if (metadata->type == FLAC__METADATA_TYPE_STREAMINFO) {
         FlacDecoder *flacDecoder = (__bridge FlacDecoder *)client_data;
 

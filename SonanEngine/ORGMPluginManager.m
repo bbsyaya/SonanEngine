@@ -63,10 +63,10 @@
         /* Decoders */
         NSMutableDictionary *decodersDict = [NSMutableDictionary dictionary];
         [[CoreAudioDecoder fileTypes] enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-            [decodersDict setObject:[CoreAudioDecoder class] forKey:obj];
+            decodersDict[obj] = [CoreAudioDecoder class];
         }];
         [[CueSheetDecoder fileTypes] enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-            [decodersDict setObject:[CueSheetDecoder class] forKey:obj];
+            decodersDict[obj] = [CueSheetDecoder class];
         }];
         self.decoders = decodersDict;
         
@@ -77,10 +77,10 @@
         /* Containers */        
         NSMutableDictionary *containersDict = [NSMutableDictionary dictionary];
         [[CueSheetContainer fileTypes] enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-            [containersDict setObject:[CueSheetContainer class] forKey:obj];
+            containersDict[obj] = [CueSheetContainer class];
         }];
         [[M3uContainer fileTypes] enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-            [containersDict setObject:[M3uContainer class] forKey:obj];
+            containersDict[obj] = [M3uContainer class];
         }];
         
         self.containers = containersDict;
@@ -90,7 +90,7 @@
 
 - (void)registerSource:(Class)sourceClass forScheme:(NSString *)scheme{
     @synchronized(self.sources) {
-        [self.sources setObject:sourceClass forKey:scheme];
+        (self.sources)[scheme] = sourceClass;
     }
 }
 
@@ -100,8 +100,8 @@
         return result;
     }
 
-	NSString *scheme = [url scheme];	
-	Class source = [_sources objectForKey:scheme];
+	NSString *scheme = url.scheme;	
+	Class source = _sources[scheme];
 	if (!source) {
         NSParameterAssert(NO);
         if (error) {
@@ -129,7 +129,7 @@
     }
 
 	NSString *extension = [source pathExtension];
-	Class decoder = [_decoders objectForKey:[extension lowercaseString]];
+	Class decoder = _decoders[extension.lowercaseString];
 	if (!decoder) {
         NSParameterAssert(NO);
         if (error) {
@@ -147,7 +147,7 @@
 }
 
 - (NSArray *)supportedFileExtensions{
-    return [[self.decoders allKeys] arrayByAddingObjectsFromArray:[self.containers allKeys]];
+    return [(self.decoders).allKeys arrayByAddingObjectsFromArray:(self.containers).allKeys];
 }
 
 - (NSArray *)urlsForContainerURL:(NSURL *)url error:(NullableReferenceNSError)error {
@@ -156,8 +156,8 @@
         return result;
     }
 
-	NSString *ext = [[url path] pathExtension];
-	Class container = [_containers objectForKey:[ext lowercaseString]];
+	NSString *ext = url.path.pathExtension;
+	Class container = _containers[ext.lowercaseString];
 	if (!container) {
         if (error) {
             NSString *message = [NSString stringWithFormat:@"%@ %@",
@@ -178,7 +178,7 @@
 - (void)registerDecoder:(Class)class forFileTypes:(NSArray *)fileTypes {
     
     [fileTypes enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        [_decoders setObject:class forKey:obj];
+        _decoders[obj] = class;
     }];
 }
 

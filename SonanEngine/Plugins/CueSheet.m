@@ -119,7 +119,7 @@
             
             NSString *index = nil;
             if (![scanner scanUpToCharactersFromSet:whitespace intoString:&index] ||
-                [index intValue] != 1) {
+                index.intValue != 1) {
                 continue;
             }
             
@@ -129,12 +129,12 @@
                 continue;
             
             NSArray *msf = [time componentsSeparatedByString:@":"];
-            if ([msf count] != 3)
+            if (msf.count != 3)
                 continue;
             
-            int minute = [[msf objectAtIndex:0] intValue];
-            int second = [[msf objectAtIndex:1] intValue];
-            float frame = [[msf objectAtIndex:2] floatValue];
+            int minute = [msf[0] intValue];
+            int second = [msf[1] intValue];
+            float frame = [msf[2] floatValue];
             double seconds = (60*minute) + second + (frame/75);
             
             if (track == nil)
@@ -195,7 +195,7 @@
 		return [NSURL URLWithString:path];
 	}
 
-    NSURL *baseUrl = [baseFileUrl URLByDeletingLastPathComponent];        
+    NSURL *baseUrl = baseFileUrl.URLByDeletingLastPathComponent;        
 	return [baseUrl URLByAppendingPathComponent:path];
 }
 

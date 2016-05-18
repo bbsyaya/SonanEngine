@@ -47,5 +47,5 @@
             album:(NSString *)album
             title:(NSString *)title
             genre:(NSString *)genre
-             year:(NSString *)year;
+             year:(NSString *)year NS_DESIGNATED_INITIALIZER;
 @end

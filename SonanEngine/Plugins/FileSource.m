@@ -59,8 +59,8 @@
 }
 
 - (BOOL)open:(NSURL *)url {
-	[self setUrl:url];
-	_fd = fopen([[url path] UTF8String], "r");
+	self.url = url;
+	_fd = fopen(url.path.UTF8String, "r");
     BOOL success = (_fd != NULL);
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         if(success){

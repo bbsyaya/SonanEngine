@@ -44,18 +44,16 @@
 #pragma mark - ORGMDecoder
 
 + (NSArray *)fileTypes {
-	return [NSArray arrayWithObjects:@"opus", nil];
+	return @[@"opus"];
 }
 
 - (NSDictionary *)properties {
-	return [NSDictionary dictionaryWithObjectsAndKeys:
-            [NSNumber numberWithInt:2], @"channels",
-            [NSNumber numberWithInt:16], @"bitsPerSample",
-            [NSNumber numberWithFloat:48000], @"sampleRate",
-            [NSNumber numberWithDouble:totalFrames], @"totalFrames",
-            [NSNumber numberWithBool:[source seekable]], @"seekable",
-            @"little", @"endian",
-            nil];
+	return @{@"channels": @2,
+            @"bitsPerSample": @16,
+            @"sampleRate": @48000.0f,
+            @"totalFrames": [NSNumber numberWithDouble:totalFrames],
+            @"seekable": @([source seekable]),
+            @"endian": @"little"};
 }
 
 - (NSMutableDictionary *)metadata {
@@ -71,7 +69,7 @@
 }
 
 - (BOOL)open:(id<ORGMSource>)s {
-    [self setSource:s];
+    self.source = s;
     self.metadata = [NSMutableDictionary dictionary];
 
     OpusFileCallbacks callbacks = {
@@ -110,7 +108,7 @@
     for (int i = 0; i < tags->comments; i++) {
 
         const char *comment = tags->user_comments[i];
-        NSString *commentValue = [NSString stringWithUTF8String:comment];
+        NSString *commentValue = @(comment);
 
         NSRange range = [commentValue rangeOfString:@"="];
         NSString *key = [commentValue substringWithRange:NSMakeRange(0, range.location)];
@@ -123,12 +121,12 @@
             if (!(opus_picture_tag_parse(&picture, comment))) // 0 on success
             {
                 NSData *picture_data = [NSData dataWithBytes:picture.data length:picture.data_length];
-                [_metadata setObject:picture_data forKey:@"picture"];
+                _metadata[@"picture"] = picture_data;
                 opus_picture_tag_clear(&picture);
             }
         }
         else {
-            [_metadata setObject:value forKey:[key lowercaseString]];
+            _metadata[key.lowercaseString] = value;
         }
     }
 }

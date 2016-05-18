@@ -76,7 +76,7 @@
 
  @return An `ASBD` struct with current audio format.
  */
-- (AudioStreamBasicDescription)format;
+@property (readonly) AudioStreamBasicDescription format;
 
 /**
  Returns current track metadata.
@@ -85,14 +85,14 @@
 
  @return Metadata dictionary or `nil` if track don't have metadata.
  */
-- (nullable NSDictionary *)metadata;
+@property (readonly, copy) NSDictionary * _Nullable metadata;
 
 /**
  Returns frames number for the current source.
 
  @return A frames number for the current source.
  */
-- (double)framesCount;
+@property (readonly) double framesCount;
 
 /**
  Seeks to the time within playing track without flushing buffer.
@@ -122,9 +122,9 @@
 
 //extra
 
-- (nullable NSURL *)currentURL;
+@property (readonly, copy) NSURL * _Nullable currentURL;
 
-- (float)preloadProgress;
+@property (readonly) float preloadProgress;
 
 - (void)addItemStatusObserver:(nonnull NSObject *)observer forKeyPaths:(nonnull NSSet *)keyPaths options:(NSKeyValueObservingOptions)options;
 

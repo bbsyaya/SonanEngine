@@ -37,7 +37,7 @@
 
  @return An initialized `ORGMConverter` object.
  */
-- (nonnull instancetype)initWithInputUnit:(nonnull ORGMInputUnit *)inputUnit bufferingSource:(nonnull dispatch_source_t)bufferingSource;
+- (nonnull instancetype)initWithInputUnit:(nonnull ORGMInputUnit *)inputUnit bufferingSource:(nonnull dispatch_source_t)bufferingSource NS_DESIGNATED_INITIALIZER;
 
 @property (strong, nonatomic, readonly, nonnull) dispatch_source_t buffering_source;
 
@@ -77,7 +77,7 @@
 
  @return `YES` if converter is ready for buffering.
  */
-- (BOOL)isReadyForBuffering;
+@property (getter=isReadyForBuffering, readonly) BOOL readyForBuffering;
 
 /**
  Flushes current data accumulated in converter's buffer.

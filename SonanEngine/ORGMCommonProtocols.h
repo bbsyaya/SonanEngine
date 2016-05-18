@@ -29,12 +29,15 @@
 /**
  Libarary error codes
  */
-typedef enum : NSInteger {
+#ifndef NS_ENUM
+#import <Foundation/Foundation.h>
+#endif
+typedef NS_ENUM(NSInteger, ORGMEngineErrorCodes) {
     ORGMEngineErrorCodesSourceFailed,
     ORGMEngineErrorCodesConverterFailed,
     ORGMEngineErrorCodesDecoderFailed,
     ORGMEngineErrorCodesContainerFailed
-} ORGMEngineErrorCodes;
+};
 
 
 @protocol ORGMSource;
@@ -75,18 +78,18 @@ typedef enum : NSInteger {
  
  @return Current file url.
  */
-- (nonnull NSURL *)url;
+@property (readonly, copy) NSURL * _Nonnull url;
 
-- (nonnull NSString *)pathExtension;
+@property (readonly, copy) NSString * _Nonnull pathExtension;
 
 /**
  Returns source file size.
  
  @return A file size in `bytes`.
  */
-- (long)size;
+@property (readonly) long size;
 
-- (long)preloadSize;
+@property (readonly) long preloadSize;
 
 /**
  Opens source file for `read`.
@@ -102,7 +105,7 @@ typedef enum : NSInteger {
  
  @return `YES` if seekable, otherwise `NO`.
  */
-- (BOOL)seekable;
+@property (readonly) BOOL seekable;
 
 /**
  Seeks within a source file in specified direction.
@@ -119,7 +122,7 @@ typedef enum : NSInteger {
  
  @return A position offset in `bytes`.
  */
-- (long)tell;
+@property (readonly) long tell;
 
 /**
  Reads specified amount of data from a source file into provided buffer.
@@ -136,7 +139,7 @@ typedef enum : NSInteger {
  */
 - (void)close;
 
-- (BOOL)isRemoteSource;
+@property (getter=isRemoteSource, readonly) BOOL remoteSource;
 
 @end
 
@@ -189,7 +192,7 @@ typedef enum : NSInteger {
  
  @return A properties dictionary.
  */
-- (nonnull NSDictionary *)properties;
+@property (readonly, copy) NSDictionary * _Nonnull properties;
 
 /**
  Returns current track metadata.
@@ -198,7 +201,7 @@ typedef enum : NSInteger {
  
  @return A Metadata dictionary or `nil` if track don't have metadata.
  */
-- (nullable NSDictionary *)metadata;
+@property (readonly, copy) NSDictionary * _Nullable metadata;
 
 /**
  Reads and decodes specified amount of frames from a source into provided buffer.
