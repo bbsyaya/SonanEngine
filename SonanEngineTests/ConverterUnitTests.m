@@ -42,14 +42,10 @@
     _converter = [[ORGMConverter alloc] initWithInputUnit:input];
     
     ORGMOutputUnit *output = [[ORGMOutputUnit alloc] initWithConverter:_converter];
-    STAssertTrue([_converter setupWithOutputUnit:output], nil);        
-    
-    [input release];
-    [output release];
+    STAssertTrue([_converter setupWithOutputUnit:output], nil);
 }
 
 - (void)tearDown {
-    [_converter release];
     [super tearDown];
 }
 
@@ -89,7 +85,6 @@
     
     STAssertEquals(_converter.inputUnit, input, nil);
     STAssertEquals(_converter.convertedData.length, _saveLength, nil);
-    [input release];
 }
 
 - (void)testConverterUnitshouldReinitWithNewInputUnitAndFlushData {
@@ -104,7 +99,6 @@
     
     STAssertEquals(_converter.inputUnit, input, nil);
     STAssertEquals(_converter.convertedData.length, 0U, nil);
-    [input release];
 }
 
 @end

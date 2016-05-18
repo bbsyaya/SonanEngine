@@ -53,7 +53,7 @@
         dispatch_resume(self.buffering_source);
         self.volume = 100.0f;
         [self setup];
-        [self setCurrentState:ORGMEngineStateStopped];
+        self.currentState = ORGMEngineStateStopped;
     }
     return self;
 }
@@ -136,7 +136,7 @@
                 [weakSelf.delegate engine:weakSelf didChangeCurrentURL:url prevItemURL:nil];
             });
         }
-        [weakSelf setCurrentState:ORGMEngineStatePlaying];
+        weakSelf.currentState = ORGMEngineStatePlaying;
         dispatch_source_merge_data(weakSelf.buffering_source, 1);
     });
 }
@@ -162,7 +162,7 @@
         return;
     }
     [self.output pause];
-    [self setCurrentState:ORGMEngineStatePaused];
+    self.currentState = ORGMEngineStatePaused;
 }
 
 - (void)resume {
@@ -170,7 +170,7 @@
         return;
     }
     [self.output resume];
-    [self setCurrentState:ORGMEngineStatePlaying];
+    self.currentState = ORGMEngineStatePlaying;
 }
 
 - (void)stop {
@@ -182,7 +182,7 @@
         weakSelf.output.outputUnitDelegate = nil;
         weakSelf.output = nil;
         weakSelf.converter = nil;
-        [weakSelf setCurrentState:ORGMEngineStateStopped];
+        weakSelf.currentState = ORGMEngineStateStopped;
     });
 }
 
@@ -228,7 +228,7 @@
             else{
                 [weakSelf.converter reinitWithNewInput:weakSelf.input withDataFlush:flush];
                 [weakSelf.output seek:0.0]; //to reset amount played
-                [weakSelf setCurrentState:ORGMEngineStatePlaying]; //trigger delegate method
+                weakSelf.currentState = ORGMEngineStatePlaying; //trigger delegate method
                 if([weakSelf.delegate respondsToSelector:@selector(engine:didChangeCurrentURL:prevItemURL:)]) {
                     dispatch_async(weakSelf.callback_queue, ^{
                         [weakSelf.delegate engine:weakSelf didChangeCurrentURL:url prevItemURL:prevURL];
@@ -254,7 +254,7 @@
              nextUrl = [self.delegate engineExpectsNextUrl:self];
         }
         if (nextUrl==nil) {
-            [self setCurrentState:ORGMEngineStateStopped];
+            self.currentState = ORGMEngineStateStopped;
             return;
         }
         __weak typeof (self) weakSelf = self;

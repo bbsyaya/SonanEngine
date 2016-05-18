@@ -42,7 +42,6 @@
 
 - (void)tearDown {
     [_source close];
-    [_source release];
     [super tearDown];
 }
 

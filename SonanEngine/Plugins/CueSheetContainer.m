@@ -29,7 +29,7 @@
 #pragma mark - ORMGContainer
 
 + (NSArray *)fileTypes {
-	return [NSArray arrayWithObject:@"cue"];
+	return @[@"cue"];
 }
 
 + (NSArray *)urlsForContainerURL:(NSURL *)url {
@@ -37,11 +37,11 @@
 	CueSheet *cuesheet = [[CueSheet alloc] initWithURL:url];
     [cuesheet.tracks enumerateObjectsUsingBlock:^(CueSheetTrack *track, NSUInteger idx, BOOL *stop) {        
         NSURL *saveURL = track.url;
-        NSURL *parentDirectory = [saveURL URLByDeletingLastPathComponent];
-        NSString *fileName = [saveURL.lastPathComponent stringByDeletingPathExtension];
+        NSURL *parentDirectory = saveURL.URLByDeletingLastPathComponent;
+        NSString *fileName = (saveURL.lastPathComponent).stringByDeletingPathExtension;
         
         NSString *newFileName = [NSString stringWithFormat:@"%@.cue%@%@",
-                                 fileName, singleFileCueSeparator, [track track]];
+                                 fileName, singleFileCueSeparator, track.track];
         newFileName = [newFileName stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
         NSURL *formattedUrl = [NSURL URLWithString:newFileName relativeToURL:parentDirectory];
         [tracks addObject:formattedUrl];

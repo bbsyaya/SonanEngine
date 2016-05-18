@@ -55,8 +55,6 @@
 }
 
 - (void)tearDown {
-    [_engine release];
-    [_tester release];
     [super tearDown];
 }
 

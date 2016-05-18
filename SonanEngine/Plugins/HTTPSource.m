@@ -53,7 +53,7 @@ const NSTimeInterval readTimeout = 1.0;
 }
 
 - (NSURL *)url {
-    return [_request URL];
+    return _request.URL;
 }
 
 - (NSString *)pathExtension{
@@ -81,7 +81,7 @@ const NSTimeInterval readTimeout = 1.0;
                 _connectionDidFail = NO;
 
                 [self prepareCache:[NSString stringWithFormat:@"%lx.%@",
-                                    (unsigned long)[[url absoluteString] hash],
+                                    (unsigned long)url.absoluteString.hash,
                                     url.pathExtension]];
                 dispatch_sync(dispatch_get_main_queue(), ^{
                     [connection start];
@@ -173,7 +173,7 @@ const NSTimeInterval readTimeout = 1.0;
 
 - (void)prepareCache:(NSString*)fileName {
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
-    NSString *dataPath = [[paths objectAtIndex:0] stringByAppendingPathComponent:@"StreamCache"];
+    NSString *dataPath = [paths[0] stringByAppendingPathComponent:@"StreamCache"];
     NSFileManager *defaultFileManger = [NSFileManager defaultManager];
     if (![defaultFileManger fileExistsAtPath:dataPath]) {
         if (![defaultFileManger createDirectoryAtPath:dataPath

@@ -27,7 +27,7 @@
 
 #pragma mark - ORMGContainer
 + (NSArray *)fileTypes {
-	return [NSArray arrayWithObject:@"m3u"];
+	return @[@"m3u"];
 }
 
 + (NSArray *)urlsForContainerURL:(NSURL*)url {
@@ -77,7 +77,7 @@
 		return [NSURL URLWithString:path];
 	}
     
-    NSURL *baseUrl = [baseFileUrl URLByDeletingLastPathComponent];
+    NSURL *baseUrl = baseFileUrl.URLByDeletingLastPathComponent;
 	return [baseUrl URLByAppendingPathComponent:path];
 }
 

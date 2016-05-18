@@ -76,7 +76,7 @@
  */
 - (nullable NSArray *)urlsForContainerURL:(nonnull NSURL *)url error:(NullableReferenceNSError)error;
 
-- (nonnull NSArray *)supportedFileExtensions;
+@property (readonly, copy) NSArray * _Nonnull supportedFileExtensions;
 
 @end
 

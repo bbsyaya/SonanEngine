@@ -29,12 +29,12 @@
 /**
  Specifies states of the engine.
  */
-typedef enum : NSInteger {
+typedef NS_ENUM(NSInteger, ORGMEngineState) {
     ORGMEngineStateStopped = 0,
     ORGMEngineStatePlaying,
     ORGMEngineStatePaused,
     ORGMEngineStateError
-} ORGMEngineState;
+};
 
 /**
  `ORGMEngine` is a facade for audio playing functionality (decoding, converting, output). If you need common audio player functionality, you should use this class. In specific usecases (such as only decoding, metadata reading etc.) it would be more efficient to use dedicated functionality from other classes.
@@ -108,14 +108,14 @@ typedef enum : NSInteger {
 
  @return Overall track time in `seconds`.
  */
-- (double)trackTime;
+@property (readonly) double trackTime;
 
 /**
  Provides played time.
 
  @return Played amount in `seconds`.
  */
-- (double)amountPlayed;
+@property (readonly) double amountPlayed;
 
 /**
  Returns current track metadata.
@@ -124,7 +124,7 @@ typedef enum : NSInteger {
 
  @return Metadata dictionary or `nil` if track don't have metadata.
  */
-- (nullable NSDictionary *)metadata;
+@property (readonly, copy) NSDictionary * _Nullable metadata;
 
 /**
  Provides ability to seek within playing track.
@@ -154,11 +154,11 @@ typedef enum : NSInteger {
 
 //extra
 
-- (nullable NSURL *)currentURL;
+@property (readonly, copy) NSURL * _Nullable currentURL;
 
-- (float)preloadProgress;
+@property (readonly) float preloadProgress;
 
-- (BOOL)isReadyToPlay;
+@property (getter=isReadyToPlay, readonly) BOOL readyToPlay;
 
 @end
 

@@ -76,8 +76,8 @@
     if (!self.decoder || ![self.decoder open:self.source]){
         return NO;
     }
-    int bitsPerSample = [[_decoder.properties objectForKey:@"bitsPerSample"] intValue];
-	int channels = [[_decoder.properties objectForKey:@"channels"] intValue];
+    int bitsPerSample = [(_decoder.properties)[@"bitsPerSample"] intValue];
+	int channels = [(_decoder.properties)[@"channels"] intValue];
     bytesPerFrame = (bitsPerSample/8) * channels;
     return YES;
 }
@@ -136,8 +136,8 @@
 }
 
 - (double)framesCount {
-    NSNumber *frames = [_decoder.properties objectForKey:@"totalFrames"];
-    return [frames doubleValue];
+    NSNumber *frames = (_decoder.properties)[@"totalFrames"];
+    return frames.doubleValue;
 }
 
 - (void)seek:(double)time withDataFlush:(BOOL)flush {
@@ -147,7 +147,7 @@
             weakSelf.data = [[NSMutableData alloc] init];
         });
     }
-    seekFrame = time * [[_decoder.properties objectForKey:@"sampleRate"] floatValue];
+    seekFrame = time * [(_decoder.properties)[@"sampleRate"] floatValue];
     _shouldSeek = YES;
 }
 
@@ -167,7 +167,7 @@
     }
     if(fabs(self.format.mSampleRate)>FLT_EPSILON){
         double trackDuration = self.framesCount/self.format.mSampleRate;
-        [dict setObject:@(trackDuration) forKey:@"duration"];
+        dict[@"duration"] = @(trackDuration);
     }
     return dict;
 }
@@ -200,7 +200,7 @@
 - (void)removeItemStatusObserver{
     @synchronized(self) {
         if(self.observerInfo){
-            NSArray *keys = [[self.observerInfo keyEnumerator] allObjects];
+            NSArray *keys = [self.observerInfo keyEnumerator].allObjects;
             for (NSString *key in keys) {
                 id value = [self.observerInfo objectForKey:key];
                 NSParameterAssert(value);

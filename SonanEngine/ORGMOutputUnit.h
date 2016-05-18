@@ -61,7 +61,7 @@
 
  @return An initialized `ORGMOutputUnit` object.
  **/
-- (nonnull instancetype)initWithConverter:(nonnull ORGMConverter *)converter;
+- (nonnull instancetype)initWithConverter:(nonnull ORGMConverter *)converter NS_DESIGNATED_INITIALIZER;
 
 @property (readonly, strong, nonatomic, nonnull) ORGMConverter *converter;
 
@@ -70,7 +70,7 @@
 
  @return An `ASBD` struct with supported audio format.
  */
-- (AudioStreamBasicDescription)format;
+@property (readonly) AudioStreamBasicDescription format;
 
 /**
  Pauses playback throught the output device. Idempotent method.
@@ -99,7 +99,7 @@
 /**
  Returns amount of played time in `seconds`.
  */
-- (double)amountPlayed;
+@property (readonly) double amountPlayed;
 
 /**
  Seeks to the time within playing track.
@@ -117,6 +117,6 @@
 
 - (void)setSampleRate:(double)sampleRate;
 
-- (BOOL)isReadyToPlay;
+@property (getter=isReadyToPlay, readonly) BOOL readyToPlay;
 
 @end

@@ -33,10 +33,13 @@
 /**
  Specifies format of the PCM output
  */
-typedef enum : NSUInteger {
+#ifndef NS_ENUM
+#import <Foundation/Foundation.h>
+#endif
+typedef NS_ENUM(NSUInteger, ORGMEngineOutputFormat) {
     ORGMOutputFormatDefault,
     ORGMOutputFormat24bit
-} ORGMEngineOutputFormat;
+};
 
 /**
  Abstract class for playback lifecycle classes.

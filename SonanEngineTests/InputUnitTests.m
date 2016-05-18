@@ -41,7 +41,6 @@
 
 - (void)tearDown {
     [_inputUnit close];
-    [_inputUnit release];
     [super tearDown];
 }
 

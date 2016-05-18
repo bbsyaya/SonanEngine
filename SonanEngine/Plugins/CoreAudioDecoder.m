@@ -61,15 +61,13 @@ const int ID3V1_SIZE = 128;
 }
 
 - (NSDictionary *)properties {
-    return [NSDictionary dictionaryWithObjectsAndKeys:
-            [NSNumber numberWithInt:channels], @"channels",
-            [NSNumber numberWithInt:bitsPerSample], @"bitsPerSample",
-            [NSNumber numberWithInt:bitrate], @"bitrate",
-            [NSNumber numberWithFloat:frequency], @"sampleRate",
-            [NSNumber numberWithLong:totalFrames], @"totalFrames",
-            [NSNumber numberWithBool:YES], @"seekable",
-            @"big", @"endian",
-            nil];
+    return @{@"channels": @(channels),
+            @"bitsPerSample": @(bitsPerSample),
+            @"bitrate": @(bitrate),
+            @"sampleRate": @(frequency),
+            @"totalFrames": @(totalFrames),
+            @"seekable": @YES,
+            @"endian": @"big"};
 }
 
 - (NSMutableDictionary *)metadata {
@@ -275,7 +273,7 @@ const int ID3V1_SIZE = 128;
     CFRelease(piDict);
     
     NSMutableDictionary *result = [[NSMutableDictionary alloc] init];
-    if([nsDict count]>0){
+    if(nsDict.count>0){
         [result addEntriesFromDictionary:nsDict];
     }
     nsDict = nil;
