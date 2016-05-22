@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name                  = "SonanEngine"
-  s.version               = "1.1.1"
+  s.version               = "1.1.4"
   s.summary               = "Lightweight iOS/OSX audio engine with flac, cue, mp3, m4a, m3u support."
   s.homepage              = "https://github.com/ardenfire/SonanEngine.git"
   s.license               = 'MIT'
