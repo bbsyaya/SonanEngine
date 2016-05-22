@@ -118,7 +118,7 @@
 		0B2CAACD1CF0CF1800ABFC95 /* Ogg.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Ogg.framework; path = "Audio-Frameworks/bin/ogg/Ogg.framework"; sourceTree = "<group>"; };
 		0B2CAACF1CF0CF2700ABFC95 /* Opus.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Opus.framework; path = "Audio-Frameworks/bin/opus/Opus.framework"; sourceTree = "<group>"; };
 		0B2CAAD11CF0CF3400ABFC95 /* OpusFile.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpusFile.framework; path = "Audio-Frameworks/bin/opusfile/OpusFile.framework"; sourceTree = "<group>"; };
-		0BF49D701CF22CD10091DFD5 /* ORGMTypes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ORGMTypes.h; path = ../ORGMTypes.h; sourceTree = "<group>"; };
+		0BF49D701CF22CD10091DFD5 /* ORGMTypes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ORGMTypes.h; sourceTree = "<group>"; };
 		9502C28E16C591C00054F4E3 /* SonanEngine.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SonanEngine.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9502C32016C594970054F4E3 /* FLAC.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FLAC.framework; path = "../Audio-Frameworks/bin/flac/FLAC_OSX/FLAC.framework"; sourceTree = "<group>"; };
 		9502C32216C5955F0054F4E3 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk/System/Library/Frameworks/AudioToolbox.framework; sourceTree = DEVELOPER_DIR; };
