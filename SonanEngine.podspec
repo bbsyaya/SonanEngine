@@ -8,8 +8,8 @@ Pod::Spec.new do |s|
   s.source                = { :git => "https://github.com/ardenfire/SonanEngine.git", :tag => "1.1.0", :submodules => true }
   s.default_subspec       = 'Core'
   s.requires_arc          = true
-  s.ios.deployment_target = '5.0'
-  s.osx.deployment_target = '10.7'
+  s.ios.deployment_target = '7.0'
+  s.osx.deployment_target = '10.8'
 
   s.subspec 'Core' do |core|
       core.source_files          = 'SonanEngine/*.{h,m}', 'SonanEngine/Plugins/{CoreAudio,Cue,File,HTTP,M3U}*.{h,m}'
