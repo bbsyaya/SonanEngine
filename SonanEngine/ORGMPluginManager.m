@@ -22,6 +22,7 @@
 // THE SOFTWARE.
 
 #import "ORGMPluginManager.h"
+#import "ORGMTypes.h"
 
 #import "HTTPSource.h"
 #import "FileSource.h"

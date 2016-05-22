@@ -22,6 +22,7 @@
 // THE SOFTWARE.
 
 #import "ORGMAudioUnit.h"
+#import "ORGMTypes.h"
 
 /**
  `ORGMConverter` is a subclass of ORGMAudioUnit for converting decoded `PCM` data to `PCM` format compatable with output unit. This class is a wrapper for `AudioConverterRef`, it determines `PCM` format from specified output and input units.

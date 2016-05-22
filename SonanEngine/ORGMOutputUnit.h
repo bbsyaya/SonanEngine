@@ -23,6 +23,7 @@
 
 #import "ORGMAudioUnit.h"
 #import "ORGMConverter.h"
+#import "ORGMTypes.h"
 
 @class ORGMOutputUnit;
 

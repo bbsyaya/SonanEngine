@@ -23,6 +23,7 @@
 
 #import <Foundation/Foundation.h>
 #import "ORGMAudioUnit.h"
+#import "ORGMTypes.h"
 
 @protocol ORGMEngineDelegate;
 

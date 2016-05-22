@@ -23,6 +23,7 @@
 
 #import <Foundation/Foundation.h>
 #import "ORGMCommonProtocols.h"
+#import "ORGMTypes.h"
 
 @protocol ORGMPluginResolver;
 
