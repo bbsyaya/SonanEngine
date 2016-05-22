@@ -1,0 +1,35 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "43489CB85F3649CAF306BAEEA8969B19A7A7DEC9",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "43489CB85F3649CAF306BAEEA8969B19A7A7DEC9" : 0,
+    "AB6BF607AE41DE2E3EC22C6C45D18E516EB9DDB0" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "15EDA3A1-DBF1-453B-BA07-22BBAC9EC705",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "43489CB85F3649CAF306BAEEA8969B19A7A7DEC9" : "SonanEngine\/",
+    "AB6BF607AE41DE2E3EC22C6C45D18E516EB9DDB0" : "Audio-Frameworks\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "SonanEngine",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "SonanEngine.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:ardenfire\/SonanEngine.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "43489CB85F3649CAF306BAEEA8969B19A7A7DEC9"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/ardenfire\/audio-frameworks.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "AB6BF607AE41DE2E3EC22C6C45D18E516EB9DDB0"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:ardenfire\/audio-frameworks.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "AB6BF607AE41DE2E3EC22C6C45D18E516EB9DDB0"
+    }
+  ]
+}
