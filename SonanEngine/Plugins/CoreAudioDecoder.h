@@ -21,11 +21,11 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "ORGMCommonProtocols.h"
+#import "AFSENCommonProtocols.h"
 
 /**
  `CoreAudioDecoder` is a decoder plugin that provides support of all `CoreAudio` formats.
  */
-@interface CoreAudioDecoder : NSObject <ORGMDecoder>
+@interface CoreAudioDecoder : NSObject <AFSENDecoder>
 
 @end

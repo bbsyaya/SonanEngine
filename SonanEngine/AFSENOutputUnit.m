@@ -1,5 +1,5 @@
 //
-// ORGMOutputUnit.m
+// AFSENOutputUnit.m
 //
 // Copyright (c) 2012 ap4y (lod@pisem.net)
 //
@@ -21,18 +21,18 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "ORGMOutputUnit.h"
+#import "AFSENOutputUnit.h"
 
-#import "ORGMInputUnit.h"
+#import "AFSENInputUnit.h"
 
-@interface ORGMOutputUnit () {
+@interface AFSENOutputUnit () {
     AudioUnit outputUnit;
     AURenderCallbackStruct renderCallback;
     AudioStreamBasicDescription _format;
     unsigned long long _amountPlayed;
     
 }
-@property (strong, nonatomic) ORGMConverter *converter;
+@property (strong, nonatomic) AFSENConverter *converter;
 
 @property (nonatomic,assign,getter=isReadyToPlay)BOOL readyToPlay;
 
@@ -40,9 +40,9 @@
 
 @end
 
-@implementation ORGMOutputUnit
+@implementation AFSENOutputUnit
 
-- (instancetype)initWithConverter:(ORGMConverter *)converter {
+- (instancetype)initWithConverter:(AFSENConverter *)converter {
     self = [super init];
     if (self) {
         outputUnit = NULL;
@@ -142,7 +142,7 @@ static OSStatus Sound_Renderer(void *inRefCon,
                                UInt32 inBusNumber,
                                UInt32 inNumberFrames,
                                AudioBufferList  *ioData) {
-    ORGMOutputUnit *output = (__bridge ORGMOutputUnit *)inRefCon;
+    AFSENOutputUnit *output = (__bridge AFSENOutputUnit *)inRefCon;
     OSStatus err = noErr;
     void *readPointer = ioData->mBuffers[0].mData;
 
@@ -223,7 +223,7 @@ static OSStatus Sound_Renderer(void *inRefCon,
     deviceFormat.mBytesPerFrame = deviceFormat.mChannelsPerFrame*(deviceFormat.mBitsPerChannel/8);
     deviceFormat.mBytesPerPacket = deviceFormat.mBytesPerFrame * deviceFormat.mFramesPerPacket;
 
-    if (_outputFormat == ORGMOutputFormat24bit) {
+    if (_outputFormat == AFSENOutputFormat24bit) {
         deviceFormat.mBytesPerFrame = 6;
         deviceFormat.mBytesPerPacket = 6;
         deviceFormat.mBitsPerChannel = 24;

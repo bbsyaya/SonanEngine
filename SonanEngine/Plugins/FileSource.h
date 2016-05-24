@@ -21,10 +21,10 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "ORGMCommonProtocols.h"
+#import "AFSENCommonProtocols.h"
 
 /**
  `FileSource` is a source plugin that provides support of the `file` url scheme.
  */
-@interface FileSource : NSObject <ORGMSource>
+@interface FileSource : NSObject <AFSENSource>
 @end

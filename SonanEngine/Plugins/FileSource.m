@@ -37,7 +37,7 @@
 	[self close];
 }
 
-#pragma mark - ORGMSource
+#pragma mark - AFSENSource
 + (NSString *)scheme {
     return @"file";
 }

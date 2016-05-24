@@ -11,7 +11,7 @@
 		0B2CAACE1CF0CF1800ABFC95 /* Ogg.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B2CAACD1CF0CF1800ABFC95 /* Ogg.framework */; };
 		0B2CAAD01CF0CF2700ABFC95 /* Opus.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B2CAACF1CF0CF2700ABFC95 /* Opus.framework */; };
 		0B2CAAD21CF0CF3400ABFC95 /* OpusFile.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B2CAAD11CF0CF3400ABFC95 /* OpusFile.framework */; };
-		0BF49D711CF22CFA0091DFD5 /* ORGMTypes.h in Headers */ = {isa = PBXBuildFile; fileRef = 0BF49D701CF22CD10091DFD5 /* ORGMTypes.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0BF49D711CF22CFA0091DFD5 /* AFSENTypes.h in Headers */ = {isa = PBXBuildFile; fileRef = 0BF49D701CF22CD10091DFD5 /* AFSENTypes.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9502C2A316C592000054F4E3 /* CoreAudioDecoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 95EE6A6D15D26758001AD694 /* CoreAudioDecoder.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		9502C2A516C592000054F4E3 /* CueSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 95317AE015D444FE0029D115 /* CueSheet.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		9502C2A716C592000054F4E3 /* CueSheetTrack.m in Sources */ = {isa = PBXBuildFile; fileRef = 95317AE815D445000029D115 /* CueSheetTrack.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
@@ -21,12 +21,12 @@
 		9502C2AF16C592000054F4E3 /* FlacDecoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 95EE6A7F15D26811001AD694 /* FlacDecoder.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		9502C2B116C592000054F4E3 /* HTTPSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 95EE6A7C15D267D5001AD694 /* HTTPSource.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		9502C2B316C592000054F4E3 /* M3uContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 95317BA215D552AA0029D115 /* M3uContainer.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		9502C2B516C592000054F4E3 /* ORGMEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 959B583515CEE17200D44955 /* ORGMEngine.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		9502C2B716C592000054F4E3 /* ORGMConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = 959B583415CEE17200D44955 /* ORGMConverter.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		9502C2B916C592000054F4E3 /* ORGMOutputUnit.m in Sources */ = {isa = PBXBuildFile; fileRef = 959B583815CEE17200D44955 /* ORGMOutputUnit.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		9502C2BB16C592000054F4E3 /* ORGMAudioUnit.m in Sources */ = {isa = PBXBuildFile; fileRef = 959B583C15CEE17200D44955 /* ORGMAudioUnit.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		9502C2BD16C592000054F4E3 /* ORGMInputUnit.m in Sources */ = {isa = PBXBuildFile; fileRef = 959B583D15CEE17200D44955 /* ORGMInputUnit.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		9502C2C216C592000054F4E3 /* ORGMPluginManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 95317ADB15D43C7A0029D115 /* ORGMPluginManager.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		9502C2B516C592000054F4E3 /* AFSEN.m in Sources */ = {isa = PBXBuildFile; fileRef = 959B583515CEE17200D44955 /* AFSEN.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		9502C2B716C592000054F4E3 /* AFSENConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = 959B583415CEE17200D44955 /* AFSENConverter.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		9502C2B916C592000054F4E3 /* AFSENOutputUnit.m in Sources */ = {isa = PBXBuildFile; fileRef = 959B583815CEE17200D44955 /* AFSENOutputUnit.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		9502C2BB16C592000054F4E3 /* AFSENAudioUnit.m in Sources */ = {isa = PBXBuildFile; fileRef = 959B583C15CEE17200D44955 /* AFSENAudioUnit.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		9502C2BD16C592000054F4E3 /* AFSENInputUnit.m in Sources */ = {isa = PBXBuildFile; fileRef = 959B583D15CEE17200D44955 /* AFSENInputUnit.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		9502C2C216C592000054F4E3 /* AFSENPluginManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 95317ADB15D43C7A0029D115 /* AFSENPluginManager.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		9502C2C316C592290054F4E3 /* CoreAudioDecoder.h in Headers */ = {isa = PBXBuildFile; fileRef = 95EE6A6C15D26758001AD694 /* CoreAudioDecoder.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9502C2C516C592290054F4E3 /* CueSheet.h in Headers */ = {isa = PBXBuildFile; fileRef = 95317ADF15D444FE0029D115 /* CueSheet.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9502C2C716C592290054F4E3 /* CueSheetTrack.h in Headers */ = {isa = PBXBuildFile; fileRef = 95317AE715D445000029D115 /* CueSheetTrack.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -36,13 +36,13 @@
 		9502C2CF16C592290054F4E3 /* FlacDecoder.h in Headers */ = {isa = PBXBuildFile; fileRef = 95EE6A7E15D26811001AD694 /* FlacDecoder.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9502C2D116C592290054F4E3 /* HTTPSource.h in Headers */ = {isa = PBXBuildFile; fileRef = 95EE6A7B15D267D5001AD694 /* HTTPSource.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9502C2D316C592290054F4E3 /* M3uContainer.h in Headers */ = {isa = PBXBuildFile; fileRef = 95317BA115D552A90029D115 /* M3uContainer.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		9502C2D516C592290054F4E3 /* ORGMEngine.h in Headers */ = {isa = PBXBuildFile; fileRef = 959B583915CEE17200D44955 /* ORGMEngine.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		9502C2D716C592290054F4E3 /* ORGMConverter.h in Headers */ = {isa = PBXBuildFile; fileRef = 959B583715CEE17200D44955 /* ORGMConverter.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		9502C2D916C592290054F4E3 /* ORGMOutputUnit.h in Headers */ = {isa = PBXBuildFile; fileRef = 959B583615CEE17200D44955 /* ORGMOutputUnit.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		9502C2DB16C592290054F4E3 /* ORGMAudioUnit.h in Headers */ = {isa = PBXBuildFile; fileRef = 959B583B15CEE17200D44955 /* ORGMAudioUnit.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		9502C2DD16C592290054F4E3 /* ORGMInputUnit.h in Headers */ = {isa = PBXBuildFile; fileRef = 959B583E15CEE17200D44955 /* ORGMInputUnit.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		9502C2E116C592290054F4E3 /* ORGMCommonProtocols.h in Headers */ = {isa = PBXBuildFile; fileRef = 95EE6A2E15D2629E001AD694 /* ORGMCommonProtocols.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		9502C2E216C592290054F4E3 /* ORGMPluginManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 95317ADA15D43C7A0029D115 /* ORGMPluginManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9502C2D516C592290054F4E3 /* AFSEN.h in Headers */ = {isa = PBXBuildFile; fileRef = 959B583915CEE17200D44955 /* AFSEN.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9502C2D716C592290054F4E3 /* AFSENConverter.h in Headers */ = {isa = PBXBuildFile; fileRef = 959B583715CEE17200D44955 /* AFSENConverter.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9502C2D916C592290054F4E3 /* AFSENOutputUnit.h in Headers */ = {isa = PBXBuildFile; fileRef = 959B583615CEE17200D44955 /* AFSENOutputUnit.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9502C2DB16C592290054F4E3 /* AFSENAudioUnit.h in Headers */ = {isa = PBXBuildFile; fileRef = 959B583B15CEE17200D44955 /* AFSENAudioUnit.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9502C2DD16C592290054F4E3 /* AFSENInputUnit.h in Headers */ = {isa = PBXBuildFile; fileRef = 959B583E15CEE17200D44955 /* AFSENInputUnit.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9502C2E116C592290054F4E3 /* AFSENCommonProtocols.h in Headers */ = {isa = PBXBuildFile; fileRef = 95EE6A2E15D2629E001AD694 /* AFSENCommonProtocols.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9502C2E216C592290054F4E3 /* AFSENPluginManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 95317ADA15D43C7A0029D115 /* AFSENPluginManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9502C32316C5955F0054F4E3 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9502C32216C5955F0054F4E3 /* AudioToolbox.framework */; };
 		9502C32516C595650054F4E3 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9502C32416C595650054F4E3 /* AVFoundation.framework */; };
 		9502C32716C595B20054F4E3 /* AudioUnit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9502C32616C595B20054F4E3 /* AudioUnit.framework */; };
@@ -57,7 +57,7 @@
 		950B12A815DB90A4001E35FE /* FlacDecoderTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 950B12A715DB90A4001E35FE /* FlacDecoderTests.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		950B12AB15DB9644001E35FE /* CoreAudioDecoderTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 950B12AA15DB9644001E35FE /* CoreAudioDecoderTests.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		950B12AD15DB96A8001E35FE /* id3v22-tda.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 950B12AC15DB96A8001E35FE /* id3v22-tda.mp3 */; };
-		95317ADC15D43C7B0029D115 /* ORGMPluginManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 95317ADB15D43C7A0029D115 /* ORGMPluginManager.m */; };
+		95317ADC15D43C7B0029D115 /* AFSENPluginManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 95317ADB15D43C7A0029D115 /* AFSENPluginManager.m */; };
 		95317ADE15D443430029D115 /* FileSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 9520746515D281DC00E0D0CB /* FileSource.m */; };
 		95317AE915D445010029D115 /* CueSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 95317AE015D444FE0029D115 /* CueSheet.m */; };
 		95317AEA15D445010029D115 /* CueSheetContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 95317AE215D444FF0029D115 /* CueSheetContainer.m */; };
@@ -76,11 +76,11 @@
 		959B581F15CEE13C00D44955 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 959B580C15CEE13C00D44955 /* Foundation.framework */; };
 		959B582215CEE13C00D44955 /* libSonanEngine.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 959B580915CEE13C00D44955 /* libSonanEngine.a */; };
 		959B582815CEE13C00D44955 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 959B582615CEE13C00D44955 /* InfoPlist.strings */; };
-		959B584015CEE17200D44955 /* ORGMConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = 959B583415CEE17200D44955 /* ORGMConverter.m */; };
-		959B584215CEE17200D44955 /* ORGMEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 959B583515CEE17200D44955 /* ORGMEngine.m */; };
-		959B584415CEE17200D44955 /* ORGMOutputUnit.m in Sources */ = {isa = PBXBuildFile; fileRef = 959B583815CEE17200D44955 /* ORGMOutputUnit.m */; };
-		959B584815CEE17200D44955 /* ORGMAudioUnit.m in Sources */ = {isa = PBXBuildFile; fileRef = 959B583C15CEE17200D44955 /* ORGMAudioUnit.m */; };
-		959B584A15CEE17200D44955 /* ORGMInputUnit.m in Sources */ = {isa = PBXBuildFile; fileRef = 959B583D15CEE17200D44955 /* ORGMInputUnit.m */; };
+		959B584015CEE17200D44955 /* AFSENConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = 959B583415CEE17200D44955 /* AFSENConverter.m */; };
+		959B584215CEE17200D44955 /* AFSEN.m in Sources */ = {isa = PBXBuildFile; fileRef = 959B583515CEE17200D44955 /* AFSEN.m */; };
+		959B584415CEE17200D44955 /* AFSENOutputUnit.m in Sources */ = {isa = PBXBuildFile; fileRef = 959B583815CEE17200D44955 /* AFSENOutputUnit.m */; };
+		959B584815CEE17200D44955 /* AFSENAudioUnit.m in Sources */ = {isa = PBXBuildFile; fileRef = 959B583C15CEE17200D44955 /* AFSENAudioUnit.m */; };
+		959B584A15CEE17200D44955 /* AFSENInputUnit.m in Sources */ = {isa = PBXBuildFile; fileRef = 959B583D15CEE17200D44955 /* AFSENInputUnit.m */; };
 		959B586115CEE1D900D44955 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 959B586015CEE1D900D44955 /* AVFoundation.framework */; };
 		959B586315CEE1DF00D44955 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 959B586215CEE1DF00D44955 /* AudioToolbox.framework */; };
 		95B2921115DBD3390031017D /* HTTPSourceTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 95B2921015DBD3390031017D /* HTTPSourceTests.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
@@ -118,7 +118,7 @@
 		0B2CAACD1CF0CF1800ABFC95 /* Ogg.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Ogg.framework; path = "Audio-Frameworks/bin/ogg/Ogg.framework"; sourceTree = "<group>"; };
 		0B2CAACF1CF0CF2700ABFC95 /* Opus.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Opus.framework; path = "Audio-Frameworks/bin/opus/Opus.framework"; sourceTree = "<group>"; };
 		0B2CAAD11CF0CF3400ABFC95 /* OpusFile.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpusFile.framework; path = "Audio-Frameworks/bin/opusfile/OpusFile.framework"; sourceTree = "<group>"; };
-		0BF49D701CF22CD10091DFD5 /* ORGMTypes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ORGMTypes.h; sourceTree = "<group>"; };
+		0BF49D701CF22CD10091DFD5 /* AFSENTypes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AFSENTypes.h; sourceTree = "<group>"; };
 		9502C28E16C591C00054F4E3 /* SonanEngine.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SonanEngine.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9502C32016C594970054F4E3 /* FLAC.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FLAC.framework; path = "../Audio-Frameworks/bin/flac/FLAC_OSX/FLAC.framework"; sourceTree = "<group>"; };
 		9502C32216C5955F0054F4E3 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk/System/Library/Frameworks/AudioToolbox.framework; sourceTree = DEVELOPER_DIR; };
@@ -142,8 +142,8 @@
 		950B12AC15DB96A8001E35FE /* id3v22-tda.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "id3v22-tda.mp3"; sourceTree = "<group>"; };
 		9520746415D281DC00E0D0CB /* FileSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FileSource.h; path = Plugins/FileSource.h; sourceTree = "<group>"; };
 		9520746515D281DC00E0D0CB /* FileSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FileSource.m; path = Plugins/FileSource.m; sourceTree = "<group>"; };
-		95317ADA15D43C7A0029D115 /* ORGMPluginManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORGMPluginManager.h; sourceTree = "<group>"; };
-		95317ADB15D43C7A0029D115 /* ORGMPluginManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORGMPluginManager.m; sourceTree = "<group>"; };
+		95317ADA15D43C7A0029D115 /* AFSENPluginManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFSENPluginManager.h; sourceTree = "<group>"; };
+		95317ADB15D43C7A0029D115 /* AFSENPluginManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFSENPluginManager.m; sourceTree = "<group>"; };
 		95317ADF15D444FE0029D115 /* CueSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CueSheet.h; path = Plugins/CueSheet.h; sourceTree = "<group>"; };
 		95317AE015D444FE0029D115 /* CueSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CueSheet.m; path = Plugins/CueSheet.m; sourceTree = "<group>"; };
 		95317AE115D444FF0029D115 /* CueSheetContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CueSheetContainer.h; path = Plugins/CueSheetContainer.h; sourceTree = "<group>"; };
@@ -172,23 +172,23 @@
 		959B581A15CEE13C00D44955 /* SonanEngineTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SonanEngineTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		959B582515CEE13C00D44955 /* SonanEngineTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SonanEngineTests-Info.plist"; sourceTree = "<group>"; };
 		959B582715CEE13C00D44955 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		959B583415CEE17200D44955 /* ORGMConverter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORGMConverter.m; sourceTree = "<group>"; };
-		959B583515CEE17200D44955 /* ORGMEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORGMEngine.m; sourceTree = "<group>"; };
-		959B583615CEE17200D44955 /* ORGMOutputUnit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORGMOutputUnit.h; sourceTree = "<group>"; };
-		959B583715CEE17200D44955 /* ORGMConverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORGMConverter.h; sourceTree = "<group>"; };
-		959B583815CEE17200D44955 /* ORGMOutputUnit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORGMOutputUnit.m; sourceTree = "<group>"; };
-		959B583915CEE17200D44955 /* ORGMEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORGMEngine.h; sourceTree = "<group>"; };
-		959B583B15CEE17200D44955 /* ORGMAudioUnit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORGMAudioUnit.h; sourceTree = "<group>"; };
-		959B583C15CEE17200D44955 /* ORGMAudioUnit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORGMAudioUnit.m; sourceTree = "<group>"; };
-		959B583D15CEE17200D44955 /* ORGMInputUnit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORGMInputUnit.m; sourceTree = "<group>"; };
-		959B583E15CEE17200D44955 /* ORGMInputUnit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORGMInputUnit.h; sourceTree = "<group>"; };
+		959B583415CEE17200D44955 /* AFSENConverter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFSENConverter.m; sourceTree = "<group>"; };
+		959B583515CEE17200D44955 /* AFSEN.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFSEN.m; sourceTree = "<group>"; };
+		959B583615CEE17200D44955 /* AFSENOutputUnit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFSENOutputUnit.h; sourceTree = "<group>"; };
+		959B583715CEE17200D44955 /* AFSENConverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFSENConverter.h; sourceTree = "<group>"; };
+		959B583815CEE17200D44955 /* AFSENOutputUnit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFSENOutputUnit.m; sourceTree = "<group>"; };
+		959B583915CEE17200D44955 /* AFSEN.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFSEN.h; sourceTree = "<group>"; };
+		959B583B15CEE17200D44955 /* AFSENAudioUnit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFSENAudioUnit.h; sourceTree = "<group>"; };
+		959B583C15CEE17200D44955 /* AFSENAudioUnit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFSENAudioUnit.m; sourceTree = "<group>"; };
+		959B583D15CEE17200D44955 /* AFSENInputUnit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFSENInputUnit.m; sourceTree = "<group>"; };
+		959B583E15CEE17200D44955 /* AFSENInputUnit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFSENInputUnit.h; sourceTree = "<group>"; };
 		959B586015CEE1D900D44955 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		959B586215CEE1DF00D44955 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		95B2920F15DBD3390031017D /* HTTPSourceTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTTPSourceTests.h; sourceTree = "<group>"; };
 		95B2921015DBD3390031017D /* HTTPSourceTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTTPSourceTests.m; sourceTree = "<group>"; };
 		95C86BC717F688AD00F6C878 /* OpusFileDecoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OpusFileDecoder.h; path = Plugins/OpusFileDecoder.h; sourceTree = "<group>"; };
 		95C86BC817F688AD00F6C878 /* OpusFileDecoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OpusFileDecoder.m; path = Plugins/OpusFileDecoder.m; sourceTree = "<group>"; };
-		95EE6A2E15D2629E001AD694 /* ORGMCommonProtocols.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORGMCommonProtocols.h; sourceTree = "<group>"; };
+		95EE6A2E15D2629E001AD694 /* AFSENCommonProtocols.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFSENCommonProtocols.h; sourceTree = "<group>"; };
 		95EE6A6C15D26758001AD694 /* CoreAudioDecoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CoreAudioDecoder.h; path = Plugins/CoreAudioDecoder.h; sourceTree = "<group>"; };
 		95EE6A6D15D26758001AD694 /* CoreAudioDecoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CoreAudioDecoder.m; path = Plugins/CoreAudioDecoder.m; sourceTree = "<group>"; };
 		95EE6A7B15D267D5001AD694 /* HTTPSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HTTPSource.h; path = Plugins/HTTPSource.h; sourceTree = "<group>"; };
@@ -299,21 +299,21 @@
 		959B580E15CEE13C00D44955 /* SonanEngine */ = {
 			isa = PBXGroup;
 			children = (
-				0BF49D701CF22CD10091DFD5 /* ORGMTypes.h */,
+				0BF49D701CF22CD10091DFD5 /* AFSENTypes.h */,
 				95EE6A6B15D26746001AD694 /* Plugin */,
-				959B583915CEE17200D44955 /* ORGMEngine.h */,
-				959B583515CEE17200D44955 /* ORGMEngine.m */,
-				959B583715CEE17200D44955 /* ORGMConverter.h */,
-				959B583415CEE17200D44955 /* ORGMConverter.m */,
-				959B583615CEE17200D44955 /* ORGMOutputUnit.h */,
-				959B583815CEE17200D44955 /* ORGMOutputUnit.m */,
-				959B583B15CEE17200D44955 /* ORGMAudioUnit.h */,
-				959B583C15CEE17200D44955 /* ORGMAudioUnit.m */,
-				959B583E15CEE17200D44955 /* ORGMInputUnit.h */,
-				959B583D15CEE17200D44955 /* ORGMInputUnit.m */,
-				95EE6A2E15D2629E001AD694 /* ORGMCommonProtocols.h */,
-				95317ADA15D43C7A0029D115 /* ORGMPluginManager.h */,
-				95317ADB15D43C7A0029D115 /* ORGMPluginManager.m */,
+				959B583915CEE17200D44955 /* AFSEN.h */,
+				959B583515CEE17200D44955 /* AFSEN.m */,
+				959B583715CEE17200D44955 /* AFSENConverter.h */,
+				959B583415CEE17200D44955 /* AFSENConverter.m */,
+				959B583615CEE17200D44955 /* AFSENOutputUnit.h */,
+				959B583815CEE17200D44955 /* AFSENOutputUnit.m */,
+				959B583B15CEE17200D44955 /* AFSENAudioUnit.h */,
+				959B583C15CEE17200D44955 /* AFSENAudioUnit.m */,
+				959B583E15CEE17200D44955 /* AFSENInputUnit.h */,
+				959B583D15CEE17200D44955 /* AFSENInputUnit.m */,
+				95EE6A2E15D2629E001AD694 /* AFSENCommonProtocols.h */,
+				95317ADA15D43C7A0029D115 /* AFSENPluginManager.h */,
+				95317ADB15D43C7A0029D115 /* AFSENPluginManager.m */,
 				959B580F15CEE13C00D44955 /* Supporting Files */,
 			);
 			path = SonanEngine;
@@ -404,7 +404,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9502C2C316C592290054F4E3 /* CoreAudioDecoder.h in Headers */,
-				0BF49D711CF22CFA0091DFD5 /* ORGMTypes.h in Headers */,
+				0BF49D711CF22CFA0091DFD5 /* AFSENTypes.h in Headers */,
 				9502C2C516C592290054F4E3 /* CueSheet.h in Headers */,
 				9502C2C716C592290054F4E3 /* CueSheetTrack.h in Headers */,
 				9502C2C916C592290054F4E3 /* CueSheetContainer.h in Headers */,
@@ -413,13 +413,13 @@
 				9502C2CF16C592290054F4E3 /* FlacDecoder.h in Headers */,
 				9502C2D116C592290054F4E3 /* HTTPSource.h in Headers */,
 				9502C2D316C592290054F4E3 /* M3uContainer.h in Headers */,
-				9502C2D516C592290054F4E3 /* ORGMEngine.h in Headers */,
-				9502C2D716C592290054F4E3 /* ORGMConverter.h in Headers */,
-				9502C2D916C592290054F4E3 /* ORGMOutputUnit.h in Headers */,
-				9502C2DB16C592290054F4E3 /* ORGMAudioUnit.h in Headers */,
-				9502C2DD16C592290054F4E3 /* ORGMInputUnit.h in Headers */,
-				9502C2E116C592290054F4E3 /* ORGMCommonProtocols.h in Headers */,
-				9502C2E216C592290054F4E3 /* ORGMPluginManager.h in Headers */,
+				9502C2D516C592290054F4E3 /* AFSEN.h in Headers */,
+				9502C2D716C592290054F4E3 /* AFSENConverter.h in Headers */,
+				9502C2D916C592290054F4E3 /* AFSENOutputUnit.h in Headers */,
+				9502C2DB16C592290054F4E3 /* AFSENAudioUnit.h in Headers */,
+				9502C2DD16C592290054F4E3 /* AFSENInputUnit.h in Headers */,
+				9502C2E116C592290054F4E3 /* AFSENCommonProtocols.h in Headers */,
+				9502C2E216C592290054F4E3 /* AFSENPluginManager.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -563,12 +563,12 @@
 				9502C2AF16C592000054F4E3 /* FlacDecoder.m in Sources */,
 				9502C2B116C592000054F4E3 /* HTTPSource.m in Sources */,
 				9502C2B316C592000054F4E3 /* M3uContainer.m in Sources */,
-				9502C2B516C592000054F4E3 /* ORGMEngine.m in Sources */,
-				9502C2B716C592000054F4E3 /* ORGMConverter.m in Sources */,
-				9502C2B916C592000054F4E3 /* ORGMOutputUnit.m in Sources */,
-				9502C2BB16C592000054F4E3 /* ORGMAudioUnit.m in Sources */,
-				9502C2BD16C592000054F4E3 /* ORGMInputUnit.m in Sources */,
-				9502C2C216C592000054F4E3 /* ORGMPluginManager.m in Sources */,
+				9502C2B516C592000054F4E3 /* AFSEN.m in Sources */,
+				9502C2B716C592000054F4E3 /* AFSENConverter.m in Sources */,
+				9502C2B916C592000054F4E3 /* AFSENOutputUnit.m in Sources */,
+				9502C2BB16C592000054F4E3 /* AFSENAudioUnit.m in Sources */,
+				9502C2BD16C592000054F4E3 /* AFSENInputUnit.m in Sources */,
+				9502C2C216C592000054F4E3 /* AFSENPluginManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -577,16 +577,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				95317ADE15D443430029D115 /* FileSource.m in Sources */,
-				959B584015CEE17200D44955 /* ORGMConverter.m in Sources */,
-				959B584215CEE17200D44955 /* ORGMEngine.m in Sources */,
-				959B584415CEE17200D44955 /* ORGMOutputUnit.m in Sources */,
-				959B584815CEE17200D44955 /* ORGMAudioUnit.m in Sources */,
-				959B584A15CEE17200D44955 /* ORGMInputUnit.m in Sources */,
+				959B584015CEE17200D44955 /* AFSENConverter.m in Sources */,
+				959B584215CEE17200D44955 /* AFSEN.m in Sources */,
+				959B584415CEE17200D44955 /* AFSENOutputUnit.m in Sources */,
+				959B584815CEE17200D44955 /* AFSENAudioUnit.m in Sources */,
+				959B584A15CEE17200D44955 /* AFSENInputUnit.m in Sources */,
 				95EE6A8015D26811001AD694 /* FlacDecoder.m in Sources */,
 				95EE6A8315D2687B001AD694 /* CoreAudioDecoder.m in Sources */,
 				95EE6A8215D26876001AD694 /* HTTPSource.m in Sources */,
 				95C86BC917F688AD00F6C878 /* OpusFileDecoder.m in Sources */,
-				95317ADC15D43C7B0029D115 /* ORGMPluginManager.m in Sources */,
+				95317ADC15D43C7B0029D115 /* AFSENPluginManager.m in Sources */,
 				95317AE915D445010029D115 /* CueSheet.m in Sources */,
 				95317AEA15D445010029D115 /* CueSheetContainer.m in Sources */,
 				95317AEB15D445010029D115 /* CueSheetDecoder.m in Sources */,

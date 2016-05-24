@@ -39,7 +39,7 @@
 }
 
 @property (strong, nonatomic) NSMutableDictionary *metadata;
-@property (strong, nonatomic) id<ORGMSource> source;
+@property (strong, nonatomic) id<AFSENSource> source;
 @property (assign, nonatomic) BOOL endOfStream;
 
 - (FLAC__StreamDecoder *)decoder;
@@ -57,7 +57,7 @@
     [self close];
 }
 
-#pragma mark - ORGMDecoder
+#pragma mark - AFSENDecoder
 + (NSArray *)fileTypes {
 	return @[@"flac"];
 }
@@ -111,7 +111,7 @@
 	return framesRead;
 }
 
-- (BOOL)open:(id<ORGMSource>)s {
+- (BOOL)open:(id<AFSENSource>)s {
 	self.source = s;
 	
     self.metadata = [NSMutableDictionary dictionary];

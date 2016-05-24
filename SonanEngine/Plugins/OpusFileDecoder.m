@@ -30,7 +30,7 @@
 }
 
 @property (strong, nonatomic) NSMutableDictionary *metadata;
-@property (strong, nonatomic) id<ORGMSource> source;
+@property (strong, nonatomic) id<AFSENSource> source;
 
 @end
 
@@ -41,7 +41,7 @@
     [self close];
 }
 
-#pragma mark - ORGMDecoder
+#pragma mark - AFSENDecoder
 
 + (NSArray *)fileTypes {
 	return @[@"opus"];
@@ -68,7 +68,7 @@
     return samples;
 }
 
-- (BOOL)open:(id<ORGMSource>)s {
+- (BOOL)open:(id<AFSENSource>)s {
     self.source = s;
     self.metadata = [NSMutableDictionary dictionary];
 
@@ -134,18 +134,18 @@
 #pragma mark - callback
 
 static int ReadCallback(void *stream, unsigned char *ptr, int nbytes) {
-    id<ORGMSource> source = (__bridge id<ORGMSource>)(stream);
+    id<AFSENSource> source = (__bridge id<AFSENSource>)(stream);
     int result = [source read:ptr amount:nbytes];
 	return result;
 }
 
 static int SeekCallback(void *stream, opus_int64 offset, int whence) {
-	id<ORGMSource> source = (__bridge id<ORGMSource>)(stream);
+	id<AFSENSource> source = (__bridge id<AFSENSource>)(stream);
     return [source seek:(long)offset whence:whence] ? 0 : -1;
 }
 
 static opus_int64 TellCallback(void *stream) {
-	id<ORGMSource> source = (__bridge id<ORGMSource>)(stream);
+	id<AFSENSource> source = (__bridge id<AFSENSource>)(stream);
     return [source tell];
 }
 

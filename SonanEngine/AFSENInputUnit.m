@@ -1,5 +1,5 @@
 //
-// ORGMInputUnit.m
+// AFSENInputUnit.m
 //
 // Copyright (c) 2012 ap4y (lod@pisem.net)
 //
@@ -21,11 +21,11 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "ORGMInputUnit.h"
+#import "AFSENInputUnit.h"
 
-#import "ORGMPluginManager.h"
+#import "AFSENPluginManager.h"
 
-@interface ORGMInputUnit () <ORGMSourceDelegate> {
+@interface AFSENInputUnit () <AFSENSourceDelegate> {
     int bytesPerFrame;
     BOOL _shouldSeek;
     long seekFrame;
@@ -33,8 +33,8 @@
 
 @property (nonatomic,strong) NSMapTable *observerInfo;
 @property (strong, nonatomic) NSMutableData *data;
-@property (strong, nonatomic) id<ORGMSource> source;
-@property (strong, nonatomic) id<ORGMDecoder> decoder;
+@property (strong, nonatomic) id<AFSENSource> source;
+@property (strong, nonatomic) id<AFSENDecoder> decoder;
 @property (assign, nonatomic) BOOL endOfInput;
 @property (strong, nonatomic) NSURL *url;
 @property (strong, nonatomic) dispatch_queue_t lock_queue;
@@ -42,12 +42,12 @@
 
 @end
 
-@implementation ORGMInputUnit
+@implementation AFSENInputUnit
 
 - (instancetype)init {
     self = [super init];
     if (self) {
-        self.lock_queue = dispatch_queue_create("com.Sonan.lock",DISPATCH_QUEUE_SERIAL);
+        self.lock_queue = dispatch_queue_create("com.sonan.lock",DISPATCH_QUEUE_SERIAL);
         self.data = [[NSMutableData alloc] init];
         self.inputBuffer = malloc(CHUNK_SIZE);
         _endOfInput = NO;
@@ -67,12 +67,12 @@
 
 - (BOOL)openWithUrl:(NSURL *)url {
     self.url = url;
-    self.source = [[ORGMPluginManager sharedManager] sourceForURL:url error:nil];
+    self.source = [[AFSENPluginManager sharedManager] sourceForURL:url error:nil];
     self.source.sourceDelegate = self;
     if (!self.source || ![self.source open:url]){
         return NO;
     }
-    self.decoder = [[ORGMPluginManager sharedManager] decoderForSource:_source error:nil];
+    self.decoder = [[AFSENPluginManager sharedManager] decoderForSource:self.source error:nil];
     if (!self.decoder || ![self.decoder open:self.source]){
         return NO;
     }
@@ -215,13 +215,13 @@
 
 #pragma mark - private
 
-- (void)sourceDidReceiveData:(id<ORGMSource>)source{
+- (void)sourceDidReceiveData:(id<AFSENSource>)source{
     if(source==self.source && [self.inputUnitDelegate respondsToSelector:@selector(inputUnit:didChangePreloadProgress:)]){
         [self.inputUnitDelegate inputUnit:self didChangePreloadProgress:self.preloadProgress];
     }
 }
 
-- (void)source:(id<ORGMSource>)source didFailWithError:(NSError *)error{
+- (void)source:(id<AFSENSource>)source didFailWithError:(NSError *)error{
     if(source==self.source && [self.inputUnitDelegate respondsToSelector:@selector(inputUnit:didFailWithError:)]){
         [self.inputUnitDelegate inputUnit:self didFailWithError:error];
     }

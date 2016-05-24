@@ -21,10 +21,10 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "ORGMCommonProtocols.h"
+#import "AFSENCommonProtocols.h"
 
 /**
  `HTTPSource` is a source plugin that provides support of the `http` url scheme.
  */
-@interface HTTPSource : NSObject <ORGMSource>
+@interface HTTPSource : NSObject <AFSENSource>
 @end

@@ -29,7 +29,7 @@
 const int ID3V1_SIZE = 128;
 
 @interface CoreAudioDecoder () {
-    id<ORGMSource>  _source;
+    id<AFSENSource>  _source;
     AudioFileID     _audioFile;
     ExtAudioFileRef _in;
     int bitrate;
@@ -47,7 +47,7 @@ const int ID3V1_SIZE = 128;
     [self close];
 }
 
-#pragma mark - ORGMDecoder
+#pragma mark - AFSENDecoder
 + (NSArray *)fileTypes {
     OSStatus err;
     UInt32 size;
@@ -93,7 +93,7 @@ const int ID3V1_SIZE = 128;
     return frameCount;
 }
 
-- (BOOL)open:(id<ORGMSource>)source {
+- (BOOL)open:(id<AFSENSource>)source {
     self.metadata = [NSMutableDictionary dictionary];
     _source = source;
     OSStatus result = AudioFileOpenWithCallbacks((__bridge void * _Nonnull)(_source), audioFile_ReadProc, NULL,
@@ -289,7 +289,7 @@ static OSStatus audioFile_ReadProc(void *inClientData,
                                    UInt32 requestCount,
                                    void *buffer,
                                    UInt32 *actualCount) {
-    id<ORGMSource> source = (__bridge id<ORGMSource>)(inClientData);
+    id<AFSENSource> source = (__bridge id<AFSENSource>)(inClientData);
 
     // Skip potential id3v1 tags over HTTP connection
     if ([source isRemoteSource] &&
@@ -306,7 +306,7 @@ static OSStatus audioFile_ReadProc(void *inClientData,
 }
 
 static SInt64 audioFile_GetSizeProc(void *inClientData) {
-    id<ORGMSource> source = (__bridge id<ORGMSource>)(inClientData);
+    id<AFSENSource> source = (__bridge id<AFSENSource>)(inClientData);
     SInt64 len = [source size];
     return len;
 }

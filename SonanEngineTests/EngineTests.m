@@ -25,19 +25,19 @@
 
 @implementation DelegateTester
 
-- (NSURL *)engineExpectsNextUrl:(ORGMEngine *)engine {
+- (NSURL *)engineExpectsNextUrl:(AFSEN *)engine {
     _trackRequested = YES;
     return nil;
 }
 
-- (void)engine:(ORGMEngine *)engine didChangeState:(ORGMEngineState)state {
+- (void)engine:(AFSEN *)engine didChangeState:(AFSENState)state {
     self.state = state;
 }
 
 @end
 
 @interface EngineTests ()
-@property (retain, nonatomic) ORGMEngine *engine;
+@property (retain, nonatomic) AFSEN *engine;
 @property (retain, nonatomic) DelegateTester *tester;
 @end
 
@@ -45,7 +45,7 @@
 
 - (void)setUp {
     [super setUp];
-    _engine = [[ORGMEngine alloc] init]; //unable to create from setup
+    _engine = [[AFSEN alloc] init]; //unable to create from setup
     _tester = [[DelegateTester alloc] init];
     _engine.delegate = _tester;
     
@@ -64,7 +64,7 @@
         [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode
                                  beforeDate:loopUntil];
     }
-    STAssertEquals(_tester.state, ORGMEngineStatePlaying, nil);
+    STAssertEquals(_tester.state, AFSENStatePlaying, nil);
 }
 
 - (void)testEngineDelegateShouldRequestNextTrackFromDelegate {
@@ -82,7 +82,7 @@
         [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode
                                  beforeDate:loopUntil];
     }
-    STAssertTrue(_engine.currentState, ORGMEngineStateStopped);
+    STAssertTrue(_engine.currentState, AFSENStateStopped);
 }
 
 

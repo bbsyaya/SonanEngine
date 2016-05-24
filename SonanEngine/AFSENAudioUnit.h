@@ -1,5 +1,5 @@
 //
-// ORGMAudioUnit.h
+// AFSENAudioUnit.h
 //
 // Copyright (c) 2012 ap4y (lod@pisem.net)
 //
@@ -27,7 +27,7 @@
 
 // default reading chunk size
 #define CHUNK_SIZE 16 * 1024
-// deault buffer size
+// default buffer size
 #define BUFFER_SIZE 256 * 1024
 
 /**
@@ -36,20 +36,20 @@
 #ifndef NS_ENUM
 #import <Foundation/Foundation.h>
 #endif
-typedef NS_ENUM(NSUInteger, ORGMEngineOutputFormat) {
-    ORGMOutputFormatDefault,
-    ORGMOutputFormat24bit
+typedef NS_ENUM(NSUInteger, AFSENOutputFormat) {
+    AFSENOutputFormatDefault,
+    AFSENOutputFormat24bit
 };
 
 /**
  Abstract class for playback lifecycle classes.
  */
-@interface ORGMAudioUnit : NSObject
+@interface AFSENAudioUnit : NSObject
 
 /**
  Invokes one processing iteration.
  
- @discussion You should implement this method in subclass of `ORGMAudioUnit`.
+ @discussion You should implement this method in subclass of `AFSENAudioUnit`.
  */
 - (void)process;
 

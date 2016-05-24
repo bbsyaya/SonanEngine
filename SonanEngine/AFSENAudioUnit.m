@@ -1,5 +1,5 @@
 //
-// ORGMAudioUnit.m
+// AFSENAudioUnit.m
 //
 // Copyright (c) 2012 ap4y (lod@pisem.net)
 //
@@ -21,13 +21,13 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "ORGMAudioUnit.h"
+#import "AFSENAudioUnit.h"
 
-@interface ORGMAudioUnit ()
+@interface AFSENAudioUnit ()
 @property (nonatomic) BOOL isProcessing;
 @end
 
-@implementation ORGMAudioUnit
+@implementation AFSENAudioUnit
 - (void)process {
     NSString *error = [NSString stringWithFormat:
                        NSLocalizedString(@"You must override %@ in a subclass", nil),

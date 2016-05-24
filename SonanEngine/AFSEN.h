@@ -1,5 +1,5 @@
 //
-// ORGMEngine.h
+// AFSEN.h
 //
 // Copyright (c) 2012 ap4y (lod@pisem.net)
 //
@@ -22,30 +22,21 @@
 // THE SOFTWARE.
 
 #import <Foundation/Foundation.h>
-#import "ORGMAudioUnit.h"
-#import "ORGMTypes.h"
+#import "AFSENAudioUnit.h"
+#import "AFSENTypes.h"
+#import "AFSENCommonProtocols.h"
 
-@protocol ORGMEngineDelegate;
-
-/**
- Specifies states of the engine.
- */
-typedef NS_ENUM(NSInteger, ORGMEngineState) {
-    ORGMEngineStateStopped = 0,
-    ORGMEngineStatePlaying,
-    ORGMEngineStatePaused,
-    ORGMEngineStateError
-};
+@protocol AFSENDelegate;
 
 /**
- `ORGMEngine` is a facade for audio playing functionality (decoding, converting, output). If you need common audio player functionality, you should use this class. In specific usecases (such as only decoding, metadata reading etc.) it would be more efficient to use dedicated functionality from other classes.
+ `AFSEN` is a facade for audio playing functionality (decoding, converting, output). If you need common audio player functionality, you should use this class. In specific usecases (such as only decoding, metadata reading etc.) it would be more efficient to use dedicated functionality from other classes.
  */
-@interface ORGMEngine : NSObject
+@interface AFSEN : NSObject
 
 /**
  Engine output format
  */
-@property (assign, nonatomic) ORGMEngineOutputFormat outputFormat;
+@property (assign, nonatomic) AFSENOutputFormat outputFormat;
 
 /**
  Engine output volume value in `percent`. Default value `100%`.
@@ -55,24 +46,24 @@ typedef NS_ENUM(NSInteger, ORGMEngineState) {
 /**
  Current state of the engine instance.
  */
-@property (assign, nonatomic, readonly) ORGMEngineState currentState;
+@property (assign, nonatomic, readonly) AFSENState currentState;
 
 /**
  Current error of the instance.
-
- @discussion Value will be provided only for the `ORGMEngineStateError`, with other states this propertie will return `nil`.
+ 
+ @discussion Value will be provided only for the `AFSENStateError`, with other states this property will return `nil`.
  */
 @property (strong, nonatomic, readonly, nullable) NSError *currentError;
 
 /**
- The object that conforms ORGMEngineDelegate protocol and acts as the delegate.
+ The object that conforms AFSENDelegate protocol and acts as the delegate.
  */
-@property (weak, nonatomic, nullable) id<ORGMEngineDelegate> delegate;
+@property (weak, nonatomic, nullable) id<AFSENDelegate> delegate;
 
 /**
  Starts new playback process from corresponding source with provided output type of output unit.
 
- @param outputUnitClass Class that will be used during output unit initialisation. Must be subclass of ORGMOutputUnit.
+ @param outputUnitClass Class that will be used during output unit initialisation. Must be subclass of AFSENOutputUnit.
  */
 - (void)playUrl:(nonnull NSURL *)url withOutputUnitClass:(nonnull Class)outputUnitClass;
 
@@ -86,14 +77,14 @@ typedef NS_ENUM(NSInteger, ORGMEngineState) {
 /**
  Pauses the playback.
 
- @discussion This method will pause only output processing, decoding and converting will be still active. Only have effect during the `ORGMEngineStatePlaying` state.
+ @discussion This method will pause only output processing, decoding and converting will be still active. Only have effect during the `AFSENStatePlaying` state.
  */
 - (void)pause;
 
 /**
  Resumes the playback.
 
- @discussion Only have effect during the `ORGMEngineStatePaused` state.
+ @discussion Only have effect during the `AFSENStatePaused` state.
  */
 - (void)resume;
 
@@ -121,7 +112,7 @@ typedef NS_ENUM(NSInteger, ORGMEngineState) {
 /**
  Returns current track metadata.
 
- @discussion Dictionary data format depends on the track format. Coverart is included as `NSData` object.
+ @discussion Dictionary data format depends on the track format. Cover art is included as `NSData` object.
 
  @return Metadata dictionary or `nil` if track don't have metadata.
  */
@@ -164,8 +155,8 @@ typedef NS_ENUM(NSInteger, ORGMEngineState) {
 @end
 
 /**
- The delegate of a ORGMEngine object must adopt the `ORGMEngineDelegate` protocol. This protocol allows you to get state change notifications and implement continious playback. */
-@protocol ORGMEngineDelegate <NSObject>
+ The delegate of a AFSEN object must adopt the `AFSENDelegate` protocol. This protocol allows you to get state change notifications and implement continious playback. */
+@protocol AFSENDelegate <NSObject>
 
 /**
  Asks the delegate for the next track url.
@@ -176,7 +167,7 @@ typedef NS_ENUM(NSInteger, ORGMEngineState) {
 
  @return The url object to be used as a source path during playback.
  */
-- (nullable NSURL *)engineExpectsNextUrl:(nullable ORGMEngine *)engine;
+- (nullable NSURL *)engineExpectsNextUrl:(nullable AFSEN *)engine;
 
 @optional
 
@@ -186,14 +177,16 @@ typedef NS_ENUM(NSInteger, ORGMEngineState) {
  @param engine The engine object posting this information.
  @param state New state of the engine object.
  */
-- (void)engine:(nullable ORGMEngine *)engine didChangeState:(ORGMEngineState)state;
+- (void)engine:(nullable AFSEN *)engine didChangeState:(AFSENState)state;
 
-- (void)engine:(nullable ORGMEngine *)engine didChangePreloadProgress:(float)progress;
+- (void)engine:(nullable AFSEN *)engine didChangePreloadProgress:(float)progress;
 
-- (void)engine:(nullable ORGMEngine *)engine didFailCurrentItemWithError:(nonnull NSError *)error;
+- (void)engine:(nullable AFSEN *)engine didFailCurrentItemWithError:(nonnull NSError *)error;
 
-- (void)engine:(nullable ORGMEngine *)engine didChangeReadyToPlay:(BOOL)readyToPlay;
+- (void)engine:(nullable AFSEN *)engine didChangeReadyToPlay:(BOOL)readyToPlay;
 
-- (void)engine:(nullable ORGMEngine *)engine didChangeCurrentURL:(nullable NSURL *)currentURL prevItemURL:(nullable NSURL *)prevURL;
+- (void)engine:(nullable AFSEN *)engine didChangeCurrentURL:(nullable NSURL *)currentURL prevItemURL:(nullable NSURL *)prevURL;
+
+- (void)engine:(nullable AFSEN *)engine didStartPlaybackFromSource:(nullable id<AFSENSource>)currentSource;
 
 @end

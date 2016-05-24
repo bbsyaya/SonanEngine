@@ -1,5 +1,5 @@
 //
-// ORGMInputUnit.h
+// AFSENInputUnit.h
 //
 // Copyright (c) 2012 ap4y (lod@pisem.net)
 //
@@ -21,31 +21,31 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "ORGMAudioUnit.h"
+#import "AFSENAudioUnit.h"
 
 
-@class ORGMInputUnit;
+@class AFSENInputUnit;
 
 
-@protocol ORGMInputUnitDelegate <NSObject>
+@protocol AFSENInputUnitDelegate <NSObject>
 
 @optional
 
-- (void)inputUnit:(ORGMInputUnit *)unit didChangePreloadProgress:(float)progress;
+- (void)inputUnit:(AFSENInputUnit *)unit didChangePreloadProgress:(float)progress;
 
-- (void)inputUnit:(ORGMInputUnit *)unit  didFailWithError:(NSError *)error;
+- (void)inputUnit:(AFSENInputUnit *)unit  didFailWithError:(NSError *)error;
 
 @end
 
 
 /**
- `ORGMInputUnit` is a subclass of ORGMAudioUnit for reading and decoding data from the source.
+ `AFSENInputUnit` is a subclass of AFSENAudioUnit for reading and decoding data from the source.
  */
-@interface ORGMInputUnit : ORGMAudioUnit
+@interface AFSENInputUnit : AFSENAudioUnit
 
 @property (strong, nonatomic, readonly) dispatch_queue_t lock_queue;
 
-@property (nonatomic,weak)id<ORGMInputUnitDelegate> inputUnitDelegate;
+@property (nonatomic,weak)id<AFSENInputUnitDelegate> inputUnitDelegate;
 
 /**
  A flag that determines if instance is currently decoding data.
@@ -81,7 +81,7 @@
 /**
  Returns current track metadata.
 
- @discussion Dictionary data format depends on the track format. Coverart is included as `NSData` object.
+ @discussion Dictionary data format depends on the track format. Cover art is included as `NSData` object.
 
  @return Metadata dictionary or `nil` if track don't have metadata.
  */

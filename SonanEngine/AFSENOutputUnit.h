@@ -1,5 +1,5 @@
 //
-// ORGMOutputUnit.h
+// AFSENOutputUnit.h
 //
 // Copyright (c) 2012 ap4y (lod@pisem.net)
 //
@@ -21,29 +21,29 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "ORGMAudioUnit.h"
-#import "ORGMConverter.h"
-#import "ORGMTypes.h"
+#import "AFSENAudioUnit.h"
+#import "AFSENConverter.h"
+#import "AFSENTypes.h"
 
-@class ORGMOutputUnit;
+@class AFSENOutputUnit;
 
 
-@protocol ORGMOutputUnitDelegate <NSObject>
+@protocol AFSENOutputUnitDelegate <NSObject>
 
 @optional
 
-- (void)outputUnit:(ORGMOutputUnit *)unit didChangeReadyToPlay:(BOOL)readyToPlay;
+- (void)outputUnit:(AFSENOutputUnit *)unit didChangeReadyToPlay:(BOOL)readyToPlay;
 
 @end
 
 
 
 /**
- `ORGMOutputUnit` is a subclass of ORGMAudioUnit for playing converted `PCM` data through the output device. This class gets data from the converter buffer.
+ `AFSENOutputUnit` is a subclass of AFSENAudioUnit for playing converted `PCM` data through the output device. This class gets data from the converter buffer.
  */
-@interface ORGMOutputUnit : ORGMAudioUnit
+@interface AFSENOutputUnit : AFSENAudioUnit
 
-@property (nonatomic, weak, nullable) id<ORGMOutputUnitDelegate> outputUnitDelegate;
+@property (nonatomic, weak, nullable) id<AFSENOutputUnitDelegate> outputUnitDelegate;
 
 /**
  A flag that determines if instance is currently active.
@@ -53,18 +53,18 @@
 /**
  Engine output format
  */
-@property (assign, nonatomic) ORGMEngineOutputFormat outputFormat;
+@property (assign, nonatomic) AFSENOutputFormat outputFormat;
 
 /**
- Returns initialized `ORGMOutputUnit` object and specifies converter source.
+ Returns initialized `AFSENOutputUnit` object and specifies converter source.
 
  @param converter An converter object used as a data source.
 
- @return An initialized `ORGMOutputUnit` object.
+ @return An initialized `AFSENOutputUnit` object.
  **/
-- (nonnull instancetype)initWithConverter:(nonnull ORGMConverter *)converter NS_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithConverter:(nonnull AFSENConverter *)converter NS_DESIGNATED_INITIALIZER;
 
-@property (readonly, strong, nonatomic, nonnull) ORGMConverter *converter;
+@property (readonly, strong, nonatomic, nonnull) AFSENConverter *converter;
 
 /**
  Returns supported `PCM` audio format.

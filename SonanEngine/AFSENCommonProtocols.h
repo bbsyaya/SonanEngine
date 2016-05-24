@@ -1,5 +1,5 @@
 //
-// ORGMCommonProtocols.h
+// AFSENCommonProtocols.h
 //
 // Copyright (c) 2012 ap4y (lod@pisem.net)
 //
@@ -24,7 +24,7 @@
 /**
  Common domain for the all engine errors
  */
-#define kErrorDomain @"com.Sonan.engine.error"
+#define kErrorDomain @"com.sonan.engine.error"
 
 /**
  Libarary error codes
@@ -32,39 +32,39 @@
 #ifndef NS_ENUM
 #import <Foundation/Foundation.h>
 #endif
-typedef NS_ENUM(NSInteger, ORGMEngineErrorCodes) {
-    ORGMEngineErrorCodesSourceFailed,
-    ORGMEngineErrorCodesConverterFailed,
-    ORGMEngineErrorCodesDecoderFailed,
-    ORGMEngineErrorCodesContainerFailed
+typedef NS_ENUM(NSInteger, AFSENErrorCodes) {
+    AFSENErrorCodesSourceFailed,
+    AFSENErrorCodesConverterFailed,
+    AFSENErrorCodesDecoderFailed,
+    AFSENErrorCodesContainerFailed
 };
 
 
-@protocol ORGMSource;
+@protocol AFSENSource;
 
 
-@protocol ORGMSourceDelegate <NSObject>
+@protocol AFSENSourceDelegate <NSObject>
 
 @optional
 
-- (void)sourceDidReceiveData:(nonnull id<ORGMSource>)source;
+- (void)sourceDidReceiveData:(nonnull id<AFSENSource>)source;
 
-- (void)source:(nonnull id<ORGMSource>)source didFailWithError:(nonnull NSError *)error;
+- (void)source:(nonnull id<AFSENSource>)source didFailWithError:(nonnull NSError *)error;
 
 @end
 
 /**
- All classes that act as plugins must adopt the `ORGMEngineObject` protocol. This protocol is a stub, future versions may require common plugin object protocol.
+ All classes that act as plugins must adopt the `AFSENObject` protocol. This protocol is a stub, future versions may require common plugin object protocol.
  */
-@protocol ORGMEngineObject <NSObject>
+@protocol AFSENObject <NSObject>
 @end
 
 /**
- All classes that act as input source must adopt the `ORGMSource` protocol. This protocol contains methods for communication with plugin manager.
+ All classes that act as input source must adopt the `AFSENSource` protocol. This protocol contains methods for communication with plugin manager.
  */
-@protocol ORGMSource <ORGMEngineObject>
+@protocol AFSENSource <AFSENObject>
 
-@property (nonatomic, weak, nullable) id<ORGMSourceDelegate> sourceDelegate;
+@property (nonatomic, weak, nullable) id<AFSENSourceDelegate> sourceDelegate;
 
 /**
  Returns supported url scheme.
@@ -144,9 +144,9 @@ typedef NS_ENUM(NSInteger, ORGMEngineErrorCodes) {
 @end
 
 /**
- All classes that act as tracks container decoders must adopt the `ORGMContainer` protocol. This protocol contains methods for communication with plugin manager.
+ All classes that act as tracks container decoders must adopt the `AFSENContainer` protocol. This protocol contains methods for communication with plugin manager.
  */
-@protocol ORGMContainer <ORGMEngineObject>
+@protocol AFSENContainer <AFSENObject>
 
 /**
  Returns supported file extensions.
@@ -166,9 +166,9 @@ typedef NS_ENUM(NSInteger, ORGMEngineErrorCodes) {
 @end
 
 /**
- All classes that act as decoders must adopt the `ORGMDecoder` protocol. This protocol contains methods for communication with plugin manager.
+ All classes that act as decoders must adopt the `AFSENDecoder` protocol. This protocol contains methods for communication with plugin manager.
  */
-@protocol ORGMDecoder <ORGMEngineObject>
+@protocol AFSENDecoder <AFSENObject>
 @required
 
 /**
@@ -197,7 +197,7 @@ typedef NS_ENUM(NSInteger, ORGMEngineErrorCodes) {
 /**
  Returns current track metadata.
  
- @discussion Dictionary data format depends on the track format. Coverart is included as `NSData` object.
+ @discussion Dictionary data format depends on the track format. Cover art is included as `NSData` object.
  
  @return A Metadata dictionary or `nil` if track don't have metadata.
  */
@@ -220,7 +220,7 @@ typedef NS_ENUM(NSInteger, ORGMEngineErrorCodes) {
  
  @return `YES` if success, otherwise `NO`.
  */
-- (BOOL)open:(nonnull id<ORGMSource>)source;
+- (BOOL)open:(nonnull id<AFSENSource>)source;
 
 /**
  Seeks to a specified frame and continues decoding from that frame.

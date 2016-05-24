@@ -1,5 +1,5 @@
 //
-// ORGMPluginManager.m
+// AFSENPluginManager.m
 //
 // Copyright (c) 2012 ap4y (lod@pisem.net)
 //
@@ -21,8 +21,8 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "ORGMPluginManager.h"
-#import "ORGMTypes.h"
+#import "AFSENPluginManager.h"
+#import "AFSENTypes.h"
 
 #import "HTTPSource.h"
 #import "FileSource.h"
@@ -33,19 +33,19 @@
 #import "CueSheetContainer.h"
 #import "M3uContainer.h"
 
-@interface ORGMPluginManager ()
+@interface AFSENPluginManager ()
 @property(strong, nonatomic) NSMutableDictionary *sources;
 @property(strong, nonatomic) NSMutableDictionary *decoders;
 @property(strong, nonatomic) NSDictionary *containers;
 @end
 
-@implementation ORGMPluginManager
+@implementation AFSENPluginManager
 
-+ (ORGMPluginManager *)sharedManager {
-    static ORGMPluginManager *_sharedManager;
++ (AFSENPluginManager *)sharedManager {
+    static AFSENPluginManager *_sharedManager;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        _sharedManager = [[ORGMPluginManager alloc] init];
+        _sharedManager = [[AFSENPluginManager alloc] init];
     });
     
     return _sharedManager;
@@ -95,8 +95,8 @@
     }
 }
 
-- (id<ORGMSource>)sourceForURL:(NSURL *)url error:(NullableReferenceNSError)error {
-    id<ORGMSource> result;
+- (id<AFSENSource>)sourceForURL:(NSURL *)url error:(NullableReferenceNSError)error {
+    id<AFSENSource> result;
     if (_resolver && (result = [_resolver sourceForURL:url error:error])) {
         return result;
     }
@@ -110,7 +110,7 @@
                                  NSLocalizedString(@"Unable to find source for scheme", nil),
                                  scheme];
             *error = [NSError errorWithDomain:kErrorDomain
-                                         code:ORGMEngineErrorCodesSourceFailed
+                                         code:AFSENErrorCodesSourceFailed
                                      userInfo:@{ NSLocalizedDescriptionKey: message }];
         }
         return nil;
@@ -118,13 +118,13 @@
 	return [[source alloc] init];
 }
 
-- (id<ORGMDecoder>)decoderForSource:(id<ORGMSource>)source error:(NullableReferenceNSError)error {
+- (id<AFSENDecoder>)decoderForSource:(id<AFSENSource>)source error:(NullableReferenceNSError)error {
     if (!source || ![source url]) {
         NSParameterAssert(NO);
         return nil;
     }
 
-    id<ORGMDecoder> result;
+    id<AFSENDecoder> result;
     if (_resolver && (result = [_resolver decoderForSource:source error:error])) {
         return result;
     }
@@ -138,7 +138,7 @@
                                  NSLocalizedString(@"Unable to find decoder for extension", nil),
                                  extension];
             *error = [NSError errorWithDomain:kErrorDomain
-                                         code:ORGMEngineErrorCodesDecoderFailed
+                                         code:AFSENErrorCodesDecoderFailed
                                      userInfo:@{ NSLocalizedDescriptionKey: message }];
         }
         return nil;
@@ -165,7 +165,7 @@
                                  NSLocalizedString(@"Unable to find container for extension", nil),
                                  ext];
             *error = [NSError errorWithDomain:kErrorDomain
-                                         code:ORGMEngineErrorCodesContainerFailed
+                                         code:AFSENErrorCodesContainerFailed
                                      userInfo:@{ NSLocalizedDescriptionKey: message }];
         }
         return nil;

@@ -23,25 +23,25 @@
 
 #import "OutputUnitTests.h"
 
-#import "ORGMConverter.h"
-#import "ORGMInputUnit.h"
-#import "ORGMOutputUnit.h"
+#import "AFSENConverter.h"
+#import "AFSENInputUnit.h"
+#import "AFSENOutputUnit.h"
 
 @interface OutputUnitTests ()
-@property (retain, nonatomic) ORGMOutputUnit *outputUnit;
+@property (retain, nonatomic) AFSENOutputUnit *outputUnit;
 @end
 
 @implementation OutputUnitTests
 
 - (void)setUp {
     [super setUp];
-    ORGMInputUnit *input = [[ORGMInputUnit alloc] init];
+    AFSENInputUnit *input = [[AFSENInputUnit alloc] init];
     NSURL *flacUrl = [[NSBundle bundleForClass:self.class] URLForResource:@"multiple-vc"
                                                             withExtension:@"flac"];
     [input openWithUrl:flacUrl];
-    ORGMConverter *converter = [[ORGMConverter alloc] initWithInputUnit:input];
+    AFSENConverter *converter = [[AFSENConverter alloc] initWithInputUnit:input];
         
-    _outputUnit = [[ORGMOutputUnit alloc] initWithConverter:converter];
+    _outputUnit = [[AFSENOutputUnit alloc] initWithConverter:converter];
     [converter setupWithOutputUnit:_outputUnit];
 }
 

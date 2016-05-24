@@ -21,10 +21,10 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "ORGMCommonProtocols.h"
+#import "AFSENCommonProtocols.h"
 
 /**
  `FlacDecoder` is a decoder plugin that provides support of the `flac` extension.
  */
-@interface FlacDecoder : NSObject <ORGMDecoder>
+@interface FlacDecoder : NSObject <AFSENDecoder>
 @end

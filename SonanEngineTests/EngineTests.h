@@ -23,10 +23,10 @@
 
 #import <SenTestingKit/SenTestingKit.h>
 
-#import "ORGMEngine.h"
+#import "AFSEN.h"
 
-@interface DelegateTester : NSObject <ORGMEngineDelegate>
-@property (assign, nonatomic) ORGMEngineState state;
+@interface DelegateTester : NSObject <AFSENDelegate>
+@property (assign, nonatomic) AFSENState state;
 @property (assign, nonatomic) BOOL trackRequested;
 @end
 

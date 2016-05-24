@@ -24,15 +24,15 @@
 #import "CueSheetDecoder.h"
 #import "CueSheet.h"
 
-#import "ORGMPluginManager.h"
+#import "AFSENPluginManager.h"
 
 @interface CueSheetDecoder () {
 	long framePosition;
 	long trackStart;
 	long trackEnd;		
 }
-@property (strong, nonatomic) id<ORGMSource> source;
-@property (strong, nonatomic) id<ORGMDecoder> decoder;
+@property (strong, nonatomic) id<AFSENSource> source;
+@property (strong, nonatomic) id<AFSENDecoder> decoder;
 @property (strong, nonatomic) CueSheet *cuesheet;
 @end
 
@@ -42,7 +42,7 @@
     [self close];
 }
 
-#pragma mark - ORGMDecoder
+#pragma mark - AFSENDecoder
 
 + (NSArray *)fileTypes  {
 	return @[@"cue"];
@@ -83,11 +83,11 @@
 	return n;
 }
 
-- (BOOL)open:(id<ORGMSource>)s {
+- (BOOL)open:(id<AFSENSource>)s {
 	NSURL *url = [s url];
 	self.cuesheet = [[CueSheet alloc] initWithURL:url];
 	
-    ORGMPluginManager *pluginManager = [ORGMPluginManager sharedManager];
+    AFSENPluginManager *pluginManager = [AFSENPluginManager sharedManager];
 	for (int i = 0; i < _cuesheet.tracks.count; i++) {
         CueSheetTrack *track = (_cuesheet.tracks)[i];
 		if ([track.track isEqualToString:url.fragment]) {

@@ -1,5 +1,5 @@
 //
-// ORGMConverter.m
+// AFSENConverter.m
 //
 // Copyright (c) 2012 ap4y (lod@pisem.net)
 //
@@ -21,19 +21,19 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "ORGMConverter.h"
+#import "AFSENConverter.h"
 
-#import "ORGMInputUnit.h"
-#import "ORGMOutputUnit.h"
+#import "AFSENInputUnit.h"
+#import "AFSENOutputUnit.h"
 
-@interface ORGMConverter () {
+@interface AFSENConverter () {
     AudioStreamBasicDescription _inputFormat;
     AudioStreamBasicDescription _outputFormat;
     AudioConverterRef _converter;
 }
 
-@property (strong, nonatomic) ORGMInputUnit *inputUnit;
-@property (weak, nonatomic) ORGMOutputUnit *outputUnit;
+@property (strong, nonatomic) AFSENInputUnit *inputUnit;
+@property (weak, nonatomic) AFSENOutputUnit *outputUnit;
 @property (strong, nonatomic) NSMutableData *convertedData;
 @property (strong, nonatomic) dispatch_source_t buffering_source;
 @property (assign, nonatomic) void *callbackBuffer;
@@ -41,9 +41,9 @@
 
 @end
 
-@implementation ORGMConverter
+@implementation AFSENConverter
 
-- (instancetype)initWithInputUnit:(ORGMInputUnit *)inputUnit bufferingSource:(dispatch_source_t)bufferingSource{
+- (instancetype)initWithInputUnit:(AFSENInputUnit *)inputUnit bufferingSource:(dispatch_source_t)bufferingSource{
     self = [super init];
     if (self) {
         self.convertedData = [NSMutableData data];
@@ -70,7 +70,7 @@
 
 #pragma mark - public
 
-- (BOOL)setupWithOutputUnit:(ORGMOutputUnit *)outputUnit {
+- (BOOL)setupWithOutputUnit:(AFSENOutputUnit *)outputUnit {
     self.outputUnit = outputUnit;
     [_outputUnit setSampleRate:_inputFormat.mSampleRate];
 
@@ -121,7 +121,7 @@
     }
 }
 
-- (void)reinitWithNewInput:(ORGMInputUnit *)inputUnit withDataFlush:(BOOL)flush {
+- (void)reinitWithNewInput:(AFSENInputUnit *)inputUnit withDataFlush:(BOOL)flush {
     if (flush) {
         [self flushBuffer];
     }
@@ -179,7 +179,7 @@ static OSStatus ACInputProc(AudioConverterRef inAudioConverter,
                             UInt32* ioNumberDataPackets, AudioBufferList* ioData,
                             AudioStreamPacketDescription** outDataPacketDescription,
                             void* inUserData) {
-    ORGMConverter *converter = (__bridge ORGMConverter *)inUserData;
+    AFSENConverter *converter = (__bridge AFSENConverter *)inUserData;
     OSStatus err = noErr;
     int amountToWrite;
 

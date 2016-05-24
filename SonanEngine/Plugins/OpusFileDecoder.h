@@ -21,8 +21,8 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "ORGMCommonProtocols.h"
+#import "AFSENCommonProtocols.h"
 
-@interface OpusFileDecoder : NSObject <ORGMDecoder>
+@interface OpusFileDecoder : NSObject <AFSENDecoder>
 
 @end

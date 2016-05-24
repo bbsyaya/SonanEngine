@@ -23,17 +23,17 @@
 
 #import "InputUnitTests.h"
 
-#import "ORGMInputUnit.h"
+#import "AFSENInputUnit.h"
 
 @interface InputUnitTests ()
-@property (retain, nonatomic) ORGMInputUnit *inputUnit;
+@property (retain, nonatomic) AFSENInputUnit *inputUnit;
 @end
 
 @implementation InputUnitTests
 
 - (void)setUp {
     [super setUp];
-    _inputUnit = [[ORGMInputUnit alloc] init];
+    _inputUnit = [[AFSENInputUnit alloc] init];
     NSURL *flacUrl = [[NSBundle bundleForClass:self.class] URLForResource:@"multiple-vc"
                                                             withExtension:@"flac"];
     STAssertTrue([_inputUnit openWithUrl:flacUrl], nil);

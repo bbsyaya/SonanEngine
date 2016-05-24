@@ -1,5 +1,5 @@
 //
-// ORGMPluginManager.h
+// AFSENPluginManager.h
 //
 // Copyright (c) 2012 ap4y (lod@pisem.net)
 //
@@ -22,20 +22,20 @@
 // THE SOFTWARE.
 
 #import <Foundation/Foundation.h>
-#import "ORGMCommonProtocols.h"
-#import "ORGMTypes.h"
+#import "AFSENCommonProtocols.h"
+#import "AFSENTypes.h"
 
-@protocol ORGMPluginResolver;
+@protocol AFSENPluginResolver;
 
 /**
- The `ORGMPluginManager` provides transparent access to the supported decoders, sources and containers. All supported plugins are conform to the corresponding protocol, thus you have common protocol among same type plugins.
+ The `AFSENPluginManager` provides transparent access to the supported decoders, sources and containers. All supported plugins are conform to the corresponding protocol, thus you have common protocol among same type plugins.
  */
-@interface ORGMPluginManager : NSObject
+@interface AFSENPluginManager : NSObject
 
 /**
  Custom plugin resolver that is used during plugin resolution process. Plugin manager fallbacks to the default implementation if `resolver` is empty or it returned `nil` value.
  */
-@property (nonatomic, weak, nullable) id<ORGMPluginResolver> resolver;
+@property (nonatomic, weak, nullable) id<AFSENPluginResolver> resolver;
 
 + (nonnull instancetype)sharedManager;
 
@@ -49,7 +49,7 @@
  
  @return A new source object or `nil` if corresponding plugin is not found.
  */
-- (nullable id<ORGMSource>)sourceForURL:(nonnull NSURL *)url error:(NullableReferenceNSError)error;
+- (nullable id<AFSENSource>)sourceForURL:(nonnull NSURL *)url error:(NullableReferenceNSError)error;
 
 - (void)registerSource:(nonnull Class)sourceClass forScheme:(nonnull NSString *)scheme;
 
@@ -63,7 +63,7 @@
  
  @return A new decoder object or `nil` if corresponding plugin is not found.
  */
-- (nullable id<ORGMDecoder>)decoderForSource:(nonnull id<ORGMSource>)source error:(NullableReferenceNSError)error;
+- (nullable id<AFSENDecoder>)decoderForSource:(nonnull id<AFSENSource>)source error:(NullableReferenceNSError)error;
 
 /**
  Searches for the container decoder plugin and parses container content.
@@ -82,10 +82,10 @@
 @end
 
 /**
- The `ORGMPluginResolver` provides uniform interface for implementing custom plugin resolution rules within plugin manager. By implementing custom resolver and registering it within plugin manager, you can modify default behaviour of the plugin manager. If you want to fallback to the default resolution process you can return `nil`.
+ The `AFSENPluginResolver` provides uniform interface for implementing custom plugin resolution rules within plugin manager. By implementing custom resolver and registering it within plugin manager, you can modify default behaviour of the plugin manager. If you want to fallback to the default resolution process you can return `nil`.
  */
-@protocol ORGMPluginResolver <NSObject>
-- (nullable id<ORGMSource>)sourceForURL:(nonnull NSURL *)url error:(NullableReferenceNSError)error;
-- (nullable id<ORGMDecoder>)decoderForSource:(nonnull id<ORGMSource>)source error:(NullableReferenceNSError)error;
+@protocol AFSENPluginResolver <NSObject>
+- (nullable id<AFSENSource>)sourceForURL:(nonnull NSURL *)url error:(NullableReferenceNSError)error;
+- (nullable id<AFSENDecoder>)decoderForSource:(nonnull id<AFSENSource>)source error:(NullableReferenceNSError)error;
 - (nullable NSArray *)urlsForContainerURL:(nonnull NSURL *)url error:(NullableReferenceNSError)error;
 @end

@@ -1,5 +1,5 @@
 //
-// ORGMConverter.h
+// AFSENConverter.h
 //
 // Copyright (c) 2012 ap4y (lod@pisem.net)
 //
@@ -21,28 +21,28 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "ORGMAudioUnit.h"
-#import "ORGMTypes.h"
+#import "AFSENAudioUnit.h"
+#import "AFSENTypes.h"
 
 /**
- `ORGMConverter` is a subclass of ORGMAudioUnit for converting decoded `PCM` data to `PCM` format compatable with output unit. This class is a wrapper for `AudioConverterRef`, it determines `PCM` format from specified output and input units.
+ `AFSENConverter` is a subclass of AFSENAudioUnit for converting decoded `PCM` data to `PCM` format compatable with output unit. This class is a wrapper for `AudioConverterRef`, it determines `PCM` format from specified output and input units.
  */
-@class ORGMOutputUnit, ORGMInputUnit;
+@class AFSENOutputUnit, AFSENInputUnit;
 
-@interface ORGMConverter : ORGMAudioUnit
+@interface AFSENConverter : AFSENAudioUnit
 
 /**
- Returns initialized `ORGMConverter` object and specifies input `PCM` format from input unit.
+ Returns initialized `AFSENConverter` object and specifies input `PCM` format from input unit.
 
  @param inputUnit An input unit to specify input data format.
 
- @return An initialized `ORGMConverter` object.
+ @return An initialized `AFSENConverter` object.
  */
-- (nonnull instancetype)initWithInputUnit:(nonnull ORGMInputUnit *)inputUnit bufferingSource:(nonnull dispatch_source_t)bufferingSource NS_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithInputUnit:(nonnull AFSENInputUnit *)inputUnit bufferingSource:(nonnull dispatch_source_t)bufferingSource NS_DESIGNATED_INITIALIZER;
 
 @property (strong, nonatomic, readonly, nonnull) dispatch_source_t buffering_source;
 
-@property (strong, nonatomic, readonly, nonnull) ORGMInputUnit *inputUnit;
+@property (strong, nonatomic, readonly, nonnull) AFSENInputUnit *inputUnit;
 
 /**
  Specifies output `PCM` format from output unit.
@@ -51,7 +51,7 @@
 
  @return `YES` if success, otherwise `NO`.
  */
-- (BOOL)setupWithOutputUnit:(nonnull ORGMOutputUnit *)outputUnit;
+- (BOOL)setupWithOutputUnit:(nonnull AFSENOutputUnit *)outputUnit;
 
 /**
  Reinitialize instance for a new input `PCM` format.
@@ -61,7 +61,7 @@
  @param inputUnit An input unit to specify input data format.
  @param flush A flag that allows you erase converted data before changing format.
  */
-- (void)reinitWithNewInput:(nonnull ORGMInputUnit *)inputUnit withDataFlush:(BOOL)flush;
+- (void)reinitWithNewInput:(nonnull AFSENInputUnit *)inputUnit withDataFlush:(BOOL)flush;
 
 /**
  Returns and removes `amount` of bytes from the beginning of the buffer with converted data.

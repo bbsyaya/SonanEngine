@@ -23,7 +23,7 @@
 
 #import "CueSheet.h"
 
-#import "ORGMCommonProtocols.h"
+#import "AFSENCommonProtocols.h"
 
 @interface CueSheet ()
 

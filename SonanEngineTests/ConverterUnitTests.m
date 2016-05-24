@@ -23,25 +23,25 @@
 
 #import "ConverterUnitTests.h"
 
-#import "ORGMConverter.h"
-#import "ORGMInputUnit.h"
-#import "ORGMOutputUnit.h"
+#import "AFSENConverter.h"
+#import "AFSENInputUnit.h"
+#import "AFSENOutputUnit.h"
 
 @interface ConverterUnitTests ()
-@property (retain, nonatomic) ORGMConverter *converter;
+@property (retain, nonatomic) AFSENConverter *converter;
 @end
 
 @implementation ConverterUnitTests
 
 - (void)setUp {
     [super setUp];
-    ORGMInputUnit *input = [[ORGMInputUnit alloc] init];
+    AFSENInputUnit *input = [[AFSENInputUnit alloc] init];
     NSURL *flacUrl = [[NSBundle bundleForClass:self.class] URLForResource:@"multiple-vc"
                                                             withExtension:@"flac"];
     [input openWithUrl:flacUrl];
-    _converter = [[ORGMConverter alloc] initWithInputUnit:input];
+    _converter = [[AFSENConverter alloc] initWithInputUnit:input];
     
-    ORGMOutputUnit *output = [[ORGMOutputUnit alloc] initWithConverter:_converter];
+    AFSENOutputUnit *output = [[AFSENOutputUnit alloc] initWithConverter:_converter];
     STAssertTrue([_converter setupWithOutputUnit:output], nil);
 }
 
@@ -77,7 +77,7 @@
     [_converter process];
     NSUInteger _saveLength = _converter.convertedData.length;
     
-    ORGMInputUnit *input = [[ORGMInputUnit alloc] init];
+    AFSENInputUnit *input = [[AFSENInputUnit alloc] init];
     NSURL *flacUrl = [[NSBundle bundleForClass:self.class] URLForResource:@"multiple-vc"
                                                             withExtension:@"flac"];
     [input openWithUrl:flacUrl];
@@ -91,7 +91,7 @@
     [_converter.inputUnit process];
     [_converter process];
     
-    ORGMInputUnit *input = [[ORGMInputUnit alloc] init];
+    AFSENInputUnit *input = [[AFSENInputUnit alloc] init];
     NSURL *flacUrl = [[NSBundle bundleForClass:self.class] URLForResource:@"multiple-vc"
                                                             withExtension:@"flac"];
     [input openWithUrl:flacUrl];
